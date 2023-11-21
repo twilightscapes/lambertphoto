@@ -4,7 +4,7 @@ title: Lost Dreams on the Gulf Coast
 slug: /lost-dreams
 date: 2023-11-21 06:53
 description: An abandoned ghost ship is grounded after Hurricane Katrina
-shareable: true
+shareable: false
 showZoom: false
 showPageNav: true
 spotlight: true
