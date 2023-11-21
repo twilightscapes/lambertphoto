@@ -24,7 +24,7 @@ audioend: ""
 scrollable: false
 viewerwarning: Viewer Discretion Strongly Advised
 nftdrop: 2023-03-05T10:00:00
-slug: /
+slug: /ridin-with-elon
 audiostart: "90"
 date: 2023-10-01 09:00
 showZoom: true
