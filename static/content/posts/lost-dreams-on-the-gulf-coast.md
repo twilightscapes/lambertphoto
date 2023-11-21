@@ -1,7 +1,7 @@
 ---
 template: blog-post
 title: Lost Dreams on the Gulf Coast
-slug: /
+slug: /lost-dreams
 date: 2023-11-21 06:53
 description: An abandoned ghost ship is grounded after Hurricane Katrina
 shareable: true
