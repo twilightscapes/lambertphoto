@@ -8,8 +8,6 @@ shareable: false
 showZoom: true
 showPageNav: true
 spotlight: false
-svgImage: /assets/null.svg
-underlayImage: /assets/transparent.png
 comments: false
 youtube:
   youtubemute: false
