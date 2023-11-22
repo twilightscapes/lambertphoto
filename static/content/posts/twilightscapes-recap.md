@@ -4,10 +4,10 @@ title: Twilightscapes Recap
 slug: /twilightscapes-promo
 date: 2023-11-21 23:56
 description: "A promo of Twilightscapes "
-shareable: true
-showZoom: true
+shareable: false
+showZoom: false
 showPageNav: true
-spotlight: false
+spotlight: true
 youtube:
   youtubemute: false
   youtubeautostart: true
