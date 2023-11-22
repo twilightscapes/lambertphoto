@@ -21,4 +21,6 @@ youtube:
   clicktoplay: false
   youtuber: https://youtu.be/cZJUyxw2G2w
 featuredImage: /assets/img_0743.jpeg
+underlayImage: /assets/transparent.png
+svgImage: /assets/null.svg
 ---
