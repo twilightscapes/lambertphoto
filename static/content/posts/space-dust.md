@@ -17,4 +17,6 @@ youtube:
   customcontrols: false
   clicktoplay: false
 featuredImage: /assets/img_0713.jpeg
+svgImage: /assets/null.svg
+underlayImage: /assets/transparent.png
 ---
