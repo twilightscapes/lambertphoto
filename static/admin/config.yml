@@ -462,6 +462,11 @@ collections:
                 name: showNav2 
                 label: Show Side Nav
                 required: false
+                
+              - widget: boolean
+                name: showDates
+                label: Show Dates
+                required: false
 
               # - widget: boolean
               #   name: showSocial 
