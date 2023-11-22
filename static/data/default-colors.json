@@ -1,8 +1,8 @@
 {
   "siteColor": "#13cef4",
   "headerColor": "rgba(0, 0, 0, 0.75)",
-  "background": "#bfb6b6",
-  "bodyColor": "#fbedf6",
+  "background": "#dc3737",
+  "bodyColor": "#71b93c",
   "text": "#360439",
   "cardBg": "rgba(239, 6, 188, 0.6)",
   "textShadow": "rgba(0, 0, 0, .1)"
