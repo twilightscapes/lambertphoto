@@ -4,6 +4,8 @@ title: Diamonds in the sky
 slug: /diamonds-in-the-sky
 date: 2023-11-22 00:03
 description: A time elapsed capture over several hours in Utah
+category:
+  - Highlights
 shareable: false
 showZoom: false
 showPageNav: true
