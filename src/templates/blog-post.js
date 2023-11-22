@@ -13,7 +13,7 @@ import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css'
 
 
 // import Controls from "../components/Controls";
-import { document } from "browser-monads"
+// import { document } from "browser-monads"
 import PropTypes from "prop-types";
 import { MdPlayArrow } from "react-icons/md"
 import { MdPause } from "react-icons/md"
@@ -216,7 +216,7 @@ const Post = ({ data, pageContext }) => {
 // }
 
 
-// const IsNft = frontmatter.isnftforsale
+
 const ShowOriginal = frontmatter.youtube.youtubeshoworiginal
 const ShareThis = frontmatter.shareable
 const Comments = frontmatter.comments
@@ -1676,7 +1676,6 @@ export const pageQuery = graphql`
         contentinvideo
         comments
         shareable
-        isnftforsale
         bumpertext
         viewerwarning
         marate
