@@ -18,6 +18,4 @@ youtube:
   customcontrols: false
   clicktoplay: false
 featuredImage: /assets/img_0046.jpeg
-underlayImage: ""
-svgImage: ""
 ---

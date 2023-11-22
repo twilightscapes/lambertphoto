@@ -185,7 +185,7 @@ collections:
           hint: "The primary image used for all social media, blog previews and the feature image at the top of the post",
           required: false,
           tagname: "",
-          default: "/assets/transparent.png"
+          default: null
         }
       - {
           label: "Underlay Image",
@@ -194,7 +194,7 @@ collections:
           hint: "This is used to put a transparent png over the video but under the animation layer",
           required: false,
           tagname: "",
-          default: "/assets/transparent.png"
+          default: null
         }
       - {
           label: "SVG",
@@ -203,7 +203,7 @@ collections:
           hint: "This is the animation layer where your animated or static SVG image goes - it is on the top of the stack",
           required: false,
           tagname: "",
-          default: "/assets/null.svg"
+          default: null
         }
       # - { label: "SVG Z-Index", name: "svgzindex", widget: "string", required: false, tagname: "", }
 

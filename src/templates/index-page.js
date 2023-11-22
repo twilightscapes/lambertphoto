@@ -16,7 +16,7 @@ import { MdVolumeUp } from "react-icons/md"
 import { MdPlayArrow } from "react-icons/md"
 import { MdPause } from "react-icons/md"
 import { MdVolumeOff } from "react-icons/md"
-import { FaRegPlusSquare } from 'react-icons/fa';
+// import { FaRegPlusSquare } from 'react-icons/fa';
 import { IoShareOutline } from 'react-icons/io5';
 import { AiOutlineAudioMuted } from 'react-icons/ai';
 // import { MdVolumeDown } from "react-icons/md"
@@ -33,7 +33,7 @@ import Social from "../components/social"
 import BlogListHome from "../components/blog-list-home"
 import Seo from "../components/seo"
 import Layout from "../components/siteLayout"
-import { AnchorLink } from "gatsby-plugin-anchor-links";
+// import { AnchorLink } from "gatsby-plugin-anchor-links";
 
 
 const HomePage = ({ data }) => {
@@ -924,147 +924,146 @@ export default HomePage
 
 
 export const pageQuery = graphql`
-  query HomeQuery($id: String!) {
-    site {
-      siteMetadata {
-        title
-        titleDefault
-        siteUrl
-        description
-        image
-        twitterUsername
-        companyname
-        postcount
-        showfooter
-        showInfo
-        showCover
-        showFeature
-        showPosts
-        showSocial
-        showSkills
-        showNav
-        showPopup
-        showDates
-        showResume
-        showSkills
-      }
+query HomeQuery($id: String!) {
+  site {
+    siteMetadata {
+      title
+      titleDefault
+      siteUrl
+      description
+      image
+      twitterUsername
+      companyname
+      postcount
+      showfooter
+      showInfo
+      showCover
+      showFeature
+      showPosts
+      showSocial
+      showSkills
+      showNav
+      showPopup
+      showDates
+      showResume
+      showSkills
     }
-    markdownRemark(id: { eq: $id }) {
-      id
-      html
-      excerpt(pruneLength: 148)
-      frontmatter {
-        date(formatString: "YYYY-MM-DD-HH-MM-SS")
-        slug
-        title
-        description
-        audiostart
-        audiotitle
-        audioend
-        youtube {
-          youtuber
-          youtuber2
-          youtubestart
-          youtubeend
-          youtubeshoworiginal
-          youtubersuggestion1
-          youtubersuggestion2
-          youtubersuggestion3
-          clicktoplay
-          youtubemute
-          youtubecontrols
-          customcontrols
-          youtubeautostart
-        }
-        contentinvideo
-        bumpertext
-        viewerwarning
-        marate
-        marating1
-        marating2
-        marating3
-        marating4
-        maratingtx1
-        maratingtx2
-        maratingtx3
-        maratingtx4
-        profTitle
-        profText
-        addressText
-        addressText2
-        skillsTitle
-        skillsText
-        svgzindex
-        scrollable
-        tagline
-        featuredImage {
-          publicURL
-          relativePath
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
-          }
-        }
-        secondaryImage {
-          childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
-          }
-        }
-        underlayImage {
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
-          }
-        }
-        cta {
-          ctaText
-          ctaLink
-        }
-        coverletter {
-          coverText
-          coverLink
-        }
-        portfolio {
-          openText
-          closeText
-        }
-        svgImage {
-          relativePath
+  }
+  markdownRemark(id: {eq: $id}) {
+    id
+    html
+    excerpt(pruneLength: 148)
+    frontmatter {
+      date(formatString: "YYYY-MM-DD-HH-MM-SS")
+      slug
+      title
+      description
+      audiostart
+      audiotitle
+      audioend
+      youtube {
+        youtuber
+        youtuber2
+        youtubestart
+        youtubeend
+        youtubeshoworiginal
+        youtubersuggestion1
+        youtubersuggestion2
+        youtubersuggestion3
+        clicktoplay
+        youtubemute
+        youtubecontrols
+        customcontrols
+        youtubeautostart
+      }
+      contentinvideo
+      bumpertext
+      viewerwarning
+      marate
+      marating1
+      marating2
+      marating3
+      marating4
+      maratingtx1
+      maratingtx2
+      maratingtx3
+      maratingtx4
+      profTitle
+      profText
+      addressText
+      addressText2
+      skillsTitle
+      skillsText
+      svgzindex
+      scrollable
+      tagline
+      featuredImage {
+        publicURL
+        relativePath
+        childImageSharp {
+          gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
         }
       }
+      secondaryImage {
+        childImageSharp {
+          gatsbyImageData(layout: FULL_WIDTH)
+        }
+      }
+      underlayImage {
+        childImageSharp {
+          gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
+        }
+      }
+      cta {
+        ctaText
+        ctaLink
+      }
+      coverletter {
+        coverText
+        coverLink
+      }
+      portfolio {
+        openText
+        closeText
+      }
+      svgImage {
+        relativePath
+      }
     }
-    posts: allMarkdownRemark(
-      sort: [{ frontmatter: { spotlight: ASC } }, { frontmatter: { date: DESC } }]
-      filter: { frontmatter: { template: { eq: "blog-post" } } }
-      limit: 9
-    ) {
-      edges {
-        node {
-          id
-          excerpt(pruneLength: 250)
-          frontmatter {
-            date(formatString: "YYYY-MM-DD-HH-MM-SS")
-            slug
-            title
-            tags
-            category
-            youtube {
-              youtubemute
-              youtubeloop
-              youtubecontrols
-              customcontrols
-              youtuber
-            }
-            spotlight
-            featuredImage {
-              relativePath
-              publicURL
-              childImageSharp {
-                gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-              }
+  }
+  posts: allMarkdownRemark(
+    sort: [{frontmatter: {spotlight: ASC}}, {frontmatter: {date: DESC}}]
+    filter: {frontmatter: {template: {eq: "blog-post"}}}
+    limit: 9
+  ) {
+    edges {
+      node {
+        id
+        excerpt(pruneLength: 250)
+        frontmatter {
+          date(formatString: "YYYY-MM-DD-HH-MM-SS")
+          slug
+          title
+          tags
+          category
+          youtube {
+            youtubemute
+            youtubeloop
+            youtubecontrols
+            customcontrols
+            youtuber
+          }
+          spotlight
+          featuredImage {
+            relativePath
+            publicURL
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
             }
           }
         }
       }
     }
   }
+}
 `;
-

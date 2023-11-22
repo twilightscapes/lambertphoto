@@ -5,7 +5,6 @@ slug: /american-dream
 date: 2023-11-22 13:03
 description: An abandoned house along old Route 66
 comments: false
-isnftforsale: false
 shareable: false
 showZoom: false
 showPageNav: true
@@ -18,6 +17,4 @@ youtube:
   customcontrols: false
   clicktoplay: false
 featuredImage: /assets/img_0019.jpeg
-underlayImage: ""
-svgImage: ""
 ---
