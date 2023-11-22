@@ -8,6 +8,9 @@ shareable: false
 showZoom: true
 showPageNav: true
 spotlight: false
+svgImage: null
+underlayImage: null
+comments: null
 youtube:
   youtubemute: false
   youtubeautostart: false
