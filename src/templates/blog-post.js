@@ -1628,7 +1628,7 @@ export default Post
 
 
 export const pageQuery = graphql`
-  query BlogPostQueryBlogPostQuery($id: String!) {
+  query BlogPostQuery($id: String!) {
     site {
       siteMetadata {
         title
@@ -1696,7 +1696,7 @@ export const pageQuery = graphql`
             gatsbyImageData(layout: FULL_WIDTH)
           }
         }
-        svgImage{
+        svgImage {
           publicURL
         }
         underlayImage {
@@ -1707,4 +1707,5 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
+
