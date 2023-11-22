@@ -10,7 +10,6 @@ showPageNav: true
 spotlight: false
 svgImage: /assets/null.svg
 underlayImage: /assets/transparent.png
-isnftforsale: false
 comments: false
 youtube:
   youtubemute: false
