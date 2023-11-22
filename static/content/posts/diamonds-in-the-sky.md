@@ -10,6 +10,8 @@ shareable: false
 showZoom: false
 showPageNav: true
 spotlight: true
+tags:
+  - Video
 youtube:
   youtubemute: true
   youtubeautostart: true
