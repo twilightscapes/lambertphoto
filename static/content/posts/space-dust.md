@@ -10,6 +10,7 @@ showPageNav: true
 spotlight: false
 svgImage: null
 underlayImage: null
+isnftforsale: null
 comments: null
 youtube:
   youtubemute: false
