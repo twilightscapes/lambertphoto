@@ -9,10 +9,10 @@ showZoom: false
 showPageNav: true
 spotlight: true
 youtube:
-  youtubemute: false
+  youtubemute: true
   youtubeautostart: true
   youtubeloop: true
-  youtubecontrols: false
+  youtubecontrols: true
   customcontrols: false
   clicktoplay: false
   youtuber: https://youtu.be/-mYw48uq010
