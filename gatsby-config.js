@@ -17,7 +17,10 @@ const settings = require("./static/data/site.json")
 
 module.exports = {
   flags: {},
-  siteMetadata: settings.meta,
+  siteMetadata: {
+    ...settings.meta, // Assuming settings.meta contains other metadata fields
+    homecount: 9, // Add homecount to the siteMetadata
+  },
   plugins: [
     // {
     //   resolve: "gatsby-source-shopify",

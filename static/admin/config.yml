@@ -518,6 +518,10 @@ collections:
               #   required: false
 
               - widget: string
+                name: postcount
+                label: Number of posts per page
+
+              - widget: string
                 name: font1
                 label: Google Font
                 required: false
