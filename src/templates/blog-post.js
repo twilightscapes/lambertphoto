@@ -621,7 +621,7 @@ const YouTube = frontmatter.youtube.youtuber
 
 
 
-          <img className="homepage-bg1" src={iconimage} width="250px" height="150px" alt="Logo" style={{ border:'0px solid red', margin:'120px auto 0 auto', filter:'drop-shadow(2px 2px 2px #000)', background:'transparent !important', position:'relative', top:''}} />
+          <img className="homepage-bg2" src={iconimage} width="250px" height="150px" alt="Logo" style={{ border:'0px solid red', margin:'0 auto 0 auto', filter:'drop-shadow(2px 2px 2px #000)', background:'transparent !important', position:'relative', top:''}} />
 
 
           
