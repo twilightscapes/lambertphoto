@@ -9,7 +9,7 @@
     "showNav": true,
     "companyname": "Lambert Photography",
     "siteUrl": "https://lambertphotography.com",
-    "showDates": false,
+    "showDates": true,
     "twitterUsername": "toddlambert",
     "titleDefault": "MG Reports",
     "showSocial": true,
