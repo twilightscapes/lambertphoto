@@ -68,6 +68,7 @@ const CategoryIndex = ({ data, pageContext }) => {
               textShadow: '2px 2px 0 #222',
               borderRadius: '8px',
               opacity: '.8',
+              textAlign:'center'
             }}
             to={`/category/${category}`}
           >
