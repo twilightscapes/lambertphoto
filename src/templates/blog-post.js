@@ -178,7 +178,7 @@ const Post = ({ data, pageContext }) => {
   
     const UnderlayImage = frontmatter.underlayImage
     ? frontmatter.underlayImage.childImageSharp.gatsbyImageData
-    : ""
+    : null;
 
     
 
@@ -205,7 +205,7 @@ const Post = ({ data, pageContext }) => {
 
 
 
-  const Svg = frontmatter.svgImage
+
   // const svgZindex = frontmatter.svgzindex
 
 // function AddSvg(){
@@ -438,14 +438,41 @@ const OriginalUrl = frontmatter.youtube.youtuber
     )
   }
 
+  const Svg = frontmatter.svgImage;
 
-
-  function AddSvg(){
-    const svgUrl = frontmatter.svgImage.publicURL
+  function AddSvg() {
+    if (!Svg) {
+      return null; // or you can return a default SVG or placeholder
+    }
+  
+    const svgUrl = Svg.publicURL;
+  
     return (
-      <object className="animator" id="" data={svgUrl} type="image/svg+xml" style={{position:'absolute', top:'0', left:'0', right:'0', bottom:'0', overflow:'', border:'0px solid red', zIndex:'', aspectRatio:'', width:'100vw', background:'transparent', objectFit:'cover'   }} alt="animated content" title="animated content" ></object>
-    )
+      <object
+        className="animator"
+        id=""
+        data={svgUrl}
+        type="image/svg+xml"
+        style={{
+          position: 'absolute',
+          top: '0',
+          left: '0',
+          right: '0',
+          bottom: '0',
+          overflow: '',
+          border: '0px solid red',
+          zIndex: '',
+          aspectRatio: '',
+          width: '100vw',
+          background: 'transparent',
+          objectFit: 'cover'
+        }}
+        alt="animated content"
+        title="animated content"
+      ></object>
+    );
   }
+  
 
 
       //  const svgUrl = frontmatter.svgImage.publicURL
