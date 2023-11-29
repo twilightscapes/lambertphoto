@@ -415,7 +415,7 @@ collections:
             widget: object
             fields:
               - widget: string
-                name: title
+                name: titleDefault
                 label: Site Title
                 required: true
               - widget: hidden
