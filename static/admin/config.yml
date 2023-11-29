@@ -1,6 +1,6 @@
 backend:
-  # name: test-repo
-  name: git-gateway
+  name: test-repo
+  # name: git-gateway
   branch: main
   commit_messages:
     create: "Create {{collection}} “{{slug}}”"
@@ -101,7 +101,8 @@ collections:
         collapsed: true
         add_to_top: true
         fields:
-          - { label: "Title", name: "title", widget: "string", hint: "Category title" }
+          - { label: "Category Title", name: "cattitle", widget: "string", hint: "Category Title" }
+          - { label: "Category Url", name: "catslug", widget: "string", hint: "Category url" }
           - { label: "Image", name: "image", widget: "image", hint: "Category image" }
 
       - { label: "Make Comments Available?", name: "comments", widget: "hidden", default: false, required: false, }
