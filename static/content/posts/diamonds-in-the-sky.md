@@ -9,9 +9,9 @@ showZoom: false
 showPageNav: true
 spotlight: true
 tags:
-  - Video
+  - video
 category:
-  - Video
+  - video
 youtube:
   youtubemute: true
   youtubeautostart: true

@@ -8,6 +8,8 @@ shareable: false
 showZoom: false
 showPageNav: true
 spotlight: false
+category:
+  - highlight
 youtube:
   youtubemute: false
   youtubeautostart: false
