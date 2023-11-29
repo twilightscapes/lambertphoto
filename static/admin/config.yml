@@ -59,26 +59,6 @@ collections:
           widget: "hidden",
           default: "blog-post",
         }
-      # - {
-      #     label: "Category",
-      #     name: "category",
-      #     widget: "select",
-      #     required: false,
-      #     options: [
-      #       {
-      #         label: "News",
-      #         value: "news",
-      #       },
-      #       {
-      #         label: "Info",
-      #         value: "info",
-      #       },
-      #       {
-      #         label: "Feature",
-      #         value: "feature",
-      #       },
-      #     ],
-      #   }
 
 
       - { label: "Title", name: "title", widget: "string", tagname: "h1" }
@@ -109,7 +89,14 @@ collections:
       #   }
 
       - { label: "SEO Description", name: "description", widget: "text" }
-      - { label: "Category", name: "category", widget: "list", collapsed: true, default: "Default", required: false, add_to_top: true, field: {label: Category, name: name, widget: string, add_to_top: true, format: 'lowercase', hint: "Use lowercase ONLY",}}
+
+
+      - label: "Category"
+        name: "category"
+        widget: "object"
+        fields:
+          - { label: "Title", name: "title", widget: "string", hint: "Category title" }
+          - { label: "Image", name: "image", widget: "image", hint: "Category image" }
 
 
 
