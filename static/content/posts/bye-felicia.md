@@ -6,7 +6,7 @@ date: 2023-11-22 16:29
 description: The oldest bridge in Texas and Oklahoma
 comments: false
 isnftforsale: false
-shareable: false
+shareable: true
 showZoom: false
 showPageNav: true
 spotlight: false
