@@ -1085,6 +1085,7 @@ Click to play
                   attributes: {
                     sameSite: "none",
                     crossorigin: "anonymous",
+                    referrerpolicy: "no-referrer-when-downgrade",
                   },
                 },
                   youtube: {
