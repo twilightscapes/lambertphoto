@@ -1,3 +1,8 @@
 {
-  "menuItems": []
+  "menuItems": [
+    {
+      "menutitle": "Galleries",
+      "url": "/categories/"
+    }
+  ]
 }
