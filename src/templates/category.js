@@ -53,7 +53,7 @@ const Category = ({ data, pageContext }) => {
         </div>
 
         <div className="contentpanel grid-container" style={{ marginTop: "" }}>
-          <div className="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
+          <div className="sliderSpacer" style={{ height: "", paddingTop: "5vh", display: "" }}></div>
 
           {posts.map(({ node }) => {
             const featuredImg = node.frontmatter.featuredImage;
