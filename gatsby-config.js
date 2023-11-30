@@ -444,18 +444,18 @@ module.exports = {
         lang: `en`,
         theme_color: `#111`,
         display: `standalone`,
- icon: settings.meta.iconimage, // This path is relative to the root of the site.
+ icon: `static/assets/logo.svg`, // This path is relative to the root of the site.
  icon_options: {
   purpose: `any maskable`,
 },
       icons: [
         {
-          src: settings.meta.iconimage,
+          src: `static/assets/logo.svg`,
           sizes: `192x192`,
           type: `image/png`,
         },
         {
-          src: settings.meta.iconimage,
+          src: `static/assets/logo.svg`,
           sizes: `512x512`,
           type: `image/png`,
         },
