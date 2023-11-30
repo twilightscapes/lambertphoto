@@ -18,6 +18,11 @@ public_folder: "/assets"
 # site_url: ""
 # display_url: ""
 show_preview_links: false
+search: false
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "_"
 
 collections:
   
@@ -67,7 +72,10 @@ collections:
           name: "slug",
           widget: "string",
           hint: "Start slug with /. Use only alphanumeric characters, - and _. Avoid spaces in any cases.",
-          default: "/", format: 'lowercase'
+          default: "/", format: 'lowercase',
+          encoding: "ascii",
+          clean_accents: true,
+          sanitize_replacement: "_"
         }
       - {
           label: "Publish Date",
