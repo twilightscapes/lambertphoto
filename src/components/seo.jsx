@@ -73,7 +73,7 @@ export default function Seo({
 
       <meta name="apple-mobile-web-app-capable" content="yes" />
       
-      <link
+      {/* <link
         rel="icon"
         type="image/png"
         sizes="32x32"
@@ -89,7 +89,7 @@ export default function Seo({
         rel="apple-touch-icon"
         sizes="180x180"
         href={icon512}
-      />
+      /> */}
 
 {/* <link rel="apple-touch-icon" sizes="180x180" href="/siteimages/apple-splashapple-icon-180.png" />
 <link rel="apple-touch-icon" sizes="167x167" href="/siteimages/apple-splashapple-icon-167.png" />
