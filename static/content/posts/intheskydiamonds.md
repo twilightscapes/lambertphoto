@@ -13,10 +13,10 @@ showPageNav: false
 spotlight: true
 youtube:
   youtubemute: true
-  youtubeautostart: false
+  youtubeautostart: true
   youtubeloop: true
-  youtubecontrols: true
-  customcontrols: true
+  youtubecontrols: false
+  customcontrols: false
   clicktoplay: false
   youtuber: https://youtu.be/iHxmNzMfDj4
 featuredImage: /assets/Experiences-Header-5.jpg
