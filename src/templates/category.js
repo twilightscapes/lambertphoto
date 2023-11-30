@@ -52,8 +52,8 @@ const Category = ({ data, pageContext }) => {
           <div style={{position:'absolute', right:'10px', top:'8px', height:'100%', color:'#fff', zIndex:'-1', fontSize:'30px'}}><AiFillDownSquare /></div>
         </div>
 
-        <div className="contentpanel grid-container" style={{ marginTop: "" }}>
-          <div className="sliderSpacer" style={{ height: "", paddingTop: "5vh", display: "" }}></div>
+        <div className="contentpanel grid-container" style={{ marginTop: "8vh" }}>
+          <div className="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
 
           {posts.map(({ node }) => {
             const featuredImg = node.frontmatter.featuredImage;
