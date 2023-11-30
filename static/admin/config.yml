@@ -18,11 +18,6 @@ public_folder: "/assets"
 # site_url: ""
 # display_url: ""
 show_preview_links: false
-search: false
-slug:
-  encoding: "ascii"
-  clean_accents: true
-  sanitize_replacement: "_"
 
 collections:
   
@@ -64,6 +59,26 @@ collections:
           widget: "hidden",
           default: "blog-post",
         }
+      # - {
+      #     label: "Category",
+      #     name: "category",
+      #     widget: "select",
+      #     required: false,
+      #     options: [
+      #       {
+      #         label: "News",
+      #         value: "news",
+      #       },
+      #       {
+      #         label: "Info",
+      #         value: "info",
+      #       },
+      #       {
+      #         label: "Feature",
+      #         value: "feature",
+      #       },
+      #     ],
+      #   }
 
 
       - { label: "Title", name: "title", widget: "string", tagname: "h1" }
@@ -72,10 +87,7 @@ collections:
           name: "slug",
           widget: "string",
           hint: "Start slug with /. Use only alphanumeric characters, - and _. Avoid spaces in any cases.",
-          default: "/", format: 'lowercase',
-          encoding: "ascii",
-          clean_accents: true,
-          sanitize_replacement: "_"
+          default: "/",
         }
       - {
           label: "Publish Date",
@@ -97,24 +109,12 @@ collections:
       #   }
 
       - { label: "SEO Description", name: "description", widget: "text" }
+      - { label: "Category", name: "category", widget: "list", collapsed: true, default: "Default", required: false, add_to_top: true, field: {label: Category, name: name, widget: string, add_to_top: true,}}
 
 
-      - { label: "Category", name: "category", widget: "list", collapsed: true, default: "Default", required: false, add_to_top: true, field: {label: Category, name: name, widget: string, add_to_top: true, format: 'lowercase', hint: "Use lowercase ONLY",}}
 
-      # - label: "Category"
-      #   name: "category"
-      #   widget: "list"
-      #   default: "Default"
-      #   required: false
-      #   collapsed: true
-      #   add_to_top: true
-      #   fields:
-      #     - { label: "Category Title", name: "cattitle", widget: "string", hint: "Category Title" }
-      #     - { label: "Category Url", name: "catslug", widget: "string", hint: "Category url" }
-      #     - { label: "Image", name: "image", widget: "image", hint: "Category image" }
-
-      # - { label: "Make Comments Available?", name: "comments", widget: "hidden", default: false, required: false, }
-      # - { label: "isnftforsale", name: "isnftforsale", widget: "hidden", default: false, required: false, }
+      - { label: "Make Comments Available?", name: "comments", widget: "hidden", default: false, required: false, }
+      - { label: "isnftforsale", name: "isnftforsale", widget: "hidden", default: false, required: false, }
 
 
 
@@ -140,7 +140,7 @@ collections:
 
 
 
-      - { label: "Page Tags", name: "tags", widget: "list", collapsed: true, default: "tagged", required: false, add_to_top: true, field: {label: Tag, name: name, widget: string, add_to_top: true, collapsed: true, format: 'lowercase'}}
+      - { label: "Page Tags", name: "tags", widget: "list", collapsed: true, default: "tagged", required: false, add_to_top: true, field: {label: Tag, name: name, widget: string, add_to_top: true, collapsed: true,}}
 
       - {
               label: "YouTube",
@@ -185,7 +185,7 @@ collections:
           hint: "The primary image used for all social media, blog previews and the feature image at the top of the post",
           required: false,
           tagname: "",
-          default: null
+          default: "/assets/transparent.png"
         }
       - {
           label: "Underlay Image",
@@ -194,7 +194,7 @@ collections:
           hint: "This is used to put a transparent png over the video but under the animation layer",
           required: false,
           tagname: "",
-          default: null
+          default: "/assets/transparent.png"
         }
       - {
           label: "SVG",
@@ -203,7 +203,7 @@ collections:
           hint: "This is the animation layer where your animated or static SVG image goes - it is on the top of the stack",
           required: false,
           tagname: "",
-          default: null
+          default: "/assets/null.svg"
         }
       # - { label: "SVG Z-Index", name: "svgzindex", widget: "string", required: false, tagname: "", }
 
@@ -253,34 +253,34 @@ collections:
             }
           - { label: "Slug", name: "slug", widget: "hidden", default: "/" }
           - { label: "Title", name: "title", widget: "string" }
-          # - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
           - { label: "Featured Image", name: "featuredImage", widget: "image", required: false }
           # - { label: "Secondary Image", name: "secondaryImage", widget: "image", hint: "this image is used for the profile photo in the info section", required: false }
-          # - { label: "Underlay Image", name: "underlayImage", widget: "image", required: false }
-          # - { label: "SVG Image", name: "svgImage", widget: "image", required: false}
+          - { label: "Underlay Image", name: "underlayImage", widget: "image", required: false }
+          - { label: "SVG Image", name: "svgImage", widget: "image", required: false}
           # - { label: "SVG Z-Index", name: "svgzindex", widget: "string", required: false }
 
-          # - {
-          #     label: "YouTube",
-          #     name: "youtube",
-          #     widget: "object",
-          #     collapsed: true, # Set to true to collapse panel by default
-          #   fields: [
-          #     { label: "YouTube Url", name: "youtuber", widget: "string",required: false },
-          #     { label: "YouTube Start", name: "youtubestart", widget: "string", required: false },
-          #     { label: "YouTube End", name: "youtubeend", widget: "string", required: false },
-          #     { label: "YouTube Audio", name: "youtuber2", widget: "string", required: false },
-          #     { label: "YouTube Audio Start", name: "audiostart", widget: "string", required: false },
-          #     { label: "YouTube Audio End", name: "audioend", widget: "string", required: false },
-          #     { label: "YouTube Audio Title", name: "audiotitle", widget: "string", required: false },
-          #     { label: "YouTube Mute", name: "youtubemute", widget: "boolean", default: false, required: false },
-          #     { label: "YouTube AutoPlay", name: "youtubeautostart", widget: "boolean", default: false, required: false },
-          #     { label: "YouTube Loop", name: "youtubeloop", widget: "boolean", default: true, required: false },
-          #     { label: "YouTube Controls", name: "youtubecontrols", widget: "boolean", default: false, required: false },
-          #     { label: "YouTube Use Custom Controls", name: "customcontrols", widget: "boolean", default: true, required: false },
-          #     { label: "YouTube Click To Play", name: "clicktoplay", widget: "boolean", default: false, required: false }
-          #   ]
-          # }
+          - {
+              label: "YouTube",
+              name: "youtube",
+              widget: "object",
+              collapsed: true, # Set to true to collapse panel by default
+            fields: [
+              { label: "YouTube Url", name: "youtuber", widget: "string",required: false },
+              { label: "YouTube Start", name: "youtubestart", widget: "string", required: false },
+              { label: "YouTube End", name: "youtubeend", widget: "string", required: false },
+              { label: "YouTube Audio", name: "youtuber2", widget: "string", required: false },
+              { label: "YouTube Audio Start", name: "audiostart", widget: "string", required: false },
+              { label: "YouTube Audio End", name: "audioend", widget: "string", required: false },
+              { label: "YouTube Audio Title", name: "audiotitle", widget: "string", required: false },
+              { label: "YouTube Mute", name: "youtubemute", widget: "boolean", default: false, required: false },
+              { label: "YouTube AutoPlay", name: "youtubeautostart", widget: "boolean", default: false, required: false },
+              { label: "YouTube Loop", name: "youtubeloop", widget: "boolean", default: true, required: false },
+              { label: "YouTube Controls", name: "youtubecontrols", widget: "boolean", default: false, required: false },
+              { label: "YouTube Use Custom Controls", name: "customcontrols", widget: "boolean", default: true, required: false },
+              { label: "YouTube Click To Play", name: "clicktoplay", widget: "boolean", default: false, required: false }
+            ]
+          }
 
 
 
@@ -319,7 +319,7 @@ collections:
           
 
 
-          # - { label: "Body", name: "body", widget: "markdown" }
+          - { label: "Body", name: "body", widget: "markdown" }
 
           # - label: "CTA"
           #   name: "cta"
@@ -423,7 +423,7 @@ collections:
             widget: object
             fields:
               - widget: string
-                name: titleDefault
+                name: title
                 label: Site Title
                 required: true
               - widget: hidden
@@ -518,10 +518,6 @@ collections:
               #   required: false
 
               - widget: string
-                name: postcount
-                label: Number of posts per page
-
-              - widget: string
                 name: font1
                 label: Google Font
                 required: false
@@ -533,26 +529,26 @@ collections:
               - widget: image
                 name: iconimage
                 label: Site Logo (should be SVG if at all possible)
-              - widget: image
-                name: favicon16x16
-                label: Site Favicon 16x16 (name image like 'favicon-16x16.png')
-                hint: "You can use the same 512x512 image for all at the expense of users with slower connections"
-                default: "/assets/favicon-16x16.png"
-              - widget: image
-                name: favicon32x32
-                label: Site Favicon 32x32 (name image like 'favicon-16x16.png')
-                hint: "You can use the same 512x512 image for all at the expense of users with slower connections"
-                default: "/assets/favicon-32x32.png"
-              - widget: image
-                name: icon192
-                label: Site Icon 192x192 (name image like 'icon-192x192.png')
-                hint: "You can use the same 512x512 image for all at the expense of users with slower connections"
-                default: "/assets/icon-192x192.png"
+              # - widget: image
+              #   name: favicon16x16
+              #   label: Site Favicon 16x16 (name image like 'favicon-16x16.png')
+              #   hint: "You can use the same 512x512 image for all at the expense of users with slower connections"
+              #   default: "/assets/favicon-16x16.png"
+              # - widget: image
+              #   name: favicon32x32
+              #   label: Site Favicon 32x32 (name image like 'favicon-16x16.png')
+              #   hint: "You can use the same 512x512 image for all at the expense of users with slower connections"
+              #   default: "/assets/favicon-32x32.png"
+              # - widget: image
+              #   name: icon192
+              #   label: Site Icon 192x192 (name image like 'icon-192x192.png')
+              #   hint: "You can use the same 512x512 image for all at the expense of users with slower connections"
+              #   default: "/assets/icon-192x192.png"
               - widget: image
                 name: icon512
-                label: Site Icon 512x512 (name image like 'icon-512x512.png')
-                hint: "You can use the same 512x512 image for all at the expense of users with slower connections"
-                default: "/assets/icon-512x512.png"
+                label: Site Icon 512x512
+                hint: "This is for icon usage in various locations"
+                # default: "/assets/icon-512x512.png"
           #     - widget: string
           #       name: menu1
           #       label: Menu Title 1
@@ -687,35 +683,35 @@ collections:
             enableAlpha: true
             allowInput: true
           
-          # - label: "background"
-          #   name: "background"
-          #   widget: "color"
-          #   enableAlpha: true
-          #   allowInput: true
+          - label: "background"
+            name: "background"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
 
-          # - label: "bodyColor"
-          #   name: "bodyColor"
-          #   widget: "color"
-          #   enableAlpha: true
-          #   allowInput: true
+          - label: "bodyColor"
+            name: "bodyColor"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
 
-          # - label: "text"
-          #   name: "text"
-          #   widget: "color"
-          #   enableAlpha: true
-          #   allowInput: true
+          - label: "text"
+            name: "text"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
 
-          # - label: "cardBg"
-          #   name: "cardBg"
-          #   widget: "color"
-          #   enableAlpha: true
-          #   allowInput: true
+          - label: "cardBg"
+            name: "cardBg"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
 
-          # - label: "textShadow"
-          #   name: "textShadow"
-          #   widget: "color"
-          #   enableAlpha: true
-          #   allowInput: true
+          - label: "textShadow"
+            name: "textShadow"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
 
 
 
@@ -737,33 +733,33 @@ collections:
             enableAlpha: true
             allowInput: true
           
-          # - label: "background"
-          #   name: "background"
-          #   widget: "color"
-          #   enableAlpha: true
-          #   allowInput: true
+          - label: "background"
+            name: "background"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
 
-          # - label: "bodyColor"
-          #   name: "bodyColor"
-          #   widget: "color"
-          #   enableAlpha: true
-          #   allowInput: true
+          - label: "bodyColor"
+            name: "bodyColor"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
 
-          # - label: "text"
-          #   name: "text"
-          #   widget: "color"
-          #   enableAlpha: true
-          #   allowInput: true
+          - label: "text"
+            name: "text"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
 
-          # - label: "cardBg"
-          #   name: "cardBg"
-          #   widget: "color"
-          #   enableAlpha: true
-          #   allowInput: true
+          - label: "cardBg"
+            name: "cardBg"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
 
-          # - label: "textShadow"
-          #   name: "textShadow"
-          #   widget: "color"
-          #   enableAlpha: true
-          #   allowInput: true
+          - label: "textShadow"
+            name: "textShadow"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
 
