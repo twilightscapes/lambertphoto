@@ -5,7 +5,7 @@ slug: /chalk-creek
 date: 2023-11-29 19:54
 description: Chalk Creek - Colorado
 shareable: false
-showZoom: false
+showZoom: true
 showPageNav: true
 spotlight: false
 youtube:
