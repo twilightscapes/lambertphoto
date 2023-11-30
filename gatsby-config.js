@@ -353,7 +353,7 @@ module.exports = {
         enableIdentityWidget: true,
         publicPath: `admin`,
         htmlTitle: `CMS`,
-        htmlFavicon: `static/assets/logo.svg`,
+        htmlFavicon: `src/images/logo.svg`,
         includeRobots: false,
         logo_url: 'https://memegenes.com/assets/logo.svg'
       },
