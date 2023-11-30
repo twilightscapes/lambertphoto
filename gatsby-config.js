@@ -444,22 +444,22 @@ module.exports = {
         lang: `en`,
         theme_color: `#111`,
         display: `standalone`,
- icon: `static/assets/logo.svg`, // This path is relative to the root of the site.
+ icon: `src/img/logo.svg`, // This path is relative to the root of the site.
  icon_options: {
   purpose: `any maskable`,
 },
-      icons: [
-        {
-          src: `static/assets/logo.svg`,
-          sizes: `192x192`,
-          type: `image/png`,
-        },
-        {
-          src: `static/assets/logo.svg`,
-          sizes: `512x512`,
-          type: `image/png`,
-        },
-      ], // Add or remove icon sizes as desired
+      // icons: [
+      //   {
+      //     src: `static/assets/logo.svg`,
+      //     sizes: `192x192`,
+      //     type: `image/png`,
+      //   },
+      //   {
+      //     src: `static/assets/logo.svg`,
+      //     sizes: `512x512`,
+      //     type: `image/png`,
+      //   },
+      // ], // Add or remove icon sizes as desired
       },
     },
     "gatsby-plugin-offline",
