@@ -355,7 +355,7 @@ module.exports = {
         htmlTitle: `CMS`,
         htmlFavicon: `src/images/logo.svg`,
         includeRobots: false,
-        logo_url: 'https://memegenes.com/assets/logo.svg'
+        logo_url: 'src/images/logo.svg'
       },
     },
 
