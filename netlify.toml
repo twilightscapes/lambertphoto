@@ -11,6 +11,7 @@
   [headers.values]
     Access-Control-Allow-Origin = "*"
     X-Frame-Options = "ALLOW-FROM https://lambertphotography.com"
+    Content-Security-Policy = "frame-ancestors 'self' https://www.youtube.com https://youtu.be"
 
 [[edge_functions]]
   function = "hello" 
