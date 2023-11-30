@@ -368,6 +368,7 @@ module.exports = {
             "X-XSS-Protection: 1; mode=block",
             "X-Content-Type-Options: nosniff",
             "Referrer-Policy: same-origin",
+            `Content-Security-Policy: frame-ancestors 'self' https://lambertphotography.com`,
           ],
         },
       },
