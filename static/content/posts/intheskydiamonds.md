@@ -1,6 +1,6 @@
 ---
 template: blog-post
-title: Unique Night Photography by Lambert Photography and Twilightscapes
+title: Unique Night Photography by Twilightscapes
 slug: /
 date: 2023-11-30 05:42
 description: A new interactive Photo "Experience" from Twilightscapes
