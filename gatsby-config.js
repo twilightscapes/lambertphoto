@@ -353,7 +353,7 @@ module.exports = {
         enableIdentityWidget: true,
         publicPath: `admin`,
         htmlTitle: `CMS`,
-        htmlFavicon: `src/images/logo.svg`,
+        htmlFavicon: `static/assets/logo.svg`,
         includeRobots: false,
         logo_url: 'https://memegenes.com/assets/logo.svg'
       },
@@ -450,12 +450,12 @@ module.exports = {
 },
       // icons: [
       //   {
-      //     src: `static/assets/logo.svg`,
+      //     src: `/static/siteimages/manifest-icon-192.maskable.png`,
       //     sizes: `192x192`,
       //     type: `image/png`,
       //   },
       //   {
-      //     src: `static/assets/logo.svg`,
+      //     src: `/static/siteimages/manifest-icon-512.maskable.png`,
       //     sizes: `512x512`,
       //     type: `image/png`,
       //   },
