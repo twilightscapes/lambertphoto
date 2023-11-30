@@ -48,7 +48,7 @@ const CategoryIndex = ({ data, pageContext }) => {
         <div style={{ position: 'absolute', right: '10px', top: '8px', height: '100%', color: '#fff', zIndex: '-1', fontSize: '30px' }}><AiFillDownSquare /></div>
       </div>
 
-      <div className="contentpanel grid-container" style={{ marginTop: "" }}>
+      <div className="contentpanel grid-container" style={{ marginTop: "8vh" }}>
         <div className="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
 
         {categories.slice(0, visibleItems).map((category, index) => (
