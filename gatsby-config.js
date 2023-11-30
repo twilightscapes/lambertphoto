@@ -355,7 +355,7 @@ module.exports = {
         htmlTitle: `CMS`,
         htmlFavicon: `src/images/logo.svg`,
         includeRobots: false,
-        logo_url: 'src/images/logo.svg'
+        logo_url: 'https://memegenes.com/assets/logo.svg'
       },
     },
 
@@ -444,7 +444,7 @@ module.exports = {
         lang: `en`,
         theme_color: `#111`,
         display: `standalone`,
- icon: `src/img/logo.svg`, // This path is relative to the root of the site.
+ icon: `static/assets/logo.svg`, // This path is relative to the root of the site.
  icon_options: {
   purpose: `any maskable`,
 },
