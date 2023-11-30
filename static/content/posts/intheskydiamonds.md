@@ -9,7 +9,7 @@ category:
   - video
 shareable: false
 showZoom: false
-showPageNav: false
+showPageNav: true
 spotlight: true
 youtube:
   youtubemute: true
