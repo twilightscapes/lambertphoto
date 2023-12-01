@@ -25,7 +25,7 @@ const CategoryIndex = ({ data, pageContext }) => {
       {showNav ? (
         <div className="spacer" style={{ height: "70px", border: "0px solid yellow" }}></div>
       ) : (
-        ""
+        <div className="spacer" style={{ height: "20px", border: "0px solid yellow" }}></div>
       )}
 
       <div className="selectArrow" style={{ position: "fixed", top: "", left: "1%", right: "1%", margin: "-55px auto 0 auto", zIndex: "3", display: "grid", placeSelf: "center", padding: "" }}>
@@ -48,7 +48,7 @@ const CategoryIndex = ({ data, pageContext }) => {
         <div style={{ position: 'absolute', right: '10px', top: '8px', height: '100%', color: '#fff', zIndex: '-1', fontSize: '30px' }}><AiFillDownSquare /></div>
       </div>
 
-      <div className="contentpanel grid-container" style={{ marginTop: "8vh" }}>
+      <div className="contentpanel grid-container" style={{ marginTop: "" }}>
         <div className="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
 
         {categories.slice(0, visibleItems).map((category, index) => (

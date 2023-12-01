@@ -27,7 +27,7 @@ const Category = ({ data, pageContext }) => {
       {showNav ? (
         <div className="spacer" style={{ height: "70px", border: "0px solid yellow" }}></div>
       ) : (
-        ""
+        <div className="spacer" style={{ height: "20px", border: "0px solid yellow" }}></div>
       )}
 
       <div>
@@ -52,7 +52,7 @@ const Category = ({ data, pageContext }) => {
           <div style={{position:'absolute', right:'10px', top:'8px', height:'100%', color:'#fff', zIndex:'-1', fontSize:'30px'}}><AiFillDownSquare /></div>
         </div>
 
-        <div className="contentpanel grid-container" style={{ marginTop: "8vh" }}>
+        <div className="contentpanel grid-container" style={{ marginTop: "" }}>
           <div className="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
 
           {posts.map(({ node }) => {
