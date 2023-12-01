@@ -28,7 +28,7 @@ const SearchPage = ({ data }) => {
   const { showModals } = useSiteMetadata();
   const { showDates } = useSiteMetadata()
   const { postcount } = useSiteMetadata()
-
+  const { showNav } = useSiteMetadata();
   const allPosts = data.allMarkdownRemark.edges
   const [query, setQuery] = React.useState("")
   const [filteredPosts, setFilteredPosts] = React.useState(allPosts)
@@ -66,8 +66,12 @@ const showMoreItems = () => {
 </Helmet>
 
 
-<div className="spacer" style={{height:'80px', border:'0px solid yellow'}}>{query}</div>
 
+{showNav ? (
+        <div className='spacer' style={{ height: '70px', border: '0px solid yellow' }}>{query}</div>
+      ) : (
+        <div className="spacer2" style={{ height: "0", border: "0px solid yellow" }}>{query}</div>
+      )}
 
 
       <div className="cattags" style={{position:'fixed', top:'', left:'1%', right:'1%', maxWidth:'380px', margin:'15px auto 0 auto', zIndex:'3', display:'grid', placeSelf:'center', outline:'1px solid #999', borderRadius:'3px', padding:'', color:''}}>

@@ -23,9 +23,9 @@ const CategoryIndex = ({ data, pageContext }) => {
         <body className="category utilitypage" />
       </Helmet>
       {showNav ? (
-        <div className="spacer" style={{ height: "70px", border: "0px solid yellow" }}></div>
+        <div className="spacer" style={{ height: "130px", border: "0px solid yellow" }}></div>
       ) : (
-        <div className="spacer" style={{ height: "20px", border: "0px solid yellow" }}></div>
+        <div className="spacer2" style={{ height: "70px", border: "0px solid yellow" }}></div>
       )}
 
       <div className="selectArrow" style={{ position: "fixed", top: "", left: "1%", right: "1%", margin: "-55px auto 0 auto", zIndex: "3", display: "grid", placeSelf: "center", padding: "" }}>

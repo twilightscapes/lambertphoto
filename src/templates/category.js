@@ -27,7 +27,7 @@ const Category = ({ data, pageContext }) => {
       {showNav ? (
         <div className="spacer" style={{ height: "70px", border: "0px solid yellow" }}></div>
       ) : (
-        <div className="spacer" style={{ height: "20px", border: "0px solid yellow" }}></div>
+        <div className="spacer2" style={{ height: "70px", border: "0px solid yellow" }}></div>
       )}
 
       <div>

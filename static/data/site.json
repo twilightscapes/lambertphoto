@@ -5,7 +5,7 @@
     "showModals": false,
     "favicon32x32": "/assets/tw-logo-large.png",
     "favicon16x16": "/assets/tw-logo-large.png",
-    "showSearch": false,
+    "showSearch": true,
     "showNav": false,
     "companyname": "Lambert Photography",
     "siteUrl": "https://lambertphotography.com",

@@ -45,7 +45,7 @@ const Tag = ({ data, pageContext }) => {
       {showNav ? (
         <div className='spacer' style={{ height: '70px', border: '0px solid yellow' }}></div>
       ) : (
-        ''
+        <div className="spacer2" style={{ height: "20px", border: "1px solid yellow" }}></div>
       )}
       {/* <h1 style={{ textAlign: 'center' }}>{tag}</h1> */}
 

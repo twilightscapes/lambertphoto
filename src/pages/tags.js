@@ -10,6 +10,7 @@ import { Helmet } from "react-helmet"
 import TimeAgo from 'react-timeago'
 import useSiteMetadata from "../hooks/SiteMetadata"
 const TagIndex = ({ data }) => {
+  const { showNav } = useSiteMetadata();
   const { showDates } = useSiteMetadata()
   const { postcount } = useSiteMetadata()
   const [selectedTag, setSelectedTag] = useState(''); // State to keep track of selected tag
@@ -38,7 +39,11 @@ const TagIndex = ({ data }) => {
         <Helmet>
         <body className="tagpage utilitypage" />
       </Helmet>
-      <div className="spacer" style={{ height: '70px', border: '0px solid yellow', }}></div>
+      {showNav ? (
+        <div className='spacer' style={{ height: '70px', border: '0px solid yellow' }}></div>
+      ) : (
+        <div className="spacer2" style={{ height: "70px", border: "0px solid yellow" }}></div>
+      )}
 
 
         

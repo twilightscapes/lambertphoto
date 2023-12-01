@@ -14,7 +14,6 @@ const BlogList = ({ data, pageContext }) => {
   const { showNav } = useSiteMetadata();
   const { showDates } = useSiteMetadata();
   const { postcount } = useSiteMetadata();
-
   const posts = data.allMarkdownRemark.edges;
   const { numPages, currentPage } = pageContext;
   const totalCount = data.allMarkdownRemark.totalCount;
@@ -31,12 +30,12 @@ const BlogList = ({ data, pageContext }) => {
       </Helmet>
 
       {showNav ? (
-        <div className="spacer" style={{ height: '70px', border: '0px solid yellow' }}></div>
+        <div className='spacer' style={{ height: '70px', border: '0px solid yellow' }}></div>
       ) : (
-        ''
+        <div className="spacer2" style={{ height: "0", border: "0px solid yellow" }}></div>
       )}
 
-      <div className="scroll-container" style={{ maxHeight: '100vh', padding: '4vh 0 0 0' }}>
+      <div className="scroll-container" style={{ maxHeight: '100vh', padding: '2vh 0 0 0' }}>
         <div className="contentpanel grid-container" style={{}}>
 
           <div className="sliderSpacer" style={{ height: '', paddingTop: '', display: '' }}></div>
