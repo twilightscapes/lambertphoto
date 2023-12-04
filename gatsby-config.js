@@ -355,7 +355,7 @@ module.exports = {
         htmlTitle: `CMS`,
         htmlFavicon: `static/assets/logo.svg`,
         includeRobots: false,
-        logo_url: 'https://memegenes.com/assets/logo.svg'
+        logo_url: 'https://piratesocial.org/assets/logo.svg'
       },
     },
 
@@ -368,7 +368,6 @@ module.exports = {
             "X-XSS-Protection: 1; mode=block",
             "X-Content-Type-Options: nosniff",
             "Referrer-Policy: same-origin",
-            `Content-Security-Policy: frame-ancestors 'self' https://lambertphotography.com`,
           ],
         },
       },
