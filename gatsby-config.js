@@ -287,8 +287,8 @@ module.exports = {
                   query: `
                   {
                     allMarkdownRemark(
-                      sort: { fields: [frontmatter___date], order: DESC }
-                      filter: { frontmatter: { excludeFromRSS: { ne: true } } }
+                      sort: {frontmatter: {date: DESC}}
+                      filter: {frontmatter: {excludeFromRSS: {ne: true}}}
                     ) {
                       nodes {
                         excerpt
