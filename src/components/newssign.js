@@ -61,12 +61,18 @@ const NewsletterPage = () => (
              <div className="signbox" style={{display:'flex', flexDirection:'column',gap:'10px'}}>
              
              
+{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+<label style={{ color: '#fff' }} htmlFor="email">
+  <input
+    name="email"
+    type="email"
+    id="email"
+    required={true}
+    placeholder="your@email.com"
+    autoComplete="email"
+  />
+</label>
 
-               <label style={{color:'#fff'}} htmlFor="email">
-                 <input type="email" id="email" required={true}
-                      placeholder="your@email.com"
-                      autocomplete="email"
-                      style={{}}/></label>
                       
             
 

@@ -985,7 +985,7 @@ Click to play
 ""
   )} */}
 
-
+<div className="panel">
 <div className="wrap-element effects" style={hasYoutubeFrontmatter ? {aspectRatio:'16/9'} : {}}>
 
 
@@ -1599,7 +1599,7 @@ Click to play original video
 
 
 
-
+</div>
        
 
 

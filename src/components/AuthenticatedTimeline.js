@@ -78,7 +78,7 @@ const AuthenticatedTimeline = () => {
     };
     
 
-  const [ setLoggedIn] = useState(false);
+  // const [ setLoggedIn] = useState(false);
   // useNetlifyIdentity(setLoggedIn);
 
   const combinedFeed = [
@@ -317,7 +317,7 @@ return (
 <button className="button" onClick={addSubscription}>Add Subscription</button>
 </div>
 <div className="flexcheek" style={{ minWidth: '', maxHeight: '40vh', overflow: 'scroll', border:'1px solid #333', padding:'100px 3% 0 3%', borderRadius:'8px', textAlign:'center', position:'relative' }}>
-<h3>Latest Subscribed Feeds:</h3>
+<h3>Latest Feeds:</h3>
 
 <ul style={{display:'flex', flexDirection:'column'}}>
   {uniqueSubscriptions.map((subscription, index) => (
@@ -326,7 +326,7 @@ return (
 </ul>
 
 
-        <Link to="/favorites" className="button" style={{position:'absolute',  top:'10px', left:'0', right:'0', width:'70%', margin:'0 auto'}} >Manage Feeds</Link>
+        <Link state={{modal: true}} to="/favorites" className="button" style={{position:'absolute',  top:'10px', left:'0', right:'0', width:'70%', margin:'0 auto'}} >Manage Feeds</Link>
 
 </div>
 
@@ -344,7 +344,7 @@ return (
         </div>
 
 
-
+      
 
 
 

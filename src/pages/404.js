@@ -1,8 +1,4 @@
 import React from "react"
-import { Link } from "gatsby"
-import { RiArrowLeftSLine, RiBugLine } from "react-icons/ri"
-import { StaticImage } from "gatsby-plugin-image"
-// import { AiFillRobot } from "react-icons/ai"
 import useSiteMetadata from "../hooks/SiteMetadata"
 import Seo from "../components/seo"
 import Layout from "../components/siteLayout"

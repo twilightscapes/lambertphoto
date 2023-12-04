@@ -80,7 +80,7 @@ const sIcons = Icons.socialIcons.map((icons, index) => {
         ""
       )}
       {icons.icon === "rss" ? (
-        <a className="social" href={icons.url} rel="noreferrer" target="_blank">
+        <a aria-label="Link to RSS" className="social" href={icons.url} rel="noreferrer" target="_blank">
           <RiRssFill />
         </a>
       ) : (
@@ -231,7 +231,7 @@ export default function Footer() {
       <nav className="footerlinks" aria-label="footer">
       <div style={{width:'100%', textAlign: 'center', margin: '2rem 10px 1rem 10px', justifyContent: 'center', fontSize: '.95rem', textDecoration:'none'}}>
 
-<Link to="/disclaimer/">Disclaimer</Link>  |  <Link to="/privacy/">Privacy Policy</Link>  |  <Link to="/terms/">Terms of Service</Link></div>
+<Link state={{modal: true}} to="/disclaimer/">Disclaimer</Link>  |  <Link state={{modal: true}} to="/privacy/">Privacy Policy</Link>  |  <Link state={{modal: true}} to="/terms/">Terms of Service</Link></div>
   
 
 <div style={{textAlign: 'center', margin: '0 0 2rem 0', justifyContent: 'center', fontSize: '.75rem'}}>Copyright &copy;
@@ -246,7 +246,7 @@ export default function Footer() {
 <br />
 <br /> */}
 
-<a href="https://completeweb.site" rel="noreferrer">Web App by Complete Web</a> &nbsp; | &nbsp; <a href={speedIt} rel="noreferrer">Site Report Card</a>
+<a href="https://piratepro.app" rel="noreferrer">Running PiratePro</a> &nbsp; | &nbsp; <a href={speedIt} rel="noreferrer">Site Report Card</a>
 </div>
 <br />
 <br />

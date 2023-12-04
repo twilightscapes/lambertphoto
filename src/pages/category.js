@@ -76,7 +76,6 @@ const CategoryIndex = ({ data, pageContext }) => {
               className="post-card12 font"
               key={index}
               style={{
-                border: '0px solid red',
                 display: 'grid',
                 width: '100%',
                 maxWidth: '',
@@ -104,13 +103,14 @@ const CategoryIndex = ({ data, pageContext }) => {
 };
 
 export const query = graphql`
-  query {
-    allMarkdownRemark {
-      group(field: { frontmatter: { category: SELECT } }) {
-        fieldValue
-      }
+query {
+  allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+    group(field: {frontmatter: {category: SELECT}}) {
+      fieldValue
     }
   }
+}
 `;
+
 
 export default CategoryIndex;

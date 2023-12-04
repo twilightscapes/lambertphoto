@@ -35,7 +35,7 @@ export default function Seo({
     // siteUrl,
     siteDescription,
     siteImage,
-    icon512,
+    // icon512,
     // hrefLang,
     twitterUsername,
   } = siteMetadata

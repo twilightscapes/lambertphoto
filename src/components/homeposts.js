@@ -1,24 +1,20 @@
 import React, { useState } from "react"
-import { graphql, Link } from "gatsby"
+import { Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { StaticImage } from "gatsby-plugin-image"
-import Layout from "../components/siteLayout"
+
 import { ImPlay } from "react-icons/im"
 import { FaImage } from "react-icons/fa"
-import { AiOutlinePicLeft, AiFillDownSquare } from "react-icons/ai"
-import { Helmet } from "react-helmet"
+import { AiOutlinePicLeft } from "react-icons/ai"
 import TimeAgo from 'react-timeago'
 import useSiteMetadata from "../hooks/SiteMetadata"
-const TagIndex = ({ data }) => {
-  const { showNav } = useSiteMetadata();
+const HomePosts = ({ data }) => {
   const { showDates } = useSiteMetadata()
   const { postcount } = useSiteMetadata()
-  const [selectedTag, setSelectedTag] = useState(''); // State to keep track of selected tag
+
   const [visibleItems, setVisibleItems] = useState(postcount); 
-  console.log("Post count:", postcount);
-  const handleTagChange = (event) => { // Handler for select change
-    setSelectedTag(event.target.value);
-  }
+
+
 
   const showMoreItems = () => {
     setVisibleItems(visibleItems + postcount);
@@ -31,47 +27,32 @@ const TagIndex = ({ data }) => {
   ).map(group => group.fieldValue);
 
   if (!tags || tags.length === 0) {
-    return <div>No keywords found.</div>;
+    return <div>Nothing found.</div>;
   }
 
   return (
-    <Layout>
-        <Helmet>
-        <body className="tagpage utilitypage" />
-      </Helmet>
-      {showNav ? (
-        <div className='spacer' style={{ height: '70px', border: '0px solid yellow' }}></div>
-      ) : (
-        <div className="spacer2" style={{ height: "70px", border: "0px solid yellow" }}></div>
-      )}
+
+<>
+        {/* <div className="spacer2" style={{ height: "70px", border: "0px solid yellow" }}></div> */}
+    
 
 
-        
-
-
-        <div className="selectArrow" style={{position:'fixed', top:'', left:'1%', right:'1%',  margin:'-55px auto 0 auto', zIndex:'3', display:'grid', placeSelf:'center',  padding:'',}}>
-          <select className="cattags" id="tag-select" value={selectedTag} onChange={handleTagChange}>
-            <option value="">keyword:</option>
-            {tags.map(tag => (
-              <option key={tag} value={tag}>{tag}</option>
-            ))}
-          </select>
-          <div style={{position:'absolute', right:'10px', top:'8px', height:'100%', color:'#fff', zIndex:'-1', fontSize:'30px'}}><AiFillDownSquare /></div>
-        </div>
 
        
 
         <div className="contentpanel grid-container" style={{justifyContent:'center', alignItems:'center', marginTop:''}}>
+
+
           <div className="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
    
           {data.allMarkdownRemark.edges &&
             data.allMarkdownRemark.edges
             
-              .filter(({ node }) => !selectedTag || (node.frontmatter.tags && node.frontmatter.tags.includes(selectedTag)))
+              .filter(({ node }) => (node.frontmatter))
               .reverse()
               .slice(0, visibleItems)
               .map(({ node }) => {
-                // const { featuredImage } = node.frontmatter;
+    
 
                 return (
                   <div key={node.fields.slug} className="post-card1" style={{  alignItems: "center" }}>
@@ -130,12 +111,6 @@ Play Multimedia
   </div>
 
 
-
-
-
-
-
-
 </div>
 
 </Link>
@@ -151,9 +126,9 @@ Play Multimedia
               })
           }
 
-{/* {visibleItems === data.allMarkdownRemark.edges.length && (
+{visibleItems === data.allMarkdownRemark.edges.length && (
   <div className="post-card1" style={{ justifyContent: "center", alignItems: "center" }}>End of Results Reached</div>
-)} */}
+)}
 
 {visibleItems < data.allMarkdownRemark.edges.length && (
   <div className="" style={{display:'flex', flexDirection:'column', justifyContent:'center', gap:'', height:'50vh'}}>
@@ -168,45 +143,10 @@ Play Multimedia
 
         </div>
 
-    </Layout>
+        </>
   );
 };
 
-export const query = graphql`
-  query {
-    allMarkdownRemark(
-      filter: {frontmatter: {template: {eq: "blog-post"}}}
-      sort: {frontmatter: {date: ASC}}
-    ) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            date
-            title
-            tags
-            youtube {
-              youtuber
-            }
-            featuredImage {
-              childImageSharp {
-                gatsbyImageData(
-                  quality: 80
-                  placeholder: BLURRED
-                  formats: [AUTO, WEBP, AVIF]
-                )
-              }
-            }
-          }
-        }
-      }
-      group(field: {frontmatter: {tags: SELECT}}) {
-        fieldValue
-      }
-    }
-  }
-`;
 
-export default TagIndex;
+
+export default HomePosts;

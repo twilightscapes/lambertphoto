@@ -16,9 +16,11 @@ body.homepage:after{content: (''); background-color:inherit; height: 100vh; widt
 //   display: grid !important;
 // }
 
-body.install #menu, body.install .spacer  {display:none !important;}
+body.install #menu, body.install #gobacker, body.install .spacer  {display:none !important;}
 
+#menu{z-index: 20 !important;}
 
+body.homepage footer{display: none !important;}
 // body.homepage section:not(:first-child) {
 //   margin-top: 20vh !important;
 // }
@@ -627,8 +629,12 @@ border:1px solid #685766;color:#ccc;height:auto;padding:1vh 3vw}
   border-radius:6px;
   color:#fff !important;
   display:inline-flex;font-weight:700;height:auto;justify-content:center;margin:2vh 1vw;padding:1vh 3vw;text-shadow:2px 2px 2px #000; opacity:.6;}
-.button:hover{background:#0580bd; color:#fff !important; }
-  
+
+  .button:hover {
+    background:var(--theme-ui-colors-siteColor); 
+    filter: brightness(85%);
+  }
+
 p{margin-bottom:2rem}
 
 

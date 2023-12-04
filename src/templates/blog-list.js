@@ -16,8 +16,8 @@ const BlogList = ({ data, pageContext }) => {
   const { postcount } = useSiteMetadata();
   const posts = data.allMarkdownRemark.edges;
   const { numPages, currentPage } = pageContext;
-  const totalCount = data.allMarkdownRemark.totalCount;
-  const hasMorePosts = currentPage < numPages;
+  // const totalCount = data.allMarkdownRemark.totalCount;
+  // const hasMorePosts = currentPage < numPages;
 
   useEffect(() => {
     // Add any additional initialization logic if needed
@@ -112,7 +112,7 @@ Play Multimedia
 
 
 
-<div className="" style={{display:'grid', placeContent:'center', minHeight:'', background: 'rgba(0, 0, 0, 0.7)', width: '', margin: '0 1%', padding: '.2vh 2vw .2vh 2vw', textAlign: 'center', color: '#fff', display: 'flex', justifyContent: 'center', borderRadius: '8px' }}>
+<div className="" style={{ placeContent:'center', minHeight:'', background: 'rgba(0, 0, 0, 0.7)', width: '', margin: '0 1%', padding: '.2vh 2vw .2vh 2vw', textAlign: 'center', color: '#fff', display: 'flex', justifyContent: 'center', borderRadius: '8px' }}>
 
 {/* {hasMorePosts && (
           <> */}
