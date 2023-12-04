@@ -19,13 +19,8 @@ mv tmp_theme/src .
 # Copy the package.json file
 cp tmp_theme/package.json .
 
-# Commit and push changes to GitHub
-git add .
-git commit -m "Update src folder"
-git push origin $BRANCH_OR_TAG
+echo "Theme updated successfully!"
 
 # Clean up
 rm -rf tmp_theme
 rm -rf user_src_backup
-
-echo "Theme updated successfully!"
