@@ -78,6 +78,7 @@ maratingtx4: x
 profTitle: Hoist Your Flag!
 svgImage: /assets/null.svg
 underlayImage: /assets/transparent.png
+excludeFromRSS: true
 ---
 
 <div style="">
