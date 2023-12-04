@@ -12,15 +12,19 @@ mv src user_src_backup
 # Clone the central repository
 git clone --branch $BRANCH_OR_TAG --depth 1 $THEME_REPO_URL tmp_theme
 
-# Replace the src folder
-rm -rf src
+# Ensure the destination directories exist
+mkdir -p src public
+
+# Replace the src and public folders
+rm -rf src public
 mv tmp_theme/src .
+mv tmp_theme/public .
 
 # Copy the package.json file
 cp tmp_theme/package.json .
 
+echo "Theme updated successfully!"
+
 # Clean up
 rm -rf tmp_theme
 rm -rf user_src_backup
-
-echo "Theme updated successfully!"
