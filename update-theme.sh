@@ -6,16 +6,21 @@ THEME_REPO_URL="https://github.com/piratesocial/pirate.git"
 # Set the branch or tag you want to pull updates from
 BRANCH_OR_TAG="main"
 
-# Create src directory if it doesn't exist
-mkdir -p src
+# Temporarily store the user's changes (optional)
+mv src user_src_backup
 
-# Fetch theme files dynamically
-curl -LJO "$THEME_REPO_URL/archive/$BRANCH_OR_TAG.zip"
+# Clone the central repository
+git clone --branch $BRANCH_OR_TAG --depth 1 $THEME_REPO_URL tmp_theme
 
-# Unzip the downloaded theme files
-unzip -o "$BRANCH_OR_TAG.zip" -d src
+# Replace the src folder
+rm -rf src
+mv tmp_theme/src .
 
-# Clean up
-rm -f "$BRANCH_OR_TAG.zip"
+# Copy the package.json file
+cp tmp_theme/package.json .
 
 echo "Theme updated successfully!"
+
+# Clean up
+rm -rf tmp_theme
+rm -rf user_src_backup
