@@ -359,19 +359,19 @@ module.exports = {
       },
     },
 
-    {
-      resolve: "gatsby-plugin-netlify",
-      options: {
-      mergeSecurityHeaders: false,
-      headers: {
-          "/*": [
-            "X-XSS-Protection: 1; mode=block",
-            "X-Content-Type-Options: nosniff",
-            "Referrer-Policy: same-origin",
-          ],
-        },
-      },
-    },
+    // {
+    //   resolve: "gatsby-plugin-netlify",
+    //   options: {
+    //   mergeSecurityHeaders: false,
+    //   headers: {
+    //       "/*": [
+    //         "X-XSS-Protection: 1; mode=block",
+    //         "X-Content-Type-Options: nosniff",
+    //         "Referrer-Policy: same-origin",
+    //       ],
+    //     },
+    //   },
+    // },
     
 
     // {
