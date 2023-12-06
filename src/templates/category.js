@@ -7,8 +7,13 @@ import { ImPlay } from "react-icons/im";
 import { FaImage } from "react-icons/fa";
 import { AiOutlinePicLeft, AiFillDownSquare } from "react-icons/ai";
 import { StaticImage } from 'gatsby-plugin-image';
-import { Helmet } from "react-helmet";
 import TimeAgo from 'react-timeago';
+
+export const Head = () => (
+  <>
+  <body className="category utilitypage" />
+  </>
+)
 
 const Category = ({ data, pageContext }) => {
   const { category } = pageContext;
@@ -20,9 +25,7 @@ const Category = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <Helmet>
-        <body id="body" className="category" />
-      </Helmet>
+
 
       {showNav ? (
         <div className="spacer" style={{ height: "70px", border: "0px solid yellow" }}></div>

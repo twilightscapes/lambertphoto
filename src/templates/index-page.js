@@ -4,9 +4,9 @@ import React from 'react';
 import { graphql } from 'gatsby'; // Import graphql from 'gatsby'
 import Layout from '../components/siteLayout';
 import useSiteMetadata from '../hooks/SiteMetadata';
-import { Helmet } from 'react-helmet';
 import HomePosts from '../components/homeposts';
-
+import Seo from "../components/seo"
+import { getSrc } from "gatsby-plugin-image"
 export const query = graphql`
   query {
     allMarkdownRemark(
@@ -44,15 +44,29 @@ export const query = graphql`
   }
 `;
 
+export const Head = () => (
+  <>
+    <body className="archivepage utilitypage" />
+  </>
+)
+
 const HomePage = ({ data }) => {
   const { showNav } = useSiteMetadata();
+  const { image } = useSiteMetadata();
+  const { titleDefault } = useSiteMetadata();
+  const { description } = useSiteMetadata();
   const { siteUrl } = useSiteMetadata();
+  
   return (
     <Layout>
-      <Helmet>
-        <body className="archivepage utilitypage" />
-      </Helmet>
-      {siteUrl}
+  <Seo
+        title={titleDefault}
+        description={description}
+        image={ siteUrl + getSrc(image) }
+      />
+
+
+
       {showNav ? (
         <div className='spacer' style={{ height: '70px', border: '0px solid yellow' }}></div>
       ) : (

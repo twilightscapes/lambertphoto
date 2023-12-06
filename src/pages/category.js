@@ -3,7 +3,15 @@ import { graphql, Link, navigate } from "gatsby";
 import useSiteMetadata from "../hooks/SiteMetadata";
 import { AiFillDownSquare } from "react-icons/ai";
 import Layout from "../components/siteLayout";
-import { Helmet } from "react-helmet";
+
+
+
+export const Head = () => (
+  <>
+  <body className="category utilitypage" />
+  </>
+)
+
 
 const CategoryIndex = ({ data, pageContext }) => {
   const { category } = pageContext;
@@ -19,9 +27,13 @@ const CategoryIndex = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <Helmet>
-        <body className="category utilitypage" />
-      </Helmet>
+
+
+
+
+
+
+
       {showNav ? (
         <div className="spacer" style={{ height: "130px", border: "0px solid yellow" }}></div>
       ) : (

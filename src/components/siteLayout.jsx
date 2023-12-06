@@ -28,7 +28,7 @@ import { MdOutlineRectangle } from "react-icons/md"
 import Menu from "../components/menu"
 // import MenuSocial from "../components/menu-social"
 import userStyles from "../../static/data/userStyles.json"
-import SignUp from "../components/newssign"
+// import SignUp from "../components/newssign"
 // import useNetlifyIdentity from '../components/useNetlifyIdentity';
 import BlueCheck from './bluecheck';
 
@@ -59,7 +59,7 @@ const { showSearch } = useSiteMetadata()
 // const { showSkills } = useSiteMetadata()
 // const { showCover } = useSiteMetadata()
 // const { showfooter } = useSiteMetadata()
-const { showPopup } = useSiteMetadata()
+// const { showPopup } = useSiteMetadata()
 // const { menu1 } = useSiteMetadata()
 // const { menu2 } = useSiteMetadata()
 // const { menu3 } = useSiteMetadata()
@@ -620,7 +620,7 @@ const fontUrl = "https://fonts.googleapis.com/css?family=" + font1.replace(/\s+/
 
 
 
-{showPopup ? (
+{/* {showPopup ? (
 <div className="signup popper"
   style={{
   position:'fixed',
@@ -640,7 +640,7 @@ const fontUrl = "https://fonts.googleapis.com/css?family=" + font1.replace(/\s+/
 
       ) : (
         ""
-      )}
+      )} */}
 
 
 
