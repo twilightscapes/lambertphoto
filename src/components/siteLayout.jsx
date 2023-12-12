@@ -1,73 +1,75 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Seo from "./seo"
 import { Link } from 'gatsby-plugin-modal-routing-4'
-// import { ModalRoutingContext } from '@decantyme/gatsby-plugin-modal-routing'
-// import { AiOutlineClose } from "react-icons/ai"
-// import { window } from "browser-monads"
 import "../assets/scss/reset.scss"
 import "../assets/scss/global.scss"
-// import "../assets/scss/styles.css"
 import { AnchorLink } from "gatsby-plugin-anchor-links"
-// import { StoreContext } from "../context/store-context"
-// import { Toast } from "./toast"
-// import Bug from "../../static/assets/logo.svg"
-import SiteLogo from "../../static/assets/logo.svg"
 import { Helmet } from "react-helmet"
 import Theme from "./theme"
-// import { CartButton } from "./cart-button"
 import SearchIcon from "../../src/img/search"
-// import SearchForm from "./searchbox"
 import useSiteMetadata from "../hooks/SiteMetadata"
 import { RiArrowUpFill } from "react-icons/ri"
 import GoBack from "../components/goBack"
 import { BiLeftArrow } from "react-icons/bi"
 import { ModalRoutingContext } from 'gatsby-plugin-modal-routing-4'
-// import { AiOutlineClose } from "react-icons/ai"
-
 import Menu from "../components/menu"
-
 import userStyles from "../../static/data/userStyles.json"
-// import SignUp from "../components/newssign"
-
+import SignUp from "../components/newssign"
 import BlueCheck from './bluecheck';
-import Switch from "../components/Switch"
 
-
+import useNetlifyIdentity from '../components/useNetlifyIdentity';
+import { BsFillGrid3X2GapFill } from "react-icons/bs";
+import { PiHandSwipeRightFill } from "react-icons/pi";
+import { window } from "browser-monads"
 const Layout = ({ children }) => {
 
-
-  const [loggedIn] = useState(false);
-
+const [loggedIn, setLoggedIn] = useState(false);
+  useNetlifyIdentity(setLoggedIn);
 const { companyname } = useSiteMetadata()
 const { iconimage } = useSiteMetadata()
-
 const { image } = useSiteMetadata()
-
-// const { showModals } = useSiteMetadata()
-
 const { showNav } = useSiteMetadata()
 const { showNav2 } = useSiteMetadata()
-// const { showInfo } = useSiteMetadata()
-// const { showFeature } = useSiteMetadata()
-// const { showPosts } = useSiteMetadata()
 const { showSearch } = useSiteMetadata()
-
-// const { showResume } = useSiteMetadata()
-// const { showSocial } = useSiteMetadata()
-// const { showSkills } = useSiteMetadata()
-// const { showCover } = useSiteMetadata()
-// const { showfooter } = useSiteMetadata()
 const { showPopup } = useSiteMetadata()
-// const { menu1 } = useSiteMetadata()
-// const { menu2 } = useSiteMetadata()
-// const { menu3 } = useSiteMetadata()
-// const { menu4 } = useSiteMetadata()
 const { font1 } = useSiteMetadata()
-// const { userStyles } = useSiteMetadata()
+
+const { showSwipe } = useSiteMetadata()
+const [archiveView, setArchiveView] = useState('');
+
+const applyArchiveView = useCallback(() => {
+  const elements = document.querySelectorAll(".contentpanel");
+  elements.forEach((el) => {
+    if (archiveView === "grid") {
+      el.classList.remove("horizontal-scroll", "panels");
+      el.classList.add("grid-container");
+      // document.body.classList.add("scrollable");
+      // document.querySelector('#showPosts').style.height = 'auto';
+      window.scrollTo(0, 0);
+    } 
+    
+    // if ( document.querySelector('body').classList.contains("homepage")) {
+    //   el.classList.remove("horizontal-scroll", "panels");
+    //   el.classList.add("grid-container");
+    // }
+    
+    else if (archiveView === "swipe") {
+      el.classList.remove("grid-container");
+      el.classList.add("horizontal-scroll", "panels");
+      // document.body.classList.remove("scrollable");
+      document.querySelector('.contentpanel').style.transition = 'all .5s ease-in-out';
+      // document.querySelector('#showPosts').style.height = '600px';
+      // window.scrollTo(0, 0);
+    }
 
 
 
-// const { showSwipe } = useSiteMetadata()
+
+  });
+  localStorage.setItem("archiveView", archiveView);
+}, [archiveView]);
+
+
 
 
 useEffect(() => {
@@ -109,6 +111,32 @@ useEffect(() => {
 
 
 
+useEffect(() => {
+  if (showSwipe) {
+    // Retrieve the selected option from local storage or default to 'grid' or 'swipe'
+    const storedArchiveView = localStorage.getItem("archiveView");
+    setArchiveView(
+      storedArchiveView || (showSwipe ? "grid" : "swipe")
+    );
+  }
+}, [showSwipe]);
+
+useEffect(() => {
+  // Apply the selected option on page load
+  applyArchiveView();
+}, [applyArchiveView]);
+
+const toggleArchiveView = () => {
+  const newArchiveView = archiveView === "grid" ? "swipe" : "grid";
+  setArchiveView(newArchiveView);
+  applyArchiveView();
+};
+
+
+
+
+
+
 
 
 
@@ -124,9 +152,9 @@ useEffect(() => {
 
   
 
-const navStyle = {
-  bg: "",
-}
+// const navStyle = {
+//   bg: "",
+// }
 
 const fontUrl = "https://fonts.googleapis.com/css?family=" + font1.replace(/\s+/g, '+') + "&display=swap";
 
@@ -169,27 +197,30 @@ const fontUrl = "https://fonts.googleapis.com/css?family=" + font1.replace(/\s+/
 
   
 
-<ModalRoutingContext.Consumer >
-{({ modal, closeTo }) => (
-<>
-  {modal ? (
-    <div style={{display:'', position:'fixed', top:'50px', right:'3%', padding:'0px', fontSize:'', opacity:'1 !important', zIndex:'10',}}>
-    <Link state={{noScroll: true }} to={closeTo} style={{fontSize:'',  textDecoration:'none', lineHeight:'', display:'flex', flexDirection:'column', color:'#fff', cursor:'pointer'}}>
-    <button className="button" style={{display:'flex', justifyContent:'center'}}><span className="icon -left" style={{paddingRight:''}}><BiLeftArrow /></span> {" "}Go Back</button>
-    </Link>
-    </div>
-  ) : (
-''
+<ModalRoutingContext.Consumer>
+  {({ modal, closeTo }) => (
+    <>
+      {modal && closeTo ? (
+        <div style={{ display: '', position: 'fixed', top: '50px', right: '3%', padding: '0px', fontSize: '', opacity: '1 !important', zIndex: '10', }}>
+          <Link state={{ noScroll: true }} to={closeTo} style={{ fontSize: '', textDecoration: 'none', lineHeight: '', display: 'flex', flexDirection: 'column', color: '#fff', cursor: 'pointer' }}>
+            <button className="button" style={{ display: 'flex', justifyContent: 'center' }}>
+              <span className="icon -left" style={{ paddingRight: '' }}><BiLeftArrow /></span>{" "}Go Back
+            </button>
+          </Link>
+        </div>
+      ) : (
+        ''
+      )}
+    </>
   )}
-</>
-)}
 </ModalRoutingContext.Consumer>
+
   
 
 
-<div className="upbar button" style={{position:'fixed', bottom:'20px', zIndex:'4', left:'', right:'1vw', display:'flex', justifyContent:'center', width:'auto', maxWidth:'80vw', margin:'0 auto', gap:'5vw', padding:'0', border:'1px solid #666', borderRadius:'', textShadow:'0 1px 1px rgba(0, 0, 0, .7)', fontSize:'', verticalAlign:'center', transform: 'translateY(200%)' }}>
+<div className="upbar button" style={{position:'fixed', bottom:'20px', zIndex:'14', left:'', right:'1vw', justifyContent:'center', width:'auto', maxWidth:'80vw', margin:'0 auto', gap:'5vw', padding:'0', borderRadius:'', textShadow:'0 1px 1px rgba(0, 0, 0, .7)', fontSize:'', verticalAlign:'center', transform: 'translateY(20%)' }}>
 
-<div className="uparrow" style={{display:'flex', flexDirection:'column', gap:'0', padding:'1vh 1vw', alignItems:'center', textAlign:'center'}}>
+<div className="uparrow" style={{display:'flex', flexDirection:'column', gap:'0', padding:'', alignItems:'center', textAlign:'center'}}>
   <a href="#top" onClick={(e) => {
   e.preventDefault();
   document.getElementById('top').scrollIntoView({ behavior: 'smooth' });
@@ -201,37 +232,36 @@ const fontUrl = "https://fonts.googleapis.com/css?family=" + font1.replace(/\s+/
 
 
 
-{/* <div id="gobacker" style={{position:'fixed', top:'60px', right:'3vw', zIndex:'5'}}><GoBack /></div> */}
 
+<div id="gobacker" style={{position:'fixed', top:'', right:'1vw', zIndex:'5'}}><GoBack /></div>
 
 
 {showNav ? (
 
-<header>
-<div id="gobacker" style={{position:'fixed', top:'60px', right:'3vw', zIndex:'5'}}><GoBack /></div>
+<header className="header" style={{display:'block', height:'51px',}}>
+
+
+
 <div id="menu" className="menu print panel1 header" style={{position:'fixed', width:'100vw', top:'0', zIndex:'10', maxHeight:'', overFlow:'', boxShadow:'0 0 2px rgba(0,0,0,.7)', padding:'0 2%', alignItems:'start', borderRadius:'0', display:'flex', justifyContent:'space-around', gap:'10px', color:'#fff',  borderBottom:'1px solid #222',}}>
 
 
 
-<Link to="/" className="cornerlogo" name="homereturn" style={{position:'', display:'flex', alignItems:'center', justifyContent:'center', maxWidth:'', height:'60px', border:'0px solid transparent'}}  aria-label="Link to Top" title="Back to Top">
-  
+<Link to="/" className="cornerlogo" name="homereturn" style={{position:'', display:'flex', marginLeft:'20px', alignItems:'center', justifyContent:'center', maxWidth:'', height:'60px', border:'0px solid transparent'}}  aria-label="Link to Top" title="Back to Top">
 {iconimage ? (
-<>
-{loggedIn ? (
-  <SiteLogo className="cornerlogo" style={{position:'relative', top:'', left:'30px', border:'0px solid white', padding:'0', maxHeight:'60px'}} alt={companyname} width="111" height="60" />
+<img className="cornerlogo" style={{position:'relative', top:'', left:'4%', border:'0px solid white', padding:'0', maxHeight:'60px'}} src={iconimage} alt={companyname} width="111" height="60" />
 ) : (
-  <img className="cornerlogo" style={{position:'relative', top:'', left:'4%', border:'0px solid white', padding:'0', maxHeight:'60px'}} src={iconimage} alt={companyname} width="111" height="60" />
-              
-)}
-</>    
-) : (
-  <div style={{fontWeight:'bold', display:'grid', justifyContent:'center', alignItems:'center', height:'60px', fontSize:'150%' }}>{companyname}1</div>
+<div style={{fontWeight:'bold', display:'grid', justifyContent:'center', alignItems:'center', height:'60px', fontSize:'150%' }}>{companyname}</div>
 )}
 </Link>
                         
 
+{loggedIn ? (
+  <div id="bluecheck" style={{position:'absolute', left:'1%', top:'22px', cursor:'pointer'}}><BlueCheck /></div>
+                ) : (
+                  <div id="bluecheck" style={{position:'absolute', left:'1%', top:'22px', cursor:'pointer'}}><BlueCheck /></div>
+                  
+                )}
 
-<div id="bluecheck" style={{position:'absolute', left:'1%', top:'22px', cursor:'pointer'}}><BlueCheck /></div>
 
 
           
@@ -240,7 +270,7 @@ const fontUrl = "https://fonts.googleapis.com/css?family=" + font1.replace(/\s+/
 
 
 
-<ul className="topmenu" sx={navStyle} style={{ fontSize:'clamp(.6rem, 1.6vw, 1.8rem)',  textAlign:'center',maxHeight:'', display:'flex', justifyContent:'space-between', gap:'4vw',  alignItems:'center', margin:'0 auto 0 auto', padding:'1.5vh 2% 0 2%', border:'0px solid white',}}>
+<ul className="topmenu" style={{ fontSize:'clamp(.6rem, 1.6vw, 1.8rem)',  textAlign:'center',maxHeight:'', display:'flex', justifyContent:'space-between', gap:'4vw',  alignItems:'center', margin:'0 auto 0 auto', padding:'1.5vh 2% 0 2%', border:'0px solid white',}}>
       
 
 
@@ -279,8 +309,35 @@ const fontUrl = "https://fonts.googleapis.com/css?family=" + font1.replace(/\s+/
         </div>
 
   
-        <div><Switch /></div>
- 
+        {showSwipe ? (
+        <div>
+            <button
+                aria-label="Grid/Swipe View"
+                onClick={toggleArchiveView}
+                className="swipescroll"
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "0px",
+                    textAlign: "center",
+                    width: "100%"
+                }}
+            >
+                {archiveView === "grid" ? (
+        <div className="themer"><PiHandSwipeRightFill style={{width:'36px', height:'30px'}} /></div>
+                ) : (
+        <div className="themer"><BsFillGrid3X2GapFill style={{width:'36px', height:'30px'}} /></div>
+                )}
+                <span className="themetext" style={{ fontSize: '' }}>
+                    {archiveView === "grid" ? "swipe" : "scroll"}
+                </span>
+            </button>
+        </div>
+ ) : (
+  ""
+)}
 
 
 </div>
@@ -315,7 +372,7 @@ const fontUrl = "https://fonts.googleapis.com/css?family=" + font1.replace(/\s+/
 {iconimage ? (
       <img className="" src={iconimage} alt={companyname} width="120" height="60" style={{maxHeight:'60px', maxWidth:'120px', border:'none'}} />
                 ) : (
-                  <div style={{fontWeight:'bold', color:'yellow'}}>companyname</div>
+                  <div style={{fontWeight:'bold', fontSize:'clamp(1.3rem, 2vw, 1rem)'}}>{companyname}</div>
                 )}
 </div>
   </label>
@@ -331,7 +388,7 @@ const fontUrl = "https://fonts.googleapis.com/css?family=" + font1.replace(/\s+/
             {iconimage ? (
       <img src={iconimage} alt={companyname} width="120" height="60" style={{maxHeight:'60px', border:'none'}} />
                 ) : (
-                  <div style={{fontWeight:'bold'}}>companyname</div>
+                  <div style={{fontWeight:'bold', fontSize:'clamp(1.3rem, 2vw, 1rem)'}}>{companyname}</div>
                 )}
             </AnchorLink>
     </li>
@@ -366,7 +423,31 @@ const fontUrl = "https://fonts.googleapis.com/css?family=" + font1.replace(/\s+/
         </li>
 
   
-<li><Switch /></li>
+<li>
+            <button
+                aria-label="Grid/Swipe View"
+                onClick={toggleArchiveView}
+                className="swipescroll"
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "0px",
+                    textAlign: "center",
+                    width: "100%"
+                }}
+            >
+                {archiveView === "grid" ? (
+        <div className="themer"><PiHandSwipeRightFill style={{width:'36px', height:'30px'}} /></div>
+                ) : (
+        <div className="themer"><BsFillGrid3X2GapFill style={{width:'36px', height:'30px'}} /></div>
+                )}
+                <span className="themetext" style={{ fontSize: '' }}>
+                    {archiveView === "grid" ? "swipe" : "scroll"}
+                </span>
+            </button>
+      </li>
 
 
 </ul>
@@ -409,7 +490,7 @@ const fontUrl = "https://fonts.googleapis.com/css?family=" + font1.replace(/\s+/
   // display:'grid',
   // placeSelf:'center',
   }}>
-{/* <SignUp /> */}
+<SignUp />
   </div>
 
       ) : (

@@ -5,22 +5,13 @@ import { StaticImage } from "gatsby-plugin-image"
 import Layout from "../components/siteLayout"
 import { ImPlay } from "react-icons/im"
 import { FaImage } from "react-icons/fa"
-import { AiOutlinePicLeft, AiFillDownSquare } from "react-icons/ai"
-
+import { AiOutlinePicLeft } from "react-icons/ai"
+import { Helmet } from "react-helmet"
 import TimeAgo from 'react-timeago'
 import useSiteMetadata from "../hooks/SiteMetadata"
-
-
-export const Head = () => (
-  <>
-  <body className="category utilitypage" />
-  </>
-)
-
-
-
+import { MdArrowForwardIos } from 'react-icons/md';
 const TagIndex = ({ data }) => {
-  const { showNav } = useSiteMetadata();
+
   const { showDates } = useSiteMetadata()
   const { postcount } = useSiteMetadata()
   const [selectedTag, setSelectedTag] = useState(''); // State to keep track of selected tag
@@ -46,30 +37,29 @@ const TagIndex = ({ data }) => {
 
   return (
     <Layout>
+        <Helmet>
+        <body className="tagpage utilitypage" />
+      </Helmet>
 
-      {showNav ? (
-        <div className='spacer' style={{ height: '70px', border: '0px solid yellow' }}></div>
-      ) : (
-        <div className="spacer2" style={{ height: "70px", border: "0px solid yellow" }}></div>
-      )}
 
 
         
 
 
-        <div className="selectArrow" style={{position:'fixed', top:'', left:'1%', right:'1%',  margin:'-55px auto 0 auto', zIndex:'3', display:'grid', placeSelf:'center',  padding:'',}}>
-          <select className="cattags" id="tag-select" value={selectedTag} onChange={handleTagChange}>
+      <div className="magicisland">
+        <div className="cattags font">
+          <select className="" id="tag-select" value={selectedTag} onChange={handleTagChange} style={{ background: '#222', outline: '1px solid #111', borderRadius: '3px', padding: '2px', width:'380px', display:'block', margin:'0 1%', overflow:'hidden', height:'34px', lineHeight:'100%' }}>
             <option value="">keyword:</option>
             {tags.map(tag => (
               <option key={tag} value={tag}>{tag}</option>
             ))}
           </select>
-          <div style={{position:'absolute', right:'10px', top:'8px', height:'100%', color:'#fff', zIndex:'-1', fontSize:'30px'}}><AiFillDownSquare /></div>
+          {/* <div style={{position:'absolute', right:'10px', top:'8px', height:'100%', color:'#fff', zIndex:'-1', fontSize:'30px'}}><AiFillDownSquare /></div> */}
         </div>
-
+</div>
        
 
-        <div className="contentpanel grid-container" style={{justifyContent:'center', alignItems:'center', marginTop:''}}>
+        <div className="contentpanel grid-container" style={{justifyContent:'center', alignItems:'center', marginTop:'60px'}}>
           <div className="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
    
           {data.allMarkdownRemark.edges &&
@@ -164,11 +154,12 @@ Play Multimedia
 )} */}
 
 {visibleItems < data.allMarkdownRemark.edges.length && (
-  <div className="" style={{display:'flex', flexDirection:'column', justifyContent:'center', gap:'', height:'50vh'}}>
-        <button className="button load-more" onClick={showMoreItems}>
-          Load more
-        </button>
-        </div>
+  <div className="" style={{ display: 'grid', flexDirection: 'column', justifyContent: 'center', alignItems:'center', placeContent:'center', gap: '', height: '', textAlign:'center' }}>
+  <button className="button load-more" onClick={showMoreItems}>
+    Load more
+  </button>
+  <Link to="/archive" style={{background:'rgba(0, 0, 0, 0.8)', borderRadius:'5px', color:'#fff', display:'flex', padding:'0 1vh',  margin:'0 auto'}}>View Archive &nbsp;<MdArrowForwardIos style={{marginTop:'4px'}} /></Link>
+</div>
 )}
 
 

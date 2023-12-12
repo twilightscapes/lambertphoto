@@ -9,7 +9,7 @@ const netlifyCmsPaths = {
   options: {
     cmsConfig: `/static/admin/config.yml`,
   },
-}
+};
 
 const settings = require("./static/data/site.json")
 
@@ -18,8 +18,7 @@ const settings = require("./static/data/site.json")
 module.exports = {
   flags: {},
   siteMetadata: {
-    ...settings.meta, // Assuming settings.meta contains other metadata fields
-    homecount: 9, // Add homecount to the siteMetadata
+    ...settings.meta,
   },
   plugins: [
     // {
@@ -33,7 +32,7 @@ module.exports = {
     //   },
     // },
 
-    
+    netlifyCmsPaths,
 
 {
     resolve: `gatsby-transformer-remark`,
@@ -178,13 +177,13 @@ module.exports = {
       },
     },
 
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     name: `team`,
-    //     path: `${__dirname}/static/content/team/`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `team`,
+        path: `${__dirname}/static/content/team/`,
+      },
+    },
 
     {
       resolve: `gatsby-source-filesystem`,
@@ -193,8 +192,20 @@ module.exports = {
         name: `content`,
       },
     },
+
+    `gatsby-transformer-sharp`,
+
     `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          formats: [`avif`, `webp`, `auto`],
+          placeholder: `blurred`,
+          quality: 90,
+        },
+      },
+    },
     `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-transformer-remark`,

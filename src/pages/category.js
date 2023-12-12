@@ -1,23 +1,15 @@
 import React, { useState } from "react";
 import { graphql, Link, navigate } from "gatsby";
 import useSiteMetadata from "../hooks/SiteMetadata";
-import { AiFillDownSquare } from "react-icons/ai";
+// import { AiFillDownSquare } from "react-icons/ai";
 import Layout from "../components/siteLayout";
-
-
-
-export const Head = () => (
-  <>
-  <body className="category utilitypage" />
-  </>
-)
-
+import { Helmet } from "react-helmet";
 
 const CategoryIndex = ({ data, pageContext }) => {
   const { category } = pageContext;
   const categories = data.allMarkdownRemark.group.map((group) => group.fieldValue);
   const { postcount } = useSiteMetadata();
-  const { showNav } = useSiteMetadata();
+
 
   const [visibleItems, setVisibleItems] = useState(postcount);
 
@@ -27,23 +19,16 @@ const CategoryIndex = ({ data, pageContext }) => {
 
   return (
     <Layout>
+      <Helmet>
+        <body className="category utilitypage" />
+      </Helmet>
 
 
-
-
-
-
-
-      {showNav ? (
-        <div className="spacer" style={{ height: "130px", border: "0px solid yellow" }}></div>
-      ) : (
-        <div className="spacer2" style={{ height: "70px", border: "0px solid yellow" }}></div>
-      )}
-
-      <div className="selectArrow" style={{ position: "fixed", top: "", left: "1%", right: "1%", margin: "-55px auto 0 auto", zIndex: "3", display: "grid", placeSelf: "center", padding: "" }}>
+      <div className="magicisland">
+        <div className="cattags font">
         <select
-          className="cattags"
-          style={{}}
+          className=""
+          style={{ background: '#222', outline: '1px solid #111', borderRadius: '3px', padding: '2px', width:'380px', display:'block', margin:'0 1%', overflow:'hidden', height:'34px', lineHeight:'100%' }}
           onChange={(e) => {
             const selectedCategory = e.target.value;
             navigate(`/category/${selectedCategory}`);
@@ -57,10 +42,12 @@ const CategoryIndex = ({ data, pageContext }) => {
             </option>
           ))}
         </select>
-        <div style={{ position: 'absolute', right: '10px', top: '8px', height: '100%', color: '#fff', zIndex: '-1', fontSize: '30px' }}><AiFillDownSquare /></div>
+        {/* <div style={{ position: 'absolute', right: '10px', top: '8px', height: '100%', color: '#fff', zIndex: '-1', fontSize: '30px' }}><AiFillDownSquare /></div> */}
       </div>
+</div>
 
-      <div className="contentpanel grid-container" style={{ marginTop: "" }}>
+      <div className="contentpanel grid-container" style={{ justifyContent: 'center', alignItems: 'center', marginTop: '', padding:'0 3vw' }}>
+
         <div className="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
 
         {categories.slice(0, visibleItems).map((category, index) => (
@@ -106,7 +93,7 @@ const CategoryIndex = ({ data, pageContext }) => {
         ))}
         {visibleItems < categories.length && (
           <button className="post-card1" style={{ justifyContent: "center", alignItems: "center" }} onClick={showMoreItems}>
-            Show more
+            Load more
           </button>
         )}
       </div>

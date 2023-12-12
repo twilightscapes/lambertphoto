@@ -3,26 +3,16 @@ import { graphql, navigate } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import Layout from '../components/siteLayout';
 import useSiteMetadata from '../hooks/SiteMetadata';
+import { Helmet } from 'react-helmet';
 import { ImPlay } from "react-icons/im"
 import { FaImage } from "react-icons/fa"
 import { AiOutlinePicLeft } from "react-icons/ai"
 import { StaticImage } from 'gatsby-plugin-image';
 import { Link } from "gatsby"
 import TimeAgo from 'react-timeago'
-
-
-
-export const Head = () => (
-  <>
-  <body className="tagpage utilitypage" />
-  </>
-)
-
-
 const Tag = ({ data, pageContext }) => {
   const { tag } = pageContext;
   const posts = data.allMarkdownRemark.edges;
-  const { showNav } = useSiteMetadata();
   const { showDates } = useSiteMetadata()
 
 
@@ -47,18 +37,17 @@ const Tag = ({ data, pageContext }) => {
 
   return (
     <Layout>
+      <Helmet>
+        <body id='body' className='tagpage' style={{}} />
+      </Helmet>
 
 
-      {showNav ? (
-        <div className='spacer' style={{ height: '70px', border: '0px solid yellow' }}></div>
-      ) : (
-        <div className="spacer2" style={{ height: "20px", border: "1px solid yellow" }}></div>
-      )}
       {/* <h1 style={{ textAlign: 'center' }}>{tag}</h1> */}
 
-      <div className="selectArrow" style={{position:'fixed', top:'', left:'1%', right:'1%',  margin:'-55px auto 0 auto', zIndex:'3', display:'grid', placeSelf:'center',  padding:'',}}>
+      <div className="magicisland">
+        <div className="cattags font">
         
-      <select className="cattags" value={selectedTag} onChange={handleTagChange}>
+      <select className="" value={selectedTag} onChange={handleTagChange} style={{ background: '#222', outline: '1px solid #111', borderRadius: '3px', padding: '2px', width:'380px', display:'block', margin:'0 1%', overflow:'hidden', height:'34px', lineHeight:'100%' }}>
   <option value=''>All Keywords</option>
   {allTags.map(tag => (
     <option key={tag} value={tag}>
@@ -67,10 +56,11 @@ const Tag = ({ data, pageContext }) => {
   ))}
 </select>
       </div> 
+      </div>
 
       <section id="showPosts" style={{marginTop:''}}>
 
-      <div className='contentpanel grid-container' style={{ marginTop: '5vh' }}>
+      <div className='contentpanel grid-container' style={{ marginTop: '0' }}>
         <div className='sliderSpacer' style={{ height: '', paddingTop: '0', display: 'none' }}></div>
 
         {filteredPosts.map(({ node }) => {
