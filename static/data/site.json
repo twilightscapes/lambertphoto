@@ -28,6 +28,12 @@
     "menu4": "Skills",
     "showPosts": true,
     "title": "Unique Night Photography",
+    "magicOptions": {
+      "showMagic": true,
+      "showMagicCat": true,
+      "showMagicTag": true,
+      "showMagicSearch": true
+    },
     "showfooter": false,
     "showFeature": false,
     "showCover": true,

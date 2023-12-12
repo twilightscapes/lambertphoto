@@ -1,4 +1,4 @@
-#!/bin/bash
+# !/bin/bash
 
 # Set the URL of your central repository
 THEME_REPO_URL="https://github.com/piratesocial/pirateplus"
@@ -34,4 +34,7 @@ cp tmp_theme/package.json .
 # Clean up
 rm -rf tmp_theme
 
-echo "Theme updated successfully!"
+# echo "Theme updated successfully!"
+
+
+echo "No Theme Updated - Needed"
