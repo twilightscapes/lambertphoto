@@ -34,7 +34,7 @@ cp tmp_theme/package.json .
 # Clean up
 rm -rf tmp_theme
 
-# echo "Theme updated successfully!"
+echo "Theme updated successfully!"
 
 
-echo "No Theme Updated - Needed"
+# echo "No Theme Updated - Needed"
