@@ -15,10 +15,16 @@
     "showSocial": true,
     "showResume": false,
     "showInfo": false,
-    "showNav2": true,
+    "showNav2": false,
     "postcount": 12,
     "showPopup": false,
     "homecount": 6,
+    "magicOptions": {
+      "showMagic": false,
+      "showMagicCat": true,
+      "showMagicTag": true,
+      "showMagicSearch": true
+    },
     "icon192": "/assets/tw-logo-large.png",
     "menu1": "Profile",
     "titleTemplate": "%s",
@@ -28,12 +34,6 @@
     "menu4": "Skills",
     "showPosts": true,
     "title": "Unique Night Photography",
-    "magicOptions": {
-      "showMagic": false,
-      "showMagicCat": true,
-      "showMagicTag": true,
-      "showMagicSearch": true
-    },
     "showfooter": false,
     "showFeature": false,
     "showCover": true,
