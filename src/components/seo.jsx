@@ -56,6 +56,9 @@ export default function Seo({
       titleTemplate={`%s | ${titleDefault}`}
     >
       <html lang="en" />
+      <meta charSet="utf-8" />
+      <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <meta name="description" content={seo.description} />
       {/* <meta name="robots" content="noindex,nofollow" /> */}
       <meta name="image" content={seo.image} />

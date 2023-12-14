@@ -252,7 +252,7 @@ header.header {height:0;}
 body.homepage .timeago{display:none !important;}
 
 
-body.homepage #gobacker, body.social #gobacker{display: none;}
+body.homepage #gobacker, body.social #gobacker{display: none !important;}
 
 
 body{overflow-x:hidden; overflow-y:auto !important;}
@@ -377,21 +377,9 @@ body.blogpost .gatsby-image-wrapper {
 
 
 
-.horizontal-scroll{margin-top:70px !important;}
 
-.grid-container {
-  display: grid;
-  list-style: none;
-  column-gap: 3vw;
-  padding: 0 3%;
-  column-count: 1;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 3vw;
-  padding-bottom: 10vh;
-  margin:70px auto 0 auto;
-  padding-top:0px;
-  // grid-auto-flow: dense; /* Add this line */
-}
+
+
 
 
 // .load-more-wrapper {
@@ -582,7 +570,7 @@ bottom: 10px !important;
 .spacer{display:block; height:0 !important;}
 
 .sliderSpacer{display:none;}
-.horizontal-scroll .sliderSpacer{display:block ; height:50% ; padding-top:0% ; }
+.horizontal-scroll .sliderSpacer{display:block ; height:50% ; }
 
 
 
@@ -595,7 +583,7 @@ bottom: 10px !important;
 //   height:60px !important;
 // }
 
-.uparrow::after{content:" top "; color:#fff;}
+.uparrow::after{content:" top "; color:#fff; font-size: .7rem;}
 
 
 
@@ -649,7 +637,7 @@ border:1px solid #685766;color:#ccc;height:auto;padding:1vh 3vw}
 .button{align-items:center;align-self:center;
   background:var(--theme-ui-colors-siteColor); 
   border:1px solid #000;
-  border-radius:6px;
+  border-radius:3px;
   color:#fff !important;
   display:inline-flex;font-weight:700;height:auto;justify-content:center;margin:2vh 1vw;padding:1vh 3vw;text-shadow:2px 2px 2px #000; opacity:.9;}
 
@@ -916,7 +904,7 @@ to{opacity:0;z-index:-3}
 
 
 
-.horizontal-scroll{margin:0;max-height:100vw;overflow-x:hidden;overflow-y:auto;position:relative;scroll-padding:0 5%;transform:rotate(-90deg) translateY(-100%);transform-origin:right top;transition:transform .2s;width:100%}
+.horizontal-scroll{max-height:100vw;overflow-x:hidden;overflow-y:auto;position:relative;scroll-padding:0 5%;transform:rotate(-90deg) translateY(-100%);transform-origin:right top;transition:transform .2s;width:100%}
 .horizontal-scroll img{max-height:65vh;object-fit:contain;}
 .horizontal-scroll,.horizontal-scroll>*{display:block;overscroll-behavior:contain;padding:0}
 .horizontal-scroll>*{scroll-snap-align:center;transform:rotate(90deg);transform-origin:right top}
@@ -1154,6 +1142,29 @@ ul li{display:inline-block}
     color:#ddd;
   }
 
+
+
+
+  .grid-container {
+    display: grid;
+    list-style: none;
+    column-gap: 3vw;
+    padding: 0 3%;
+    column-count: 1;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3vw;
+    padding-bottom: 10vh;
+    padding-top:0px;
+    border:0px solid yellow;
+    // grid-auto-flow: dense; /* Add this line */
+  }
+  .grid-container {margin:10vh auto 0 auto ;}
+  .horizontal-scroll{margin-top:12vh ;}
+
+
+  
+
+
   .cattags{
     border-radius: 3px;
     // display:grid;
@@ -1166,7 +1177,7 @@ ul li{display:inline-block}
     -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
-
+    align-items: center;
     // font-size:18px; font-weight:600;
     font-size:clamp(.7rem,.9vw,1rem) !important;
  color:#fff;
@@ -1198,7 +1209,8 @@ ul li{display:inline-block}
     position:fixed;
     width:100%;
     z-index: 2;
-    margin-top:20px;
+    margin-top:3vh;
+    align-items: center;
   }
 
 
@@ -1230,13 +1242,20 @@ ul li{display:inline-block}
 }
 @media(max-width:48rem) {
 
-  .cattags{
-    margin: 65px auto 0 auto !important;
-  }
+  // .cattags{
+  //   margin: 65px auto 0 auto !important;
+  // }
+
+
+
+.grid-container {margin:16vh auto 0 auto ;}
+.horizontal-scroll{margin-top:16vh ;}
+.magicisland {margin-top:10vh;}
+
 #resume span{display:flex;flex-direction:column;gap:20px;position:-webkit-sticky;position:sticky;top:0}
 #resume span div{display:block;width:100%}
 .nameblock{background:transparent;color:inherit;text-shadow:none}
-#gobacker{position:fixed; top:58px ; right:1vw; z-index:11;}
+#gobacker{position:fixed; top:80vh ; right:1vw; z-index:11;}
 }
 @media(hover:none) {
 .horizontal-scroll{scroll-snap-type:y mandatory}

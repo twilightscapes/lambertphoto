@@ -1,30 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { graphql, Link } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 import { ImPlay } from "react-icons/im";
 import { FaImage } from "react-icons/fa";
 import { AiOutlinePicLeft } from "react-icons/ai";
 import Layout from "../components/siteLayout";
 import { Helmet } from "react-helmet";
-import { StaticImage } from "gatsby-plugin-image";
 import useSiteMetadata from "../hooks/SiteMetadata";
 import TimeAgo from 'react-timeago';
 import { MdArrowForwardIos } from 'react-icons/md';
-
+import Seo from "../components/seo";
+import { getSrc } from "gatsby-plugin-image";
 
 const HomePage = ({ data }) => {
-  const { showModals } = useSiteMetadata();
-  const { showDates } = useSiteMetadata();
-  const { homecount, postcount } = useSiteMetadata();
-  const { magicOptions } = useSiteMetadata();
+  const { showModals, showDates, homecount, postcount, magicOptions } = useSiteMetadata();
   const { showMagic, showMagicCat, showMagicTag, showMagicSearch } = magicOptions;
 
+  const { markdownRemark, posts } = data;
+  const { frontmatter, excerpt } = markdownRemark;
 
   const allPosts = data.allMarkdownRemark.edges;
-  const [query, setQuery] = React.useState("");
-  const [filteredPosts, setFilteredPosts] = React.useState(allPosts);
-  const [selectedCategory, setSelectedCategory] = React.useState("");
-  const [selectedTag, setSelectedTag] = React.useState("");
+  const [query, setQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
+  const [visibleItems, setVisibleItems] = useState(homecount);
 
   const allCategoriesSet = new Set(allPosts.flatMap(({ node }) => node.frontmatter.category));
   const allCategories = Array.from(allCategoriesSet);
@@ -32,55 +31,55 @@ const HomePage = ({ data }) => {
   const allTagsSet = new Set(allPosts.flatMap(({ node }) => node.frontmatter.tags));
   const allTags = Array.from(allTagsSet);
 
+  const filteredPosts = allPosts.filter(({ node }) => {
+    const { title, tags, category: categories } = node.frontmatter;
+    const titleMatch = query === "" || title.toLowerCase().includes(query.toLowerCase());
+    const categoryMatch = selectedCategory === "" || (Array.isArray(categories) ? categories.includes(selectedCategory) : categories === selectedCategory);
+    const tagMatch = selectedTag === "" || (tags && tags.includes(selectedTag));
+
+    return titleMatch && categoryMatch && tagMatch;
+  });
+
+  useEffect(() => {
+    setVisibleItems(homecount);
+  }, [filteredPosts, homecount]);
+
   const handleSearch = (event) => {
     const query = event.target.value;
     setQuery(query);
-    const filteredPosts = filterPosts(query, selectedCategory, selectedTag);
-    setFilteredPosts(filteredPosts);
+    setVisibleItems(homecount);
   };
 
-  const handleCategoryChange = event => {
+  const handleCategoryChange = (event) => {
     const category = event.target.value;
     setSelectedCategory(category);
     setSelectedTag("");
-    const filteredPosts = filterPosts(query, category, "");
-    setFilteredPosts(filteredPosts);
+    setVisibleItems(homecount);
   };
 
-  const handleTagChange = event => {
+  const handleTagChange = (event) => {
     const tag = event.target.value;
     setSelectedTag(tag);
     setSelectedCategory("");
-    const filteredPosts = filterPosts(query, "", tag);
-    setFilteredPosts(filteredPosts);
+    setVisibleItems(homecount);
   };
 
-  const filterPosts = (query, category, tag) => {
-    const filtered = allPosts.filter(({ node }) => {
-      const { title, tags, category: categories } = node.frontmatter;
-      const titleMatch = query === "" || title.toLowerCase().includes(query.toLowerCase());
-      const categoryMatch = category === "" || (Array.isArray(categories) ? categories.includes(category) : categories === category);
-      const tagMatch = tag === "" || (tags && tags.includes(tag));
-  
-      return titleMatch && categoryMatch && tagMatch;
-    }).slice(0, postcount);
-  
-    console.log("Filtered Posts:", filtered);
-    return filtered;
-  };
-
-  const [visibleItems, setVisibleItems] = React.useState(homecount);
+  const [numVisibleItems, setNumVisibleItems] = useState(homecount);
 
   const showMoreItems = () => {
-    setVisibleItems(visibleItems + postcount);
+    setNumVisibleItems((prevNumVisibleItems) => {
+      const newVisibleItems = prevNumVisibleItems + postcount;
+      return newVisibleItems <= filteredPosts.length ? newVisibleItems : prevNumVisibleItems;
+    });
   };
+  
 
-  function clearfield(setFilteredPosts, setVisibleItems, allPosts, homecount, setSelectedCategory, setSelectedTag) {
+  function clearfield() {
     document.querySelector('#clearme').value = '';
-    setFilteredPosts(allPosts.slice(0, homecount));
+    setQuery('');
+    setSelectedCategory('');
+    setSelectedTag('');
     setVisibleItems(homecount);
-    setSelectedCategory(""); // Reset selected category
-    setSelectedTag("");
   }
 
   return (
@@ -89,81 +88,143 @@ const HomePage = ({ data }) => {
         <body id="body" className="homepage" />
       </Helmet>
 
-
+      <Seo
+        title={frontmatter.title}
+        description={frontmatter.description ? frontmatter.description : excerpt}
+        image={getSrc(frontmatter.featuredImage)}
+      />
 
       {showMagic ? (
-<>
-<div className="magicisland">
-        <div className="cattags font">
-{showMagicCat ? (
-<>
-    {allCategories.length > 1 && (
-      <label htmlFor="catselector">
-      <select id="catselector" value={selectedCategory} onChange={handleCategoryChange} style={{ background: '#222', outline: '1px solid #111', borderRadius: '3px', padding: '2px', minWidth:'80px', maxWidth:'30%', overflow:'hidden' }}>
-            <option value="">Category</option>
-            {allCategories.filter(category => category).map((category, index) => (
-              <option key={`${category}_${index}`} value={category.trim()}>
-                {category.trim()}
-              </option>
-            ))}
-        </select></label>
-      )}
-</>
-  ) : (
-    ""
-)}
+        <>
+          <div className="magicisland">
+            <div className="cattags font">
+              {showMagicCat ? (
+                <>
+                  {allCategories.length > 1 && (
+                    <select
+                      value={selectedCategory}
+                      onChange={handleCategoryChange}
+                      style={{
+                        background: '#222',
+                        outline: '1px solid #111',
+                        borderRadius: '3px',
+                        padding: '2px',
+                        minWidth: '80px',
+                        maxWidth: '30%',
+                        overflow: 'hidden',
+                      }}
+                      aria-label="Select Category"
+                    >
+                      <option value="">Category</option>
+                      {allCategories.filter(category => category).map((category, index) => (
+                        <option key={`${category}_${index}`} value={category.trim()}>
+                          {category.trim()}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                </>
+              ) : (
+                ""
+              )}
 
-{showMagicTag ? (
-<>
-  {allTags.length > 1 && (
-    <label htmlFor="tagselector">
-    <select id="tagselector" value={selectedTag} onChange={handleTagChange} style={{ background: '#222', outline: '1px solid #111', borderRadius: '3px', padding: '2px', minWidth:'80px', maxWidth:'30%', overflow:'hidden' }}>
-    <option value="">Keyword</option>
-    {allTags.filter(tag => tag).map((tag, index) => (
-      <option key={`${tag}_${index}`} value={tag.trim()}>
-        {tag.trim()}
-      </option>
-    ))}
-  </select>
-  </label>
-)}
-</>
-  ) : (
-    ""
-)}
+              {showMagicTag ? (
+                <>
+                  {allTags.length > 1 && (
+                    <select
+                      value={selectedTag}
+                      onChange={handleTagChange}
+                      style={{
+                        background: '#222',
+                        outline: '1px solid #111',
+                        borderRadius: '3px',
+                        padding: '2px',
+                        minWidth: '80px',
+                        maxWidth: '30%',
+                        overflow: 'hidden',
+                      }}
+                      aria-label="Select Keyword"
+                    >
+                      <option value="">Keyword</option>
+                      {allTags.filter(tag => tag).map((tag, index) => (
+                        <option key={`${tag}_${index}`} value={tag.trim()}>
+                          {tag.trim()}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                </>
+              ) : (
+                ""
+              )}
 
+              {showMagicSearch ? (
+                <>
+                  <label style={{ maxWidth: '' }}>
+                    <input
+                      id="clearme"
+                      type="text"
+                      placeholder="Search:"
+                      onChange={handleSearch}
+                      style={{
+                        width: '',
+                        background: '#222',
+                        marginRight: '',
+                        outline: '1px solid #111',
+                        borderRadius: '3px',
+                        height: '',
+                        padding: '6px 6px',
+                        minWidth: '80px',
+                        maxWidth: '80%',
+                        lineHeight: '100%',
+                      }}
+                      aria-label="Search"
+                    />
+                  </label>
+                </>
+              ) : (
+                ""
+              )}
 
-{showMagicSearch ? (
-<>
-          <label htmlFor="clearme">
-            <input id="clearme" name="clearme" type="text" placeholder="Search:" onChange={handleSearch} style={{ width: '', background: '#222', marginRight: '', outline: '1px solid #111', borderRadius: '3px', height: '', padding: '6px 6px', minWidth:'80px', maxWidth:'80%', lineHeight:'100%' }} />
-          </label>
-          </>
-  ) : (
-    ""
-)}
+              <button
+                type="reset"
+                value="reset"
+                onClick={clearfield}
+                style={{
+                  position: '',
+                  right: '',
+                  top: '',
+                  background: '#222',
+                  color: '#fff',
+                  textAlign: 'center',
+                  fontSize: '10px',
+                  height: '',
+                  maxWidth: '',
+                  outline: '1px solid #111',
+                  padding: '5px',
+                  borderRadius: '3px',
+                  lineHeight: '100%',
+                }}
+                aria-label="Clear"
+              >
+                clear
+              </button>
 
-<label htmlFor="magicreset">
-<button id="magicreset" type="reset" value="reset" onClick={() => clearfield(setFilteredPosts, setVisibleItems, allPosts, postcount, setSelectedCategory, setSelectedTag)} style={{ position: '', right: '', top: '', background: '#222', color: '#fff', textAlign: 'center', fontSize: '10px', height: '', maxWidth: '', outline: '1px solid #111', padding: '5px', borderRadius: '3px', lineHeight:'100%' }}>
-  clear
-</button></label>
-
-<div style={{ position: '', right: '', top: '', textAlign: 'center', fontSize: '9px', color: '#fff', maxWidth:'' }}>{filteredPosts.length} <br />result{filteredPosts.length !== 1 && 's'}</div>
-
-        </div>
-      </div>
-      </>
+              <div style={{ position: '', right: '', top: '', textAlign: 'center', fontSize: '9px', color: '#fff', maxWidth: '' }}>
+                {filteredPosts.length} <br />
+                result{filteredPosts.length !== 1 && 's'}
+              </div>
+            </div>
+          </div>
+        </>
       ) : (
         ""
       )}
 
-
-
       <div className="contentpanel grid-container" style={{ justifyContent: 'center', alignItems: 'center', marginTop: '' }}>
         <div className="sliderSpacer" style={{ height: '', paddingTop: '', display: '' }}></div>
 
-
-        {filteredPosts.slice(0, visibleItems).map(({ node }, index) => (
+        {filteredPosts.slice(0, numVisibleItems).map(({ node }, index) => (
           <div key={index} className="post-card1" style={{ alignItems: 'center' }}>
             <Link className="postlink" state={showModals ? { modal: true } : {}} key={node.frontmatter.slug} to={node.frontmatter.slug}>
               <div>
@@ -173,7 +234,7 @@ const HomePage = ({ data }) => {
                     alt={node.frontmatter.title + " - Featured image"}
                     className="featured-image1"
                     placeholder="blurred"
-                    loading="eager"
+                    // loading="eager"
                     style={{ position: 'relative', zIndex: '1', maxHeight: '', margin: '0 auto' }}
                   />
                 ) : (
@@ -192,7 +253,7 @@ const HomePage = ({ data }) => {
                       <div style={{ display: 'flex', justifyContent: 'space-around', gap: '2vw', color: 'fff', }}>
                         <FaImage className="posticon" style={{ margin: '0 auto', width: '60%', height: '30px', fontSize: '' }} />
                         <ImPlay className="posticon" style={{ margin: '0 auto', width: '60%', height: '30px', fontSize: '' }} />
-                        <AiOutlinePicLeft className="posticon" style={{ margin: '0 auto', width: '60%', height: '30px', fontSize: '' }} />
+                        <AiOutlinePicLeft className="posticon" style={{ margin: '0 auto', width: '60%', height: '30px, fontSize: ""' }} />
                       </div>
                       Play Multimedia
                     </div>
@@ -211,27 +272,25 @@ const HomePage = ({ data }) => {
           </div>
         ))}
 
-
-
-        
-        {visibleItems < data.allMarkdownRemark.edges.length && (
-          <div className="" style={{ display: 'grid', flexDirection: 'column', justifyContent: 'center', alignItems:'center', placeContent:'center', gap: '', height: '', textAlign:'center' }}>
+        {visibleItems < filteredPosts.length && (
+          <div className="" style={{ display: 'grid', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', placeContent: 'center', gap: '', height: '', textAlign: 'center' }}>
             <button className="button load-more" onClick={showMoreItems}>
               Load more
             </button>
-            <Link to="/archive" style={{background:'rgba(0, 0, 0, 0.8)', borderRadius:'5px', color:'#fff', display:'flex', padding:'0 1vh',  margin:'0 auto'}}>View Archive &nbsp;<MdArrowForwardIos style={{marginTop:'4px'}} /></Link>
+            <Link to="/archive" style={{ background: 'rgba(0, 0, 0, 0.8)', borderRadius: '5px', color: '#fff', display: 'flex', padding: '0 1vh', margin: '0 auto' }}>View Archive &nbsp;<MdArrowForwardIos style={{ marginTop: '4px' }} /></Link>
           </div>
         )}
+
       </div>
     </Layout>
   );
 };
 
 export const pageQuery = graphql`
-  query ($homecount: Int) {
+  query ($id: String!, $homecount: Int) {
     allMarkdownRemark(
-      sort: [{frontmatter: {spotlight: ASC}}, {frontmatter: {date: DESC}}]
-      filter: {frontmatter: {template: {eq: "blog-post"}}}
+      sort: [{ frontmatter: { spotlight: ASC } }, { frontmatter: { date: DESC } }]
+      filter: { frontmatter: { template: { eq: "blog-post" } } }
       limit: $homecount
     ) {
       edges {
@@ -252,6 +311,23 @@ export const pageQuery = graphql`
             category
             tags
             slug
+          }
+        }
+      }
+    }
+    markdownRemark(id: { eq: $id }) {
+      id
+      html
+      excerpt(pruneLength: 148)
+      frontmatter {
+        date(formatString: "YYYY-MM-DD-HH-MM-SS")
+        slug
+        title
+        description
+        featuredImage {
+          publicURL
+          childImageSharp {
+            gatsbyImageData
           }
         }
       }
