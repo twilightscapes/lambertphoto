@@ -29,7 +29,7 @@
     "showPosts": true,
     "title": "Unique Night Photography",
     "magicOptions": {
-      "showMagic": true,
+      "showMagic": false,
       "showMagicCat": true,
       "showMagicTag": true,
       "showMagicSearch": true
