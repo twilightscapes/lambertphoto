@@ -15,23 +15,10 @@
     "showSocial": true,
     "showResume": false,
     "showInfo": false,
-<<<<<<< HEAD
     "showNav2": true,
     "postcount": 9,
     "showPopup": false,
     "homecount": 3,
-=======
-    "showNav2": false,
-    "postcount": 12,
-    "showPopup": false,
-    "homecount": 9,
-    "magicOptions": {
-      "showMagic": true,
-      "showMagicCat": true,
-      "showMagicTag": false,
-      "showMagicSearch": true
-    },
->>>>>>> 62e3ef651a308526ad8948d8eb9f517ad2765d16
     "icon192": "/assets/tw-logo-large.png",
     "menu1": "Profile",
     "titleTemplate": "%s",
@@ -51,5 +38,5 @@
     "showSkills": false
   },
   "ga": "UA-89654528-2",
-  "comments": "5639031584980992-proj"
+  "comments": "56390315s84980992-proj"
 }
