@@ -5,6 +5,7 @@
     "showModals": false,
     "favicon32x32": "/assets/tw-logo-large.png",
     "favicon16x16": "/assets/tw-logo-large.png",
+    "showArchive": false,
     "showSearch": true,
     "showNav": false,
     "companyname": "Lambert Photography",
@@ -19,6 +20,12 @@
     "postcount": 9,
     "showPopup": false,
     "homecount": 3,
+    "magicOptions": {
+      "showMagic": true,
+      "showMagicCat": true,
+      "showMagicTag": false,
+      "showMagicSearch": true
+    },
     "icon192": "/assets/tw-logo-large.png",
     "menu1": "Profile",
     "titleTemplate": "%s",
@@ -31,13 +38,6 @@
     "showfooter": false,
     "showFeature": false,
     "showCover": true,
-    "magicOptions": {
-      "showMagic": true,
-      "showMagicCat": true,
-      "showMagicTag": true,
-      "showMagicSearch": true
-    },
-    "showArchive": true,
     "image": "/assets/logo-bg.svg",
     "description": "Photography by Todd Lambert",
     "icon512": "/assets/tw-logo-large.png",
