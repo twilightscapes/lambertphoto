@@ -31,6 +31,12 @@
     "showfooter": false,
     "showFeature": false,
     "showCover": true,
+    "magicOptions": {
+      "showMagic": true,
+      "showMagicCat": true,
+      "showMagicTag": true,
+      "showMagicSearch": true
+    },
     "image": "/assets/logo-bg.svg",
     "description": "Photography by Todd Lambert",
     "icon512": "/assets/tw-logo-large.png",
