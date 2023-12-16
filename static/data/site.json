@@ -8,7 +8,6 @@
     "showArchive": false,
     "showSearch": true,
     "showNav": false,
-    "showTitles": false,
     "companyname": "Lambert Photography",
     "siteUrl": "https://lambertphotography.com",
     "showDates": false,
@@ -18,9 +17,9 @@
     "showResume": false,
     "showInfo": false,
     "showNav2": true,
-    "postcount": 9,
+    "postcount": 12,
     "showPopup": false,
-    "homecount": 3,
+    "homecount": 6,
     "magicOptions": {
       "showMagic": true,
       "showMagicCat": true,
@@ -36,6 +35,7 @@
     "menu4": "Skills",
     "showPosts": true,
     "title": "Unique Night Photography",
+    "showTitles": false,
     "showfooter": false,
     "showFeature": false,
     "showCover": true,
@@ -44,7 +44,6 @@
     "icon512": "/assets/tw-logo-large.png",
     "showSwipe": true,
     "showSkills": false
-    
   },
   "ga": "UA-89654528-2",
   "comments": "56390315s84980992-proj"
