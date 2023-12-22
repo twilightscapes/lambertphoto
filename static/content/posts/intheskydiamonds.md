@@ -18,6 +18,7 @@ youtube:
   youtubecontrols: false
   customcontrols: false
   clicktoplay: false
+  showVidOnly: true
   youtuber: https://youtu.be/iHxmNzMfDj4
 featuredImage: /assets/Experiences-Header-5.jpg
 underlayImage: /assets/diamond-overlay.webp
