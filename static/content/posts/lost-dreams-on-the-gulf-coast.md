@@ -7,7 +7,7 @@ description: An abandoned ghost ship is grounded after Hurricane Katrina
 shareable: false
 showZoom: false
 showPageNav: true
-spotlight: true
+spotlight: 
 youtube:
   youtubemute: false
   youtubeautostart: false

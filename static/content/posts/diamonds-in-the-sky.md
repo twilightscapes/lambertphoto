@@ -20,5 +20,6 @@ youtube:
   customcontrols: false
   clicktoplay: false
   youtuber: https://youtu.be/cZJUyxw2G2w
+  showVidOnly: true
 featuredImage: /assets/img_0743.jpeg
 ---

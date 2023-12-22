@@ -7,7 +7,7 @@ description: An old remnant of the past stuck in time
 shareable: false
 showZoom: false
 showPageNav: true
-spotlight: true
+spotlight: 
 youtube:
   youtubemute: false
   youtubeautostart: false

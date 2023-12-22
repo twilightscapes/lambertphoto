@@ -10,7 +10,7 @@ category:
 shareable: false
 showZoom: false
 showPageNav: true
-spotlight: true
+spotlight: 
 youtube:
   youtubemute: true
   youtubeautostart: true
@@ -18,7 +18,7 @@ youtube:
   youtubecontrols: false
   customcontrols: false
   clicktoplay: false
-  showVidOnly: true
+  showVidOnly: false
   youtuber: https://youtu.be/iHxmNzMfDj4
 featuredImage: /assets/Experiences-Header-5.jpg
 underlayImage: /assets/diamond-overlay.webp
