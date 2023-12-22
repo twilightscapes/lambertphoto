@@ -8,7 +8,7 @@ comments: false
 shareable: false
 showZoom: true
 showPageNav: true
-spotlight: false
+spotlight: 
 youtube:
   youtubemute: false
   youtubeautostart: false

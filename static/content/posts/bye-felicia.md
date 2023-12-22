@@ -9,7 +9,7 @@ isnftforsale: false
 shareable: true
 showZoom: false
 showPageNav: true
-spotlight: false
+spotlight: 
 youtube:
   youtubemute: false
   youtubeautostart: false

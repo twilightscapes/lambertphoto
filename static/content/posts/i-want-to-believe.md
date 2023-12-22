@@ -7,7 +7,7 @@ description: The VLA in all its glory
 shareable: false
 showZoom: false
 showPageNav: true
-spotlight: false
+spotlight: 
 category:
   - highlight
 youtube:
