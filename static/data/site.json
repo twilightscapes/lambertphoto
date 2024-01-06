@@ -17,8 +17,8 @@
     "postcount": 9,
     "homecount": 6,
     "magicOptions": {
-      "showMagic": true,
-      "showMagicCat": true,
+      "showMagic": false,
+      "showMagicCat": false,
       "showMagicTag": false,
       "showMagicSearch": false
     },
