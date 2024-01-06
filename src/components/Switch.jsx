@@ -1,11 +1,14 @@
-
 import React, { useState, useEffect, useCallback } from "react";
 import { BsFillGrid3X2GapFill } from "react-icons/bs";
 import { PiHandSwipeRightFill } from "react-icons/pi";
-// import { window } from "browser-monads"
+import useSiteMetadata from "../hooks/SiteMetadata";
+
 function Header() {
-    const [archiveView, setArchiveView] = useState("");
+    const [archiveView, setArchiveView] = useState("true");
     const [showSwipe] = useState(true);
+
+    const { language } = useSiteMetadata();
+    const { dicSwipe, dicScroll } = language;
 
     const applyArchiveView = useCallback(() => {
         const elements = document.querySelectorAll(".contentpanel");
@@ -13,43 +16,37 @@ function Header() {
             if (archiveView === "grid") {
                 el.classList.remove("horizontal-scroll", "panels");
                 el.classList.add("grid-container");
-                window.scrollTo(0, 0);
-
+                document.body.classList.remove('scroll');
             } else if (archiveView === "swipe") {
                 el.classList.remove("grid-container");
                 el.classList.add("horizontal-scroll", "panels");
                 document.querySelector(".contentpanel").style.transition = "all .5s ease-in-out";
                 window.scrollTo(0, 0);
+                document.body.classList.add('scroll');
             }
         });
-        localStorage.setItem("archiveView", archiveView);
     }, [archiveView]);
 
     useEffect(() => {
         if (showSwipe) {
-            // Retrieve the selected option from local storage or default to 'grid' or 'swipe'
             const storedArchiveView = localStorage.getItem("archiveView");
+            // Use the stored value or default to 'grid' or 'swipe'
             setArchiveView(storedArchiveView || (showSwipe ? "grid" : "swipe"));
         }
     }, [showSwipe]);
 
     useEffect(() => {
-        // Apply the selected option on page load
         applyArchiveView();
-    }, [applyArchiveView]);
+        // Update local storage whenever archiveView changes
+        localStorage.setItem("archiveView", archiveView);
+    }, [archiveView, applyArchiveView]);
 
     const toggleArchiveView = () => {
         const newArchiveView = archiveView === "grid" ? "swipe" : "grid";
         setArchiveView(newArchiveView);
-        applyArchiveView();
-        console.log("Button clicked");
     };
 
-
-
     return (
-
-
         <div>
             <button
                 aria-label="Grid/Swipe View"
@@ -66,18 +63,15 @@ function Header() {
                 }}
             >
                 {archiveView === "grid" ? (
-        <div className="themer"><PiHandSwipeRightFill style={{width:'36px', height:'30px'}} /></div>
+                    <div className="themer"><PiHandSwipeRightFill style={{ width: '36px', height: '30px' }} /></div>
                 ) : (
-        <div className="themer"><BsFillGrid3X2GapFill style={{width:'36px', height:'30px'}} /></div>
+                    <div className="themer"><BsFillGrid3X2GapFill style={{ width: '36px', height: '30px' }} /></div>
                 )}
                 <span className="themetext" style={{ fontSize: '' }}>
-                    {archiveView === "grid" ? "swipe" : "scroll"}
+                    {archiveView === "grid" ? dicSwipe : dicScroll}
                 </span>
             </button>
         </div>
-
-
-
     );
 }
 

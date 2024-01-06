@@ -13,14 +13,14 @@ const BlogPosts = () => {
   const data = useStaticQuery(graphql`
   query {
     allMarkdownRemark(
-      sort: { fields: [frontmatter___spotlight, frontmatter___date], order: [ASC, DESC] }
-      filter: { frontmatter: { template: { eq: "blog-post" } } }
+      sort: [{frontmatter: {spotlight: ASC}}, {frontmatter: {date: DESC}}]
+      filter: { frontmatter: { template: { eq: "blog-post" }, draft: { ne: true } } }
       limit: 3
     ) {
       edges {
         node {
           id
-          excerpt(pruneLength: 250)
+          excerpt(pruneLength: 150)
           frontmatter {
             title
             date(formatString: "YYYY-MM-DD-HH-MM-SS")
@@ -36,6 +36,7 @@ const BlogPosts = () => {
             tags
             slug
             spotlight
+            draft
           }
         }
       }
@@ -80,6 +81,7 @@ const BlogPosts = () => {
 
   return (
     <>
+    
     <div className="horizontal-scroll1 contentpanel">
       {renderContent()}
       

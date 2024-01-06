@@ -1,10 +1,6 @@
 ---
-marating1: x
-marating2: x
 addressText: The Fleet Launches Soon!
 audiotitle: Shoop
-marating3: x
-marating4: x
 tagline: Lambert Photography -
 featuredImage: /assets/promo-about-todd.jpg
 youtube:
@@ -36,7 +32,6 @@ scrollable: false
 portfolio:
   openText: ""
   closeText: ""
-viewerwarning: x
 nftdrop: x
 slug: /
 audiostart: "0"
@@ -53,33 +48,40 @@ skillsText: >-
   class="text">UX Design</span> <span class="percent">85%</span></dd> </dl>
 
   <dl> <dt> <h2>Detailed Skills</h2><div>100%</div> </dt> <dd class="percentage percentage-90"><span class="text">Word Perfect</span> <span class="percent">90%</span></dd> <dd class="percentage percentage-85"><span class="text">MS Paint</span> <span class="percent">85%</span></dd> <dd class="percentage percentage-75"><span class="text">Photoshop</span> <span class="percent">75%</span></dd> <dd class="percentage percentage-99"><span class="text">Hacking</span> <span class="percent">99%</span></dd> </dl>
-bumpertext: Ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha
 cta:
   ctaText: Reserve Your Galleon
   ctaLink: /contact
 addressText2: ""
-marate: x
 pagePW: ""
 skillsTitle: ""
 template: index-page
 title: Unique Night Photography
 postLimit: "4"
-maratingtx1: x
 liarliar: false
 description: PIRATE - social media owned by the people
 svgzindex: x
-maratingtx2: x
 coverletter:
   coverText: About PIRATE
   coverLink: /about
 sharethis: false
 contentinvideo: false
-maratingtx3: x
-maratingtx4: x
 profTitle: Hoist Your Flag!
 svgImage: /assets/null.svg
 underlayImage: /assets/transparent.png
 excludeFromRSS: true
+draft: true
+bumpertext: ""
+mediawarnings:
+ viewerwarning: Viewer Discretion Strongly Advised
+ marate: ss
+ marating1: DA
+ marating2: BS
+ marating3: ss
+ marating4: ss
+ maratingtx1: Dumb Ass
+ maratingtx2: Total BS
+ maratingtx3: sss
+ maratingtx4: ss
 ---
 
 <div style="">

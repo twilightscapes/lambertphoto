@@ -19,8 +19,31 @@ public_folder: "/assets"
 # display_url: ""
 show_preview_links: false
 
+
 collections:
 
+
+  # - name: "team"
+  #   editor:
+  #     preview: false
+  #   label: "Pirate Posts"
+  #   label_singular: "Pirate Post"
+  #   description: >
+  #     Pirate Posts - your content on Pirate
+  #   folder: "static/content/team"
+  #   create: true
+  #   slug: "{{slug}}"
+  #   fields:
+  #     - {label: "Template Key", name: "templateKey", widget: "hidden", default: "team"}
+  #     - {label: "Slug", name: "slug", widget: "string"}
+  #     - {label: "Team Member Name", name: "name", widget: "string"}
+  #     - {label: "Job Title", name: "jobTitle", widget: "string"}
+  #     - {label: "Credentials", name: "credentials", widget: "string"}
+  #     - {label: "Page Order", name: "order", widget: "number"}
+  #     - {label: "Team Image", name: "profilePicture", widget: "image", required: false,}
+  #     - {label: "Body", name: "body", widget: "markdown"}
+
+      
   - name: "posts" # Used in routes, ie.: /admin/collections/:slug/edit
     editor:
       preview: false
@@ -41,14 +64,6 @@ collections:
         }
 
 
-      - { label: "Title", name: "title", widget: "string", tagname: "h1" }
-      - {
-          label: "Slug",
-          name: "slug",
-          widget: "string",
-          hint: "Start slug with /. Use only alphanumeric characters, - and _. Avoid spaces in any cases.",
-          default: "/",
-        }
       - {
           label: "Publish Date",
           name: "date",
@@ -58,47 +73,63 @@ collections:
           format: "YYYY-MM-DD HH:mm",
         }
 
+      - {
+          label: "Slug or URL or Location (seo)",
+          name: "slug",
+          widget: "string",
+          hint: "Start slug with /. Use only alphanumeric characters, - and _. AVOID SPACES",
+          default: "/",
+        }
+
+      - { label: "Title", name: "title", widget: "string", tagname: "h1", hint: "Page Title (seo)" }
 
 
-      - { label: "SEO Description", name: "description", widget: "text" }
-      - { label: "Category", name: "category", widget: "list", collapsed: true, default: "Default", required: false, add_to_top: true, field: {label: Category, name: name, widget: string, add_to_top: true,}}
+      - { label: "Page Description", name: "description", widget: "string", hint: "Short description of the page. This is the description text in search engine results (seo)" }
 
 
+      - { label: "Category", name: "category", widget: "list", collapsed: true, default: "Default", required: false, add_to_top: true, field: {label: Category, name: name, widget: string, add_to_top: true,}, hint: "Create categories to segment a group of posts"}
 
+      - { label: "Tags", name: "tags", widget: "list", collapsed: true, default: "tagged", required: false, add_to_top: true, field: {label: Tag, name: name, widget: string, add_to_top: true, collapsed: true,}, hint: "Create tags to segment a group of posts"}
 
-
-
-
-
-
-
-
-
-
-
-      - { label: "Make Post Shareable?", name: "shareable", widget: "boolean", default: false, required: false }
-      - { label: "Make Feature Image Zoom", name: "showZoom", widget: "boolean", default: false, required: false }
-      - { label: "Turn on Page Level Nav", name: "showPageNav", widget: "boolean", default: true, required: false }
-      - { label: "Spotlight on Homepage", name: "spotlight", widget: "boolean", default: false, required: false }
-
-
-
-
-
-
-
-
-
-      - { label: "Page Tags", name: "tags", widget: "list", collapsed: true, default: "tagged", required: false, add_to_top: true, field: {label: Tag, name: name, widget: string, add_to_top: true, collapsed: true,}}
 
       - {
-              label: "YouTube",
+          label: "Featured Image",
+          name: "featuredImage",
+          widget: "image",
+          hint: "The primary image used for all social media, blog previews and the feature image at the top of the post",
+          required: false,
+          tagname: "",
+          # default: "/assets/transparent.png"
+        }
+      - {
+          label: "Alternate Image",
+          name: "underlayImage",
+          widget: "image",
+          hint: "This image can be used over the feature image, or it can be used over the video. It is layered above the video but under the animation layer below.",
+          required: false,
+          tagname: "",
+          # default: "/assets/transparent.png"
+        }
+      - {
+          label: "Animation Layer",
+          name: "svgImage",
+          widget: "image",
+          hint: "This is the animation layer where your animated or static SVG image goes - it is on the top of the stack. We recommend SVGator.com for creating animations",
+          required: false,
+          tagname: "",
+          # default: "/assets/null.svg"
+        }
+
+
+
+      - {
+              label: "Video Settings",
               name: "youtube",
               widget: "object",
               collapsed: true, # Set to true to collapse panel by default
             fields: [
               { label: "YouTube Url", name: "youtuber", widget: "string",required: false },
-              { label: "Show Video Only", name: "showVidOnly", widget: "boolean", default: false, required: false },
+              { label: "Show Video Only (PIRATE Plus ONLY)", name: "showVidOnly", widget: "boolean", default: false, required: false },
               { label: "YouTube Start", name: "youtubestart", widget: "string", required: false },
               { label: "YouTube End", name: "youtubeend", widget: "string", required: false },
               { label: "YouTube Audio", name: "youtuber2", widget: "string", required: false },
@@ -114,44 +145,35 @@ collections:
             ]
           }
 
-
-
-
-
-      
       - {
-          label: "Featured Image",
-          name: "featuredImage",
-          widget: "image",
-          hint: "The primary image used for all social media, blog previews and the feature image at the top of the post",
-          required: false,
-          tagname: "",
-          # default: "/assets/transparent.png"
-        }
-      - {
-          label: "Underlay Image",
-          name: "underlayImage",
-          widget: "image",
-          hint: "This is used to put a transparent png over the video but under the animation layer",
-          required: false,
-          tagname: "",
-          # default: "/assets/transparent.png"
-        }
-      - {
-          label: "SVG",
-          name: "svgImage",
-          widget: "image",
-          hint: "This is the animation layer where your animated or static SVG image goes - it is on the top of the stack",
-          required: false,
-          tagname: "",
-          # default: "/assets/null.svg"
-        }
+              label: "Bumper Content Warnings (PIRATE Plus ONLY)",
+              name: "mediawarnings",
+              widget: "object",
+              collapsed: true, # Set to true to collapse panel by default
+            fields: [
+              { label: "Viewer Warning", name: "viewerwarning", widget: "string", default: "MA", required: false },
+              { label: "Content Rating", name: "marate", widget: "string", required: false },
+              { label: "Content Sub Rating 1", name: "marating1", widget: "string", required: false },
+              { label: "Content Sub Rating 1 Text", name: "maratingtx1", widget: "string", required: false },
+              { label: "Content Sub Rating 2", name: "marating2", widget: "string", required: false },
+              { label: "Content Sub Rating 2 Text", name: "maratingtx2", widget: "string", required: false },
+              { label: "Content Sub Rating 3", name: "marating3", widget: "string", required: false },
+              { label: "Content Sub Rating 3 Text", name: "maratingtx3", widget: "string", required: false },
+              { label: "Content Sub Rating 4", name: "marating4", widget: "string", required: false },
+              { label: "Content Sub Rating 4 Text", name: "maratingtx4", widget: "string", required: false }
+            ]
+          }
 
+      - { label: "Post is Hidden (PIRATE Plus ONLY)", name: "draft", widget: "boolean", required: false, hint: "This hides the post from search, and filtering across the site. The post is still visible to google and anyone who know the location", }
 
+      - { label: "Share Buttons", name: "shareable", widget: "boolean", default: false, required: false }
+      - { label: "Header Image Zoom", name: "showZoom", widget: "boolean", default: false, required: false }
+      - { label: "Page Level Navigation", name: "showPageNav", widget: "boolean", default: true, required: false }
+      - { label: "Spotlight on Homepage", name: "spotlight", widget: "boolean", required: false, hint: "This weights this post to always show on the top of page results" }
 
 
       - {
-          label: "Body",
+          label: "Body Content",
           name: "body",
           widget: "markdown",
           required: false,
@@ -160,37 +182,19 @@ collections:
         
 
         
-  - name: "team"
-    editor:
-      preview: false
-    label: "Pirate Posts"
-    label_singular: "Pirate Post"
-    description: >
-      Pirate Posts - your content on Pirate
-    folder: "static/content/team"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "team"}
-      - {label: "Slug", name: "slug", widget: "string"}
-      - {label: "Team Member Name", name: "name", widget: "string"}
-      - {label: "Job Title", name: "jobTitle", widget: "string"}
-      - {label: "Credentials", name: "credentials", widget: "string"}
-      - {label: "Page Order", name: "order", widget: "number"}
-      - {label: "Team Image", name: "profilePicture", widget: "image", required: false,}
-      - {label: "Body", name: "body", widget: "markdown"}
 
 
 
 
 
 
-  - label: "HomePage"
+
+  - label: "Site Pages"
     name: "pages"
     editor:
       preview: false
     files:
-      - label: "Home"
+      - label: "Default Home Page - Important to set defaults for Search Engines"
         name: "home"
         file: "static/content/pages/index.md"
         fields:
@@ -211,8 +215,98 @@ collections:
 
           - { label: "Body", name: "body", widget: "markdown" }
 
+      - label: "Privacy Policy Page"
+        name: "privacy"
+        file: "static/content/pages/privacy.md"
+        fields:
+          - {
+              label: "Template",
+              name: "template",
+              widget: "hidden",
+              default: "privacy-page",
+            }
+          - { label: "Slug", name: "slug", widget: "hidden", default: "/privacy" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - label: "Disclaimer Page"
+        name: "disclaimer"
+        file: "static/content/pages/disclaimer.md"
+        fields:
+          - {
+              label: "Template",
+              name: "template",
+              widget: "hidden",
+              default: "discaimer-page",
+            }
+          - { label: "Slug", name: "slug", widget: "hidden", default: "/disclaimer" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - label: "Terms of Use/Conditions Page"
+        name: "terms"
+        file: "static/content/pages/terms.md"
+        fields:
+          - {
+              label: "Template",
+              name: "template",
+              widget: "hidden",
+              default: "terms-page",
+            }
+          - { label: "Slug", name: "slug", widget: "hidden", default: "/terms" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
                 
-      
+      - label: "Contact Page/Form"
+        name: "contact"
+        file: "static/content/pages/contact.md"
+        fields:
+          - {
+              label: "Template",
+              name: "template",
+              widget: "hidden",
+              default: "contact-page",
+            }
+          - {
+              label: "Slug",
+              name: "slug",
+              widget: "hidden",
+              default: "/contact/",
+            }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Redirect to Thanks Page",
+              name: "redirect",
+              widget: "boolean",
+              default: false,
+              required: false
+            }
+
+          - { label: "Show Name Field",
+              name: "contactname",
+              widget: "boolean",
+              default: false,
+              required: false
+            }
+          - { label: "Show Phone Field",
+              name: "contactphone",
+              widget: "boolean",
+              default: false,
+              required: false
+            }
+          - { label: "Show File Upload Field",
+              name: "contactupload",
+              widget: "boolean",
+              default: false,
+              required: false
+            }
+          - { label: "Upload Text",
+              name: "uploadtext",
+              widget: "string",
+              default: false,
+              required: false
+            }
+
+          - { label: "Body", name: "body", widget: "markdown", required: false }
       
 
   
@@ -220,7 +314,7 @@ collections:
   - name: settings
     editor:
       preview: false
-    label: Settings
+    label: Site Settings
     files:
       - name: general
         label: General
@@ -256,8 +350,188 @@ collections:
                 name: companyname
                 label: Company Name or Site Name
                 required: true
+              - widget: "number"
+                label: "Number of posts on HOME PAGE"
+                name: "homecount"
+                default: 5
+                value_type: "int"
+                min: 1
+                max: 51
+                step: 2
+                hint: "Max #50"
+              - widget: "number"
+                label: "Number of posts on other pages"
+                name: "postcount"
+                default: 18
+                value_type: "int"
+                min: 1
+                max: 51
+                step: 2
+                hint: "Max #50"
 
 
+
+
+
+
+
+              - name: "navOptions"
+                label: "Navigation Options"
+                widget: "object"
+                collapsed: true
+                fields:
+
+                  - widget: boolean
+                    name: showNav 
+                    label: Show Top Nav
+                    required: false
+                    default: true
+
+                  - widget: boolean
+                    name: showNav2 
+                    label: Show Side Nav
+                    required: false
+                  
+                  - widget: boolean
+                    name: showFooterMenu 
+                    label: Show Footer Menu
+                    required: false
+
+
+              - name: "language"
+                label: "UI Language"
+                widget: "object"
+                collapsed: true
+                fields:
+
+                  - name: "dicLoadMore"
+                    label: "Load More"
+                    widget: "string"
+                    required: false
+                  - name: "dicViewArchive"
+                    label: "View Archive"
+                    widget: "string"
+                    required: false
+                  - name: "dicCategory"
+                    label: "Category"
+                    widget: "string"
+                    required: false
+                  - name: "dicKeyword"
+                    label: "Keyword"
+                    widget: "string"
+                    required: false
+                  - name: "dicSearch"
+                    label: "Search"
+                    widget: "string"
+                    required: false
+                  - name: "dicClear"
+                    label: "Clear"
+                    widget: "string"
+                    required: false
+                  - name: "dicResults"
+                    label: "Result"
+                    widget: "string"
+                    required: false
+                  - name: "dicContact"
+                    label: "Contact"
+                    widget: "string"
+                    required: false
+                  - name: "dicSocial"
+                    label: "Social Links"
+                    widget: "string"
+                    required: false
+                  - name: "dicDisclaimer"
+                    label: "Disclaimer"
+                    widget: "string"
+                    required: false
+                  - name: "dicPrivacy"
+                    label: "Privacy"
+                    widget: "string"
+                    required: false
+                  - name: "dicTerms"
+                    label: "Terms of Use"
+                    widget: "string"
+                    required: false
+                  - name: "dicCopyright"
+                    label: "Copyright"
+                    widget: "string"
+                    required: false
+                  - name: "dicSwipe"
+                    label: "Swipe"
+                    widget: "string"
+                    required: false
+                  - name: "dicScroll"
+                    label: "Scroll"
+                    widget: "string"
+                    required: false
+                  - name: "dicPirate"
+                    label: "Powered by PIRATE"
+                    widget: "string"
+                    eequired: false
+                  - name: "dicSiteReport"
+                    label: "Site Report"
+                    widget: "string"
+                    required: false
+                  - name: "dicLight"
+                    label: "Light"
+                    widget: "string"
+                    required: false
+                  - name: "dicDark"
+                    label: "Dark"
+                    widget: "string"
+                    required: false
+                  - name: "dicGoBack"
+                    label: "Go Back"
+                    widget: "string"
+                    required: false
+                  - name: "dicPlayVideo"
+                    label: "Play Video"
+                    widget: "string"
+                    required: false
+                  - name: "dicPlayMultimedia"
+                    label: "Play Multimedia"
+                    widget: "string"
+                    required: false
+                  - name: "dicClickToView"
+                    label: "Click To View"
+                    widget: "string"
+                    required: false
+                  - name: "dicSignUpButton"
+                    label: "Sign Up"
+                    widget: "string"
+                    required: false
+                  - name: "dicSignUpText"
+                    label: "Sign Up - Enter your email"
+                    widget: "string"
+                    required: false
+                  - name: "dicClose"
+                    label: "X Close"
+                    widget: "string"
+                    required: false
+                  - name: "dicName"
+                    label: "Your Name"
+                    widget: "string"
+                    required: false
+                  - name: "dicEmail"
+                    label: "your@email.com"
+                    widget: "string"
+                    required: false
+                  - name: "dicMessage"
+                    label: "Your Message"
+                    widget: "string"
+                    required: false
+                  - name: "dicSubmit"
+                    label: "Send Message"
+                    widget: "string"
+                    required: false
+                  - name: "dicPhone"
+                    label: "Your Phone Number"
+                    widget: "string"
+                    required: false
+                  - name: "dicConfirmation"
+                    label: "Message Received"
+                    widget: "string"
+                    required: false
 
 
               - name: "magicOptions"
@@ -276,92 +550,93 @@ collections:
                   - name: "showMagicCat"
                     label: "Show Categories?"
                     widget: "boolean"
-                    # if: "showMagic == true"
                     required: false
                     default: true
 
                   - name: "showMagicTag"
                     label: "Show Tags?"
                     widget: "boolean"
-                    # if: "showMagic == true"
                     required: false
                     default: "true"
 
                   - name: "showMagicSearch"
                     label: "Show Search?"
                     widget: "boolean"
-                    # if: "showMagic == true"
                     required: false
                     default: true
 
-              - widget: "number"
-                label: "Number of posts on HOME PAGE"
-                name: "homecount"
-                default: 5
-                value_type: "int"
-                min: 1
-                max: 51
-                step: 2
-                hint: "Max #50"
+
+              - name: "featureOptions"
+                label: "Site Features"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - widget: boolean
+                    name: showfooter
+                    label: Show the Footer
+                    required: false
+                  - widget: boolean
+                    name: showTitles
+                    label: Show Post Titles
+                    required: false
+                  - widget: boolean
+                    name: showDates
+                    label: Show Dates
+                    required: false
+                  - widget: boolean
+                    name: showSearch
+                    label: Show Search Icon 
+                    required: false
+                  - widget: boolean
+                    name: showSwipe
+                    label: Show Swipe Icon
+                    required: false
+                  - widget: boolean
+                    name: showSocial 
+                    label: Show Social Links
+                    required: false
+                  - widget: boolean
+                    name: showArchive 
+                    label: Show Archive link under "Load More" button
+                    required: false
+                    # PRO BELOW
+              - name: "proOptions"
+                label: "Plus Features (PIRATE Plus users only)"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - widget: boolean
+                    name: showModals
+                    label: Show Posts in Modal Window
+                    required: false
+                  - widget: boolean
+                    name: showBranding
+                    label: Hide Pirate Branding
+                    required: false
+                  - widget: boolean
+                    name: showPopup 
+                    label: Show Sign Up Form In Posts
+                    required: false
+                  - widget: boolean
+                    name: showLegal
+                    label: Show Legal Pages (note the pages are still there just not visible)
+                    required: false
+                  - widget: boolean
+                    name: showContact
+                    label: Show Contact in Footer
+                    required: false
+                  - widget: boolean
+                    name: showConsent
+                    label: Show Cookie Consent Banner
+                    required: false
 
 
-              - widget: "number"
-                label: "Number of posts on other pages"
-                name: "postcount"
-                default: 18
-                value_type: "int"
-                min: 1
-                max: 51
-                step: 2
-                hint: "Max #50"
-
-
-              - widget: boolean
-                name: showNav 
-                label: Show Top Nav
-                required: false
-
-              - widget: boolean
-                name: showNav2 
-                label: Show Side Nav
-                required: false
-                
-
-              - widget: boolean
-                name: showTitles
-                label: Show Post Titles
-                required: false
-
-              - widget: boolean
-                name: showDates
-                label: Show Dates
-                required: false
-
-
-
-              - widget: boolean
-                name: showSearch
-                label: Show Search Icon 
-                required: false
-
-              - widget: boolean
-                name: showSwipe
-                label: Show Swipe Icon
-                required: false
-
-              - widget: boolean
-                name: showArchive 
-                label: Show Archive link under "Load More" button
-                required: false
 
 
 
 
+              
 
-              - widget: string
-                name: font1
-                label: Google Font
-                required: false
               - widget: image
                 name: image
                 label: Site Background Image
@@ -378,7 +653,46 @@ collections:
                 required: false
                 
               
-
+      - label: Social Icons
+        name: socialIcons
+        editor:
+          preview: false
+        file: "static/data/socialmedia.json"
+        fields:
+          - label: Social Icons
+            name: socialIcons
+            widget: list
+            collapsed: true
+            hint: "Here you can add social icons, Click on 'Add social icons'"
+            fields:
+              - label: "Icons"
+                name: "icon"
+                widget: "select"
+                options:
+                  [
+                    "facebook",
+                    "x-twitter",
+                    "linkedin",
+                    "youtube",
+                    "instagram",
+                    "rss",
+                    "github",
+                    "telegram",
+                    "pinterest",
+                    "snapchat",
+                    "skype",
+                    "wordpress",
+                    "dribbble",
+                    "medium",
+                    "behance",
+                    "vk",
+                  ]
+                hint: "Select the Icon"
+              - widget: string
+                name: url
+                label: url
+                required: true
+                hint: "Paste the 'URL' of your Social media"
 
 
 
@@ -407,7 +721,7 @@ collections:
                 required: true
                 hint: "add the url of the menu item"
 
-  - label: "Appearance"
+  - label: "Site Appearance"
     name: "appearance"
     editor:
       preview: false
@@ -419,59 +733,147 @@ collections:
         fields:
           - label: "Override Site Styles"
             name: "userStyles"
-            widget: "markdown"
+            widget: "text"
             hint: "Additional CSS can be written here, overwriting the site's default styles."
 
       - label: "Default Theme"
         name: "themescolors"
         file: "static/data/default-colors.json"
         fields:
-          - label: "siteColor"
-            name: "siteColor"
+
+          - label: "Site Font - powered by Google"
+            name: "siteFont"
+            widget: "string"
+            hint: "Google Font Name"
+
+          - label: "Site Background Color"
+            name: "siteBackground"
             widget: "color"
             enableAlpha: true
             allowInput: true
-            hint: "Don't know what this is"
+            hint: "Default Page Background Color"
 
-          - label: "headerColor"
-            name: "headerColor"
-            widget: "color"
-            enableAlpha: true
-            allowInput: true
-
-          - label: "text"
+          - label: "Site Text Color"
             name: "text"
             widget: "color"
             enableAlpha: true
             allowInput: true
+            hint: "Default Page Text Color"
 
+          - label: "Site Text Shadow Color"
+            name: "textShadow"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Default Page Text Shadow Color"
+        
+          - label: "Highlight Color"
+            name: "siteColor"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Used for buttons and link colors"
 
+          - label: "Hightlight Text Color"
+            name: "siteColorText"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Used for buttons and link colors"
 
+          - label: "Header/Menu Background"
+            name: "headerColor"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Header and Side Menu background"
 
+          - label: "Header/Menu Text Color"
+            name: "headerColorText"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Used for buttons and link colors"
 
+          - label: "Site Border Color"
+            name: "borderColor"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Used for element borders"
 
-
+          - label: "Site Border Radius"
+            name: "borderRadius"
+            widget: "string"
+            hint: "Rounded Corners Radius"
 
       - label: "Dark Theme"
         name: "darkthemescolors"
         file: "static/data/dark-theme-colors.json"
         fields:
-          - label: "siteColor"
-            name: "siteColor"
+
+          - label: "Site Font - powered by Google"
+            name: "siteFont"
+            widget: "string"
+            hint: "Google Font Name"
+
+          - label: "Site Background Color"
+            name: "siteBackground"
             widget: "color"
             enableAlpha: true
             allowInput: true
-            hint: "Don't know what this is"
+            hint: "Default Page Background Color"
 
-          - label: "headerColor"
-            name: "headerColor"
-            widget: "color"
-            enableAlpha: true
-            allowInput: true
-
-          - label: "text"
+          - label: "Site Text Color"
             name: "text"
             widget: "color"
             enableAlpha: true
             allowInput: true
+            hint: "Default Page Text Color"
 
+          - label: "Site Text Shadow Color"
+            name: "textShadow"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Default Page Text Shadow Color"
+        
+          - label: "Highlight Color"
+            name: "siteColor"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Used for buttons and link colors"
+
+          - label: "Hightlight Text Color"
+            name: "siteColorText"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Used for buttons and link colors"
+
+          - label: "Header/Menu Background"
+            name: "headerColor"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Header and Side Menu background"
+
+          - label: "Header/Menu Text Color"
+            name: "headerColorText"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Used for buttons and link colors"
+
+          - label: "Site Border Color"
+            name: "borderColor"
+            widget: "color"
+            enableAlpha: true
+            allowInput: true
+            hint: "Used for element borders"
+
+          - label: "Site Border Radius"
+            name: "borderRadius"
+            widget: "string"
+            hint: "Rounded Corners Radius"

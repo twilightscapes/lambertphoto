@@ -1,4 +1,4 @@
-require("dotenv").config()
+// require("dotenv").config()
 /**
  * Configure your Gatsby site with this file.
  *
@@ -177,13 +177,13 @@ module.exports = {
       },
     },
 
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `team`,
-        path: `${__dirname}/static/content/team/`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `team`,
+    //     path: `${__dirname}/static/content/team/`,
+    //   },
+    // },
 
     {
       resolve: `gatsby-source-filesystem`,
@@ -352,24 +352,26 @@ module.exports = {
       },
     },
     // 'gatsby-plugin-sharp-exif',
-    `gatsby-plugin-sass`,
+    // `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-theme-ui`,
     // `gatsby-plugin-static-cms`,
 
-    // {
-    //   resolve: `gatsby-plugin-netlify-cms`,
-    //   options: {
-    //     modulePath: `${__dirname}/src/cms/cms.js`,
-    //     enableIdentityWidget: false,
-    //     publicPath: `admin`,
-    //     htmlTitle: `PIRATE CMS`,
-    //     htmlFavicon: `static/assets/logo.svg`,
-    //     includeRobots: false,
-    //     logo_url: 'https://piratesocial.org/assets/logo.svg'
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-decap-cms`,
+      options: {
+        modulePath: `${__dirname}/src/cms/cms.js`,
+        enableIdentityWidget: false,
+        publicPath: `admin`,
+        htmlTitle: `PIRATE CMS`,
+        htmlFavicon: `static/assets/logo.svg`,
+        includeRobots: false,
+        logo_url: 'https://piratesocial.org/assets/logo.svg'
+      },
+    },
+    // 'gatsby-plugin-netlify-identity-widget',
 
+    
     // {
     //   resolve: "gatsby-plugin-netlify",
     //   options: {

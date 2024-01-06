@@ -1,4 +1,5 @@
 /** @jsx jsx */
+// eslint-disable-next-line
 import React, { useState, useRef, useEffect, forwardRef } from "react";
 
 // import Zoom from 'react-medium-image-zoom'
@@ -11,7 +12,7 @@ import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css'
 
 
 // import Controls from "../components/Controls";
-import { document } from "browser-monads"
+// import { document } from "browser-monads"
 import PropTypes from "prop-types";
 import { MdPlayArrow } from "react-icons/md"
 import { MdPause } from "react-icons/md"
@@ -43,9 +44,9 @@ import { RiMenuUnfoldFill, RiCloseCircleFill } from "react-icons/ri"
 import { AiOutlineAudioMuted } from "react-icons/ai"
 
 
-import Footer from "../components/footer"
+
 // import { SRLWrapper } from "simple-react-lightbox"
-import { CopyToClipboard } from 'react-copy-to-clipboard'
+// import { CopyToClipboard } from 'react-copy-to-clipboard'
 import ReactPlayer from 'react-player/lazy'
 // import { AnchorLink } from "gatsby-plugin-anchor-links"
 // import YouTubed from "../components/youtube"
@@ -55,58 +56,11 @@ import ShareSocial from '../components/share'
 // import GoBack from "../components/goBack"
 import { ImPlay } from "react-icons/im"
 import TimeAgo from 'react-timeago'
-import styled from "styled-components"
-const CustomBox = styled.div`
 
 
 
 
 
-
-
-`
-
-
-
-const Pagination = props => (
-  <div className="pagination -post1" style={{position:'', bottom:'',}}>
-    <ul className="" style={{display:'flex', gap:'2vw', justifyContent:'space-around', paddingTop:'5px', alignItems:'center'}}>
-      
-
-    {props.next && props.next.frontmatter.template === "blog-post" && (
-        <li style={{display:'flex', justifyContent:'space-between', width:'50%'}}>
-<Link to={props.next.frontmatter.slug + "/"} rel="next">
-<button className="" style={{display:'flex', justifyContent:'', }}>
-<span className="page-title">
-  {props.next.frontmatter.title}
-{/* Newer */}
-</span>
-{/* &nbsp;&nbsp;<AiFillCaretLeft /> */}
-</button>
-</Link>
-        </li>
-      )}
-
-      <div className="specialfont" style={{fontSize:'clamp(1.5rem, 2vw, 2.8rem)', marginTop:'-5px', width:'10vw', fontWeight:'bold', border:'0px solid', display:'grid', color:'#999', placeContent:'center'}}>GO TO</div>
-
-      
-{props.previous && props.previous.frontmatter.template === "blog-post" && (
-        // <li style={{border:'1px solid', borderRadius:'12px', filter:'drop-shadow(0 0px 6px rgba(0, 0, 0, 1))'}}>
-        <li style={{display:'flex', justifyContent:'space-between', width:'50%'}}>
-<Link style={{}}  to= {props.previous.frontmatter.slug + "/"} rel="prev">
- <button className="" style={{display:'flex', justifyContent:'',}}>
- {/* <AiFillCaretRight />&nbsp;&nbsp; */}
-  <span className="page-title">
-{props.previous.frontmatter.title}
-{/* Previous */}
-</span>
-</button>
-          </Link>
-        </li>
-      )}
-    </ul>
-  </div>
-)
 
 
 
@@ -114,6 +68,57 @@ const Pagination = props => (
 
 
 const Post = ({ data, pageContext }) => {
+
+    const { language, proOptions, featureOptions } = useSiteMetadata();
+    const { dicClickToView } = language;
+
+    const { showModals, ShowDisclaimer   } = proOptions
+    const { showDates, showTitles } = featureOptions
+
+    
+
+
+  const Pagination = props => (
+
+  
+    <div className="pagination -post1" style={{position:'', bottom:'',}}>
+      <ul className="" style={{display:'flex', gap:'2vw', justifyContent:'space-around', paddingTop:'5px', alignItems:'center'}}>
+        
+  
+      {props.next && props.next.frontmatter.template === "blog-post" && (
+          <li style={{display:'flex', justifyContent:'space-between', width:'50%'}}>
+  <Link to={props.next.frontmatter.slug + "/"} state={showModals ? { modal: true } : {}}  rel="next">
+  <button className="" style={{display:'flex', justifyContent:'', }}>
+  <span className="page-title">
+    {props.next.frontmatter.title}
+  {/* Newer */}
+  </span>
+  {/* &nbsp;&nbsp;<AiFillCaretLeft /> */}
+  </button>
+  </Link>
+          </li>
+        )}
+  
+        <div className="specialfont" style={{fontSize:'clamp(1.5rem, 2vw, 2.8rem)', marginTop:'-5px', width:'10vw', fontWeight:'bold', border:'0px solid', display:'grid', color:'#999', placeContent:'center'}}>GO TO</div>
+  
+        
+  {props.previous && props.previous.frontmatter.template === "blog-post" && (
+          // <li style={{border:'1px solid', borderRadius:'12px', filter:'drop-shadow(0 0px 6px rgba(0, 0, 0, 1))'}}>
+          <li style={{display:'flex', justifyContent:'space-between', width:'50%'}}>
+  <Link style={{}}  to= {props.previous.frontmatter.slug + "/"} state={showModals ? { modal: true } : {}}  rel="prev">
+   <button className="" style={{display:'flex', justifyContent:'',}}>
+   {/* <AiFillCaretRight />&nbsp;&nbsp; */}
+    <span className="page-title">
+  {props.previous.frontmatter.title}
+  {/* Previous */}
+  </span>
+  </button>
+            </Link>
+          </li>
+        )}
+      </ul>
+    </div>
+  )
 
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   /* eslint-disable-next-line no-unused-vars */
@@ -226,8 +231,8 @@ const YouTubeControls = frontmatter.youtube.youtubecontrols
 const YouTubeAutostart = frontmatter.youtube.youtubeautostart
 const CustomControls = frontmatter.youtube.customcontrols
 const Suggestion1 = frontmatter.youtube.youtubersuggestion1
-const Suggestion2 = frontmatter.youtube.youtubersuggestion2
-const Suggestion3 = frontmatter.youtube.youtubersuggestion3
+// const Suggestion2 = frontmatter.youtube.youtubersuggestion2
+// const Suggestion3 = frontmatter.youtube.youtubersuggestion3
 
 const YoutubeLoop = frontmatter.youtube.youtubeloop
 
@@ -287,7 +292,7 @@ function ShowSuggestion() {
 We recommend these alternatives:
 <br /><br />
 Click to Copy:<br />
-<CopyToClipboard text={Suggestion1}>
+{/* <CopyToClipboard text={Suggestion1}>
   <button>{Suggestion1} </button>
 </CopyToClipboard><br />
 
@@ -298,7 +303,7 @@ Click to Copy:<br />
 
 <CopyToClipboard text={Suggestion3}>
   <button>{Suggestion3} </button>
-</CopyToClipboard><br />
+</CopyToClipboard><br /> */}
 
 <br />
 Add your own in the comments below!
@@ -360,7 +365,7 @@ const OriginalUrl = frontmatter.youtube.youtuber
                 },
               },
               youtube: {
-                playerVars: { showinfo:0, autoplay:YouTubeAutostart, controls:YouTubeControls, start:YouTubeStart, end:YouTubeEnd, mute:YouTubeMute, loop:YoutubeLoop }
+                playerVars: { showinfo: false, autoplay:YouTubeAutostart, controls:YouTubeControls, start:YouTubeStart, end:YouTubeEnd, mute:YouTubeMute, loop:YoutubeLoop }
               },
             }}
           
@@ -388,8 +393,8 @@ const OriginalUrl = frontmatter.youtube.youtuber
           className='audioframe'
           url={iframeUrl3}
           width="100%"
-          height="250px"
-          style={{margin:'0 auto', position:'relative', left:'', right:'', zIndex:'3', maxWidth:'80vw', display:'flex', justifyContent:'center', border:'0px solid blue'}}
+          height=""
+          style={{margin:'0 auto', position:'relatuve', top:'', left:'', right:'', zIndex:'3', maxWidth:'80vw', display:'flex', justifyContent:'center', border:'0px solid blue'}}
           config={{
             
             youtube: {
@@ -401,9 +406,9 @@ const OriginalUrl = frontmatter.youtube.youtuber
           playing
           playsinline
           playIcon={
-            <button aria-label="Click To Play" className="clickplays" style={{position:'relative', zIndex:'', top:'', border:'0px  solid red', width:'100vw', height:'0', background:'transparent', color:'', fontSize:'18px', textAlign:'center', display:'flex', flexDirection:'column', verticalAlign:'center', justifyContent:'center', alignItems:'center', paddingTop:'0', borderRadius:'12px'}}>
+            <button aria-label="Click To Play" className="clickplays" style={{position:'relative', zIndex:'3', top:'', border:'0px  solid red', width:'100vw', height:'0', background:'transparent', color:'', fontSize:'18px', textAlign:'center', display:'flex', flexDirection:'column', verticalAlign:'center', justifyContent:'center', alignItems:'center', paddingTop:'0', borderRadius:'12px'}}>
           
-        <div className="audiopopper" style={{position:'absolute', top:'-400px', right:'', zIndex:'3', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'center', width:'auto', marginBottom:''}}>
+        <div className="audiopopper" style={{position:'absolute', top:'-100px', right:'', zIndex:'5', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'center', width:'auto', marginBottom:''}}>
           
       
           {/* <div className="" style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem',}}>Click For Audio</div> */}
@@ -412,12 +417,12 @@ const OriginalUrl = frontmatter.youtube.youtuber
             
  
 
-            <AiOutlineAudioMuted style={{margin:'0 1vw', fontSize:'20px', filter:'drop-shadow(2px 2px 2px #000)'}} />
+            
             
             {LiarLiar ? (
   <ImCross style={{margin:'0 1vw', fontSize:'20px', color:'#ff0000', filter:'drop-shadow(2px 2px 2px #000)'}} />
           ) : (
-            ""
+            <AiOutlineAudioMuted style={{margin:'0 1vw', fontSize:'20px', filter:'drop-shadow(2px 2px 2px #000)'}} />
           )}
             
             <div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)', color:'#ccc', }}>{frontmatter.audiotitle}</div>
@@ -472,7 +477,7 @@ const YouTube = frontmatter.youtube.youtuber
 
 
   // const { showNav } = useSiteMetadata()
-  const { showDates, showTitles } = useSiteMetadata()
+
 
 
 
@@ -589,15 +594,15 @@ const YouTube = frontmatter.youtube.youtuber
           {/* // <div style={{position:'absolute', background:'#111', height:'100vh', width:'100vw', zIndex:'3', top:'0', right:'0', textAlign:'center', display:'grid', placeContent:'start', justifyContent:'center', color:'#fff', fontFamily:'Verdana, Sans-Serif, System' }}> */}
 
           {/* <img className="homepage-bg" src={iconimage} width="250px" height="150px" alt="UrbanFetish" style={{ width:'', margin:'120px auto 0 auto', filter:'drop-shadow(2px 2px 2px #000)', background:'transparent !important', position:'relative', top:''}} /> */}
-
-
-          <div className="flex-items" style={{fontSize:'clamp(.6rem, 1.4vw, 2rem)', fontWeight:'bold', margin:'0 auto 0 auto', textTransform:'uppercase',}}>The following is rated: <strong>{frontmatter.marate}</strong></div>
+{frontmatter.mediawarnings.marate ? (
+<>
+<div className="flex-items" style={{fontSize:'clamp(.6rem, 1.4vw, 2rem)', fontWeight:'bold', margin:'0 auto 0 auto', textTransform:'uppercase',}}>The following is rated: <strong>{frontmatter.mediawarnings.marate}</strong></div>
 
 <div className="flex-container" style={{display:'flex', flexDirection:'row', gap:'1vh', justifyContent:'center', alignItems:'center',  textAlign:'left', margin:'0 auto', color:'#ddd', background:'rgba(0, 0, 0, .8)', width:'auto', maxWidth:'800px', height:'', border:'1px solid #222', borderRadius:'12px', padding:'2vh 5vw' }}>
 
 
-{frontmatter.marate ? (
-            <div className="flex-items" style={{display:'grid', placeContent:'center', width:'', height:'', aspectRatio:'1/1', padding:'0 20px', border:'6.5px solid #fff', margin:'0 auto 0 auto 0', fontSize:'clamp(4rem, 15vw, 5rem)', fontFamily:'Verdana, Sans-Serif, System', fontWeight:'800'}}>{frontmatter.marate}</div>
+{frontmatter.mediawarnings.marate ? (
+            <div className="flex-items" style={{display:'grid', placeContent:'center', width:'', height:'', aspectRatio:'1/1', padding:'0 20px', border:'6.5px solid #fff', margin:'0 auto 0 auto 0', fontSize:'clamp(4rem, 15vw, 5rem)', fontFamily:'Verdana, Sans-Serif, System', fontWeight:'800'}}>{frontmatter.mediawarnings.marate}</div>
             ) : (
               <div className="flex-items" style={{display:'grid', placeContent:'center', width:'', height:'', aspectRatio:'1/1', padding:'0 20px', border:'6.5px solid #fff', margin:'0 auto 0 auto 0', fontSize:'clamp(4rem, 15vw, 5rem)', fontFamily:'Verdana, Sans-Serif, System', fontWeight:'800'}}>PG</div>
             )}
@@ -609,33 +614,33 @@ const YouTube = frontmatter.youtube.youtuber
 <ul style={{display:'flex', flexDirection:'column', position:'relative', left:'', top:'', gap:'.8vh', justifyContent:'space-around', alignContent:'', alignItems:'start', border:'0px solid red', fontSize:'clamp(.5rem, 1.2vw, 2rem)'}}>
 
 
-{frontmatter.maratingtx1 ? (
+{frontmatter.mediawarnings.maratingtx1 ? (
             <li className="flex-items" style={{display:'flex', justifyContent:'center', alignItems:'center', alignContent:'end'}}><strong style={{ }}>
-            {frontmatter.marating1}</strong> {frontmatter.maratingtx1}</li>
+            {frontmatter.mediawarnings.marating1}</strong> {frontmatter.mediawarnings.maratingtx1}</li>
             ) : (
               ""
             )}
 
 
-{frontmatter.maratingtx2 ? (
+{frontmatter.mediawarnings.maratingtx2 ? (
             <li className="flex-items" style={{display:'flex', justifyContent:'center', alignItems:'center', alignContent:'end'}}><strong style={{ }}>
-{frontmatter.marating2}</strong> {frontmatter.maratingtx2} </li>
+{frontmatter.mediawarnings.marating2}</strong> {frontmatter.mediawarnings.maratingtx2} </li>
             ) : (
               ""
             )}
 
 
-{frontmatter.maratingtx3 ? (
+{frontmatter.mediawarnings.maratingtx3 ? (
          <li className="flex-items" style={{display:'flex', justifyContent:'center', alignItems:'center', alignContent:'end'}}><strong style={{ }}>
-{frontmatter.marating3}</strong> {frontmatter.maratingtx3} </li>   
+{frontmatter.mediawarnings.marating3}</strong> {frontmatter.mediawarnings.maratingtx3} </li>   
             ) : (
               ""
             )} 
 
 
-{frontmatter.maratingtx4 ? (
+{frontmatter.mediawarnings.maratingtx4 ? (
        <li className="flex-items" style={{display:'flex', justifyContent:'center', alignItems:'center', alignContent:'end'}}><strong style={{ }}>
-{frontmatter.marating4}</strong> {frontmatter.maratingtx4} </li>           
+{frontmatter.mediawarnings.marating4}</strong> {frontmatter.mediawarnings.maratingtx4} </li>           
             ) : (
               ""
             )} 
@@ -645,12 +650,21 @@ const YouTube = frontmatter.youtube.youtuber
 </ul>
 
 </div>
-<div className="flex-items" style={{position:'relative', right:'', top:'', display:'', fontSize:'clamp(.6rem, 1.4vw, 2rem)', fontWeight:'bold', textTransform:'uppercase', textAlign:'center'}}>{frontmatter.viewerwarning}</div>
+
+<div className="flex-items" style={{position:'relative', right:'', top:'', display:'', fontSize:'clamp(.6rem, 1.4vw, 2rem)', fontWeight:'bold', textTransform:'uppercase', textAlign:'center'}}>{frontmatter.mediawarnings.viewerwarning}</div>
+</>
+) : (
+                
+  ""
+  
+      )}
+
+
 
 
          <div style={{display:'grid', placeContent:'center', position:'relative', zindex:'1', fontWeight:'bold', padding:'3% 0 0 0', fontSize:'clamp(.6rem, 1.4vw, 2rem)', width:'100%', maxWidth:'25vw', height:'', border:'0px solid', borderRadius:'12px', margin:'0 auto 0 auto', opacity:'.99', textShadow:'2px 2px 2px black', color:'#fff' }}>
 <ImPlay style={{margin:'0 auto', width:'50%', fontSize:'clamp(2rem, 4.4vw, 3rem)', filter:'drop-shadow(0px 0px 12px #fff',}} />
-Click to play
+{dicClickToView}
 </div>
 
 
@@ -822,7 +836,7 @@ Click to play
   return (
     
     <Layout className="page">
-<CustomBox>
+
 
 {frontmatter.scrollable ? (
   <Helmet>
@@ -1072,14 +1086,16 @@ Click to play
    
                 {/* <img className="homepage-bg" src={iconimage} width="250px" height="150px" alt="UrbanFetish" style={{ width:'', margin:'120px auto 0 auto', filter:'drop-shadow(2px 2px 2px #000)', background:'transparent !important', position:'relative', top:''}} /> */}
 
+                {frontmatter.mediawarnings.marate ? (
+<>
 
-                <div className="flex-items" style={{fontSize:'clamp(.6rem, 1.4vw, 2rem)', fontWeight:'bold', margin:'0 auto 0 auto', textTransform:'uppercase',}}>The following is rated: <strong>{frontmatter.marate}</strong></div>
+<div className="flex-items" style={{fontSize:'clamp(.6rem, 1.4vw, 2rem)', fontWeight:'bold', margin:'0 auto 0 auto', textTransform:'uppercase',}}>The following is rated: <strong>{frontmatter.mediawarnings.marate}</strong></div>
 
 <ul className="flex-container" style={{display:'flex', flexDirection:'row', gap:'1vh', justifyContent:'center', alignItems:'center',  textAlign:'left', margin:'0 auto', color:'#ddd', background:'rgba(0, 0, 0, .8)', width:'auto', maxWidth:'800px', height:'', border:'1px solid #222', borderRadius:'12px', padding:'2vh 5vw' }}>
 
 
-{frontmatter.marate ? (
-            <li className="flex-items" style={{display:'grid', placeContent:'center', width:'', height:'', aspectRatio:'1/1', padding:'0 20px', border:'6.5px solid #fff', margin:'0 auto 0 auto 0', fontSize:'clamp(4rem, 15vw, 5rem)', fontFamily:'Verdana, Sans-Serif, System', fontWeight:'800'}}>{frontmatter.marate}</li>
+{frontmatter.mediawarnings.marate ? (
+            <li className="flex-items" style={{display:'grid', placeContent:'center', width:'', height:'', aspectRatio:'1/1', padding:'0 20px', border:'6.5px solid #fff', margin:'0 auto 0 auto 0', fontSize:'clamp(4rem, 15vw, 5rem)', fontFamily:'Verdana, Sans-Serif, System', fontWeight:'800'}}>{frontmatter.mediawarnings.marate}</li>
             ) : (
               <li className="flex-items" style={{display:'grid', placeContent:'center', width:'', height:'', aspectRatio:'1/1', padding:'0 20px', border:'6.5px solid #fff', margin:'0 auto 0 auto 0', fontSize:'clamp(4rem, 15vw, 5rem)', fontFamily:'Verdana, Sans-Serif, System', fontWeight:'800'}}>PG</li>
             )}
@@ -1091,33 +1107,33 @@ Click to play
 <li style={{display:'flex', flexDirection:'column', position:'relative', left:'', top:'', gap:'.8vh', justifyContent:'space-around', alignContent:'', alignItems:'start', border:'0px solid red', fontSize:'clamp(.5rem, 1.2vw, 2rem)'}}>
 
 
-{frontmatter.maratingtx1 ? (
+{frontmatter.mediawarnings.maratingtx1 ? (
             <li className="flex-items" style={{display:'flex', justifyContent:'center', alignItems:'center', alignContent:'end'}}><strong style={{ }}>
-            {frontmatter.marating1}</strong> {frontmatter.maratingtx1}</li>
+            {frontmatter.mediawarnings.marating1}</strong> {frontmatter.mediawarnings.maratingtx1}</li>
             ) : (
               ""
             )}
 
 
-{frontmatter.maratingtx2 ? (
+{frontmatter.mediawarnings.maratingtx2 ? (
             <li className="flex-items" style={{display:'flex', justifyContent:'center', alignItems:'center', alignContent:'end'}}><strong style={{ }}>
-{frontmatter.marating2}</strong> {frontmatter.maratingtx2} </li>
+{frontmatter.mediawarnings.marating2}</strong> {frontmatter.mediawarnings.maratingtx2} </li>
             ) : (
               ""
             )}
 
 
-{frontmatter.maratingtx3 ? (
+{frontmatter.mediawarnings.maratingtx3 ? (
          <li className="flex-items" style={{display:'flex', justifyContent:'center', alignItems:'center', alignContent:'end'}}><strong style={{ }}>
-{frontmatter.marating3}</strong> {frontmatter.maratingtx3} </li>   
+{frontmatter.mediawarnings.marating3}</strong> {frontmatter.mediawarnings.maratingtx3} </li>   
             ) : (
               ""
             )} 
 
 
-{frontmatter.maratingtx4 ? (
+{frontmatter.mediawarnings.maratingtx4 ? (
        <li className="flex-items" style={{display:'flex', justifyContent:'center', alignItems:'center', alignContent:'end'}}><strong style={{ }}>
-{frontmatter.marating4}</strong> {frontmatter.maratingtx4} </li>           
+{frontmatter.mediawarnings.marating4}</strong> {frontmatter.mediawarnings.maratingtx4} </li>           
             ) : (
               ""
             )} 
@@ -1127,16 +1143,22 @@ Click to play
 </li>
 
 </ul>
-<div className="flex-items" style={{position:'relative', right:'', top:'', display:'', fontSize:'clamp(.6rem, 1.4vw, 2rem)', fontWeight:'bold', textTransform:'uppercase', textAlign:'center'}}>{frontmatter.viewerwarning}</div>
+
+
+<div className="flex-items" style={{position:'relative', right:'', top:'', display:'', fontSize:'clamp(.6rem, 1.4vw, 2rem)', fontWeight:'bold', textTransform:'uppercase', textAlign:'center'}}>{frontmatter.mediawarnings.viewerwarning}</div>
 
 
 <div style={{display:'grid', placeContent:'center', position:'relative', zindex:'1', fontWeight:'bold', padding:'1vh 0', fontSize:'clamp(.6rem, 1.4vw, 2rem)', width:'100%', maxWidth:'25vw', height:'', border:'0px solid', borderRadius:'12px', background:'linear-gradient(180deg, rgba(24, 23, 30, 0.2) 1%, rgba(0, 0, 0, .7) 99%)', margin:'0 auto 0 auto', opacity:'.99', textShadow:'2px 2px 2px black', color:'#fff' }}>
 <ImPlay style={{margin:'0 auto', width:'50%', fontSize:'clamp(2rem, 4.4vw, 3rem)', filter:'drop-shadow(0px 0px 12px #fff',}} />
-Click to play
+{dicClickToView}
 </div>
+</>
 
-
-
+) : (
+                
+                ""
+                
+                    )}
 
 
 
@@ -1254,7 +1276,7 @@ zindex:'1'
 
 
 
-     <div className="" style={{width:'100%', height:'', maxWidth:'1024px', margin:'0 auto 0 auto', }}>
+     <div className="panel" style={{width:'100%', height:'', maxWidth:'1024px', margin:'0 auto 0 auto', }}>
 
 
      {/* {Suggestion1 ? (
@@ -1322,7 +1344,7 @@ zindex:'1'
 </header>
             ) : (
               <header style={{ height:'', display:'grid', placeContent:'center'}}>
-                <div className="article-header" style={{textAlign:'center', paddingTop:'1rem', height:'auto', color:'', borderRadius:'', marginTop:'0'}}>
+                <div className="article-header" style={{textAlign:'center', paddingTop:'', height:'auto', color:'', borderRadius:'', marginTop:'0'}}>
 
                 {showTitles ? (   
     <>
@@ -1360,9 +1382,9 @@ zindex:'1'
 
 
 
-  <div className="panel" style={{padding:'0 0', borderTop:'0px solid', margin:'0 0', textAlign:'center', fontSize:'1.5rem', minWidth:'50%', width:'100%', maxWidth:'', border:'0px solid yellow', borderRadius:''}}>
+  <div className="panel" style={{padding:'0 0', border:'0px solid red', margin:'0 0', textAlign:'center', fontSize:'1.5rem', minWidth:'50%', width:'100%'}}>
       <div
-        className="blog-post-content bodycontent" style={{ fontSize:'clamp(1.2rem, 2.8vw, 1.8rem)', textAlign:'center', width:'100%', maxWidth:'', padding:'2vh 6% 10vh 6%', margin:'0 auto', color:'inherit !important'}}
+        className="blog-post-content bodycontent" style={{ fontSize:'clamp(1.2rem, 2.8vw, 1.8rem)', textAlign:'center', width:'100%', maxWidth:'', padding:'2vh 6% 0 6%', margin:'0 auto', border:'1px solid red', color:'inherit'}}
         dangerouslySetInnerHTML={{ __html: html }}
       />    
 </div>
@@ -1381,7 +1403,7 @@ zindex:'1'
 <div style={{width:'auto', height:'', padding:'0', display:'grid', placeContent:'center', border:'0px solid'}}>
     <ShareSocial style={{}} />
     </div>
-<div className="article-header" style={{textAlign:'center', paddingTop:'1rem', height:'auto', color:'', borderRadius:'', marginTop:'0'}}>
+<div className="article-header" style={{textAlign:'center', paddingTop:'', height:'auto', color:'', borderRadius:'', marginTop:'0'}}>
 
 
 {showTitles ? (   
@@ -1412,7 +1434,7 @@ zindex:'1'
       {frontmatter.tags && frontmatter.tags.length > 0 && (
         <>
   
-          <div style={{ position: 'relative', zindex: '2', margin: '1vh auto', width: '100%', display: 'flex', justifyContent: 'center', gap: '1vw' }}>
+          <div style={{ position: 'relative', zindex: '', margin: '1vh auto', width: '100%', display: 'flex', justifyContent: 'center', gap: '1vw' }}>
             {frontmatter.tags.map((tag) => (
               <Link to={`/tag/${tag}`} key={tag}>{tag}</Link>
             ))}
@@ -1436,7 +1458,7 @@ zindex:'1'
 </header>
               ) : (
                 <header style={{ height:'', display:'grid', placeContent:'center'}}>
-                <div className="article-header" style={{textAlign:'center', paddingTop:'1rem', height:'auto', color:''}}>
+                <div className="article-header" style={{textAlign:'center', paddingTop:'', height:'auto', color:''}}>
 
 
                 {showTitles ? (   
@@ -1455,7 +1477,7 @@ zindex:'1'
       {frontmatter.tags && frontmatter.tags.length > 0 && (
         <>
   
-          <div style={{ position: 'relative', zindex: '2', margin: '1vh auto', width: '100%', display: 'flex', justifyContent: 'center', gap: '1vw' }}>
+          <div style={{ position: 'relative', zindex: '', margin: '1vh auto', width: '100%', display: 'flex', justifyContent: 'center', gap: '1vw' }}>
             {frontmatter.tags.map((tag) => (
               <Link to={`/tag/${tag}`} key={tag}>{tag}</Link>
             ))}
@@ -1468,7 +1490,7 @@ zindex:'1'
 
 <div className="panel" style={{padding:'0 0', borderTop:'0px solid', margin:'0 0', textAlign:'center', fontSize:'1.5rem', minWidth:'50%', width:'100%', maxWidth:'', border:'0px solid yellow', borderRadius:''}}>
 <div
-  className="blog-post-content bodycontent" style={{ fontSize:'clamp(1.2rem, 2.8vw, 1.8rem)', textAlign:'center', width:'100%', maxWidth:'', padding:'2vh 6% 10vh 6%', margin:'0 auto', color:'inherit !important'}}
+  className="blog-post-content bodycontent" style={{ fontSize:'clamp(1.2rem, 2.8vw, 1.8rem)', textAlign:'center', width:'100%', maxWidth:'', padding:'0 6% 0 6%', margin:'0 auto', color:'inherit !important'}}
   dangerouslySetInnerHTML={{ __html: html }}
 />    
 </div>
@@ -1548,7 +1570,7 @@ textShadow:'2px 2px 0 #222', filter:'drop-shadow(0px 0px 5px rgba(155,155,155,1)
  <div style={{display:'grid', placeContent:'center', fontWeight:'bold', padding:'1rem', fontSize:'2rem', width:'100%', height:'', border:'0px solid', borderRadius:'12px'}}>Support Our Video Sponsors
 
 <ImPlay style={{margin:'0 auto', width:'50%', fontSize:'60px'}} />
-Click to play original video
+{dicClickToView}
 </div>
 </a>                   
        </div>
@@ -1567,9 +1589,11 @@ Click to play original video
 
 
 
+<br />
 
+{ShowDisclaimer ? (
 
-{/* <div className="panel legal" style={{textAlign: 'center', padding:'1rem',  justifyContent: 'center', fontSize: '.95rem', textDecoration:'none', maxWidth:'90vw'}}>
+<div className="panel fade legal" style={{ textAlign: 'center', padding:'1rem',  justifyContent: 'center', fontSize: '.95rem', textDecoration:'none', maxWidth:'90vw'}}>
             Legal:<br />
             <Link to="/disclaimer/">Disclaimer</Link>  |  <Link to="/privacy/">Privacy Policy</Link>  |  <Link to="/terms/">Terms of Service</Link>
       <br /> <br />
@@ -1583,8 +1607,10 @@ Click to play original video
         Video footage public youtube.com | Some imagery provided from <a rel="noopener noreferrer" href="https://www.flickr.com/photos/donkeyhotey/" >DonkeyHotey</a>, Wikipedia and other public sourced materials.
         </p>
     </div>
-</div> */}
-
+</div>
+    ) : (
+            ""
+          )}
 
 
 
@@ -1635,12 +1661,7 @@ Click to play original video
 
 
 
-<br/>
 
-   </CustomBox>
-
-  
-   <Footer />
   
     </Layout>
 
@@ -1659,54 +1680,54 @@ export default Post
 
 
 export const pageQuery = graphql`
-  query BlogPostQueryBlogPostQuery($id: String!) {
-    site {
-      siteMetadata {
-        title
-        titleDefault
-        siteUrl
-        description
-        image
-        twitterUsername
-        companyname
-      }
+fragment isDraft on MarkdownRemark {
+  frontmatter {
+    draft
+  }
+}
+
+query BlogPostQuery($id: String!) {
+  site {
+    siteMetadata {
+      title
+      titleDefault
+      siteUrl
+      description
+      image
+      twitterUsername
+      companyname
     }
-    markdownRemark(id: { eq: $id }) {
-      id
-      html
-      excerpt(pruneLength: 148)
-      frontmatter {
-        date(formatString: "YYYY-MM-DD-HH-MM-SS")
-        slug
-        title
-        tags
-        description
-        showZoom
-        showPageNav
-        youtube {
-          youtuber
-          youtuber2
-          youtubeshoworiginal
-          youtubersuggestion1
-          youtubersuggestion2
-          youtubersuggestion3
-          youtubestart
-          youtubeend
-          youtubemute
-          youtubeloop
-          youtubecontrols
-          customcontrols
-          clicktoplay
-          youtubeautostart
-        }
-        audiostart
-        audioend
-        audiotitle
-        liarliar
-        contentinvideo
-        comments
-        shareable
-        bumpertext
+  }
+  markdownRemark(id: {eq: $id}) {
+    ...isDraft
+    id
+    html
+    excerpt(pruneLength: 148)
+    frontmatter {
+      date(formatString: "YYYY-MM-DD-HH-MM-SS")
+      slug
+      title
+      tags
+      description
+      showZoom
+      showPageNav
+      youtube {
+        youtuber
+        youtuber2
+        youtubeshoworiginal
+        youtubersuggestion1
+        youtubersuggestion2
+        youtubersuggestion3
+        youtubestart
+        youtubeend
+        youtubemute
+        youtubeloop
+        youtubecontrols
+        customcontrols
+        clicktoplay
+        youtubeautostart
+      }
+      mediawarnings {
         viewerwarning
         marate
         marating1
@@ -1717,24 +1738,48 @@ export const pageQuery = graphql`
         maratingtx2
         maratingtx3
         maratingtx4
-        nftdrop
-        svgzindex
-        scrollable
-        featuredImage {
-          relativePath
-          childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
-          }
+      }
+      audiostart
+      audioend
+      audiotitle
+      liarliar
+      contentinvideo
+      comments
+      shareable
+      bumpertext
+      nftdrop
+      svgzindex
+      scrollable
+      featuredImage {
+        relativePath
+        childImageSharp {
+          gatsbyImageData(layout: FULL_WIDTH)
         }
-        svgImage{
-          publicURL
-        }
-        underlayImage {
-          childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
-          }
+      }
+      svgImage {
+        publicURL
+      }
+      underlayImage {
+        childImageSharp {
+          gatsbyImageData(layout: FULL_WIDTH)
         }
       }
     }
   }
-`
+  allMarkdownRemark(
+    sort: {frontmatter: {date: ASC}}
+    filter: {frontmatter: {template: {eq: "blog-post"}, draft: {ne: true}}}
+  ) {
+    edges {
+      node {
+        id
+        frontmatter {
+          title
+          slug
+          date(formatString: "MMMM DD, YYYY")
+        }
+      }
+    }
+  }
+}
+`;

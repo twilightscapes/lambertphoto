@@ -8,7 +8,16 @@ import { Helmet } from "react-helmet";
 const CategoryIndex = ({ data, pageContext }) => {
   const { category } = pageContext;
   const categories = data.allMarkdownRemark.group.map((group) => group.fieldValue);
-  const { postcount } = useSiteMetadata();
+
+
+
+
+
+
+  const {  postcount, language, proOptions } = useSiteMetadata()
+
+  const { showModals  } = proOptions
+  const { dicCategory } = language;
 
 
   const [visibleItems, setVisibleItems] = useState(postcount);
@@ -25,17 +34,17 @@ const CategoryIndex = ({ data, pageContext }) => {
 
 
       <div className="magicisland">
-        <div className="cattags font">
+        <div className="cattags font panel">
         <select
           className=""
-          style={{ background: '#222', outline: '1px solid #111', borderRadius: '3px', padding: '2px', width:'380px', display:'block', margin:'0 1%', overflow:'hidden', height:'34px', lineHeight:'100%' }}
+          style={{ background: 'var(--theme-ui-colors-siteColor)', borderRadius: 'var(--theme-ui-colors-borderRadius)', padding: '2px', width:'380px', display:'block', margin:'0 1%', overflow:'hidden', height:'34px', lineHeight:'100%', color:'var(--theme-ui-colors-siteColorText)' }}
           onChange={(e) => {
             const selectedCategory = e.target.value;
             navigate(`/category/${selectedCategory}`);
           }}
           value={category}
         >
-          <option value="">Categories:</option>
+          <option value="">{dicCategory}:</option>
           {categories.map((category) => (
             <option key={category} value={category}>
               {category}
@@ -46,13 +55,14 @@ const CategoryIndex = ({ data, pageContext }) => {
       </div>
 </div>
 
-      <div className="contentpanel grid-container" style={{ justifyContent: 'center', alignItems: 'center', marginTop: '', padding:'15vw 10vw 0 10vw' }}>
+      <div className="contentpanel grid-container" style={{ justifyContent: 'center', alignItems: 'center', marginTop: '18vh', padding:'0 10vw 10vh 10vw' }}>
 
         <div className="sliderSpacer" style={{ height: "", paddingTop: "", display: "" }}></div>
 
         {categories.slice(0, visibleItems).map((category, index) => (
           <Link
             key={index}
+            state={showModals ? { modal: true } : {}}
             style={{
               display: 'block',
               maxHeight: '',
@@ -85,6 +95,7 @@ const CategoryIndex = ({ data, pageContext }) => {
                 background: 'rgba(0, 0, 0, 0.5)',
                 border: '1px solid #999',
                 borderRadius: '8px',
+                fontSize: 'clamp(2.5rem,3vw,3rem)'
               }}
             >
               {category}
