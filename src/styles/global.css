@@ -332,9 +332,9 @@ body.social .searchIcon{visibility:hidden;}
 }
 
 .grid-container .post-card1 img{
-max-height: 30vh;
-margin:0 auto;
-}
+  max-height: 25vh;
+  margin:0 auto;
+  }
 
 
 @media (min-width: 320px) and (max-width: 759.5px) {
