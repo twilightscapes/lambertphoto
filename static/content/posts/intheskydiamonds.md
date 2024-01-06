@@ -23,4 +23,6 @@ youtube:
 featuredImage: /assets/Experiences-Header-5.jpg
 underlayImage: /assets/diamond-overlay.webp
 svgImage: /assets/campground.svg
+mediawarnings:
+  viewerwarning: MA
 ---
