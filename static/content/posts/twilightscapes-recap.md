@@ -19,7 +19,7 @@ youtube:
   customcontrols: false
   clicktoplay: false
   youtuber: https://youtu.be/-mYw48uq010
-  showVidOnly: true
+  showVidOnly: false
 featuredImage: /assets/4b4a6896.jpeg
 mediawarnings:
   viewerwarning: MA

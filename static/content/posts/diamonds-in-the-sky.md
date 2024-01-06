@@ -17,10 +17,10 @@ youtube:
   youtubeautostart: true
   youtubeloop: true
   youtubecontrols: false
-  customcontrols: false
+  customcontrols: true
   clicktoplay: false
   youtuber: https://youtu.be/cZJUyxw2G2w
-  showVidOnly: true
+  showVidOnly: 
 featuredImage: /assets/img_0743.jpeg
 mediawarnings:
   viewerwarning: MA
