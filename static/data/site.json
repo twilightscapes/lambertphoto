@@ -23,7 +23,7 @@
       "showMagicSearch": true
     },
     "proOptions": {
-      "showModals": false,
+      "showModals": true,
       "showContact": false,
       "showBranding": false,
       "ShowDisclaimer": false,
