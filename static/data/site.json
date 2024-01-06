@@ -1,6 +1,6 @@
 {
   "meta": {
-    "iconimage": "/assets/tw-logo-large.png",
+    "iconimage": "/assets/logo-hover.svg",
     "companyname": "Lambert Photography",
     "siteUrl": "https://lambertphotography.com",
     "twitterUsername": "toddlambert",
@@ -13,7 +13,7 @@
     "description": "Photography by Todd Lambert",
     "icon512": "/assets/tw-logo-large.png",
     "navOptions": {
-      "showNav": false,
+      "showNav": true,
       "showNav2": false,
       "showFooterMenu": false
     },
