@@ -17,10 +17,10 @@
     "postcount": 9,
     "homecount": 6,
     "magicOptions": {
-      "showMagic": false,
+      "showMagic": true,
       "showMagicCat": true,
-      "showMagicTag": true,
-      "showMagicSearch": true
+      "showMagicTag": false,
+      "showMagicSearch": false
     },
     "proOptions": {
       "showModals": true,
