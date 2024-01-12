@@ -48,9 +48,9 @@ pagePW: ""
 skillsTitle: ""
 svgImage: /assets/transparent.png
 template: index-page
-title: Social media by the people for the people
+title: Unique Night Photography
 postLimit: "4"
-description: PIRATE - social media for the people by the people
+description: Unique Night Photography by Todd Lambert and Twilightscapes
 svgzindex: x
 coverletter:
   coverText: About PIRATE
