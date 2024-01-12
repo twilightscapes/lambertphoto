@@ -12,16 +12,21 @@ showPageNav: true
 spotlight: true
 tags:
   - video
-youtube:
-  youtubemute: true
-  youtubeautostart: true
-  youtubeloop: true
-  youtubecontrols: false
-  customcontrols: true
-  clicktoplay: false
-  youtuber: https://youtu.be/cZJUyxw2G2w
-  showVidOnly: 
 featuredImage: /assets/img_0743.jpeg
 mediawarnings:
   viewerwarning: MA
+youtube:
+ youtubeshoworiginal: false
+ youtubestart: ""
+ youtubeend: ""
+ youtubemute: false
+ youtubecontrols: false
+ youtubeautostart: false
+ youtubeloop: false
+ clicktoplay: false
+ showVidOnly: false
+ customcontrols: false
+ audioend: ""
+ audiotitle: ""
+ audiostart: ""
 ---

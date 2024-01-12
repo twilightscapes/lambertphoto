@@ -52,10 +52,10 @@ import Footer from "../components/footer"
 
 
     const { language, navOptions, featureOptions, proOptions } = useSiteMetadata();
-    const { dicSearch, dicClose } = language;
+    const { dicSearch, dicClose, dicPirate } = language;
     const { showNav, showNav2 } = navOptions
     const { showfooter, showSwipe, showSearch } = featureOptions
-    const { showModals } = proOptions
+    const { showModals, showBranding } = proOptions
 
     
 
@@ -133,7 +133,7 @@ const fontUrl = `https://fonts.googleapis.com/css?family=${defaultColors?.siteFo
 
 <Seo />
 
-<div id="top" name="pagetop"></div>
+
 
 <ModalRoutingContext.Consumer >
 {({ modal, closeTo }) => (
@@ -161,12 +161,13 @@ const fontUrl = `https://fonts.googleapis.com/css?family=${defaultColors?.siteFo
           transform: showBackToTop ? 'translateY(0)' : 'translateY(200%)',
         }}
       >
-        <a
-            href="#top"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('top').scrollIntoView({ behavior: 'smooth' });
-            }}
+        <AnchorLink
+            to="#top"
+            // state={showModals ? { modal: true } : {}}
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   document.getElementById('top').scrollIntoView({ behavior: 'smooth' });
+            // }}
             aria-label="Link to Top"
             style={{cursor: 'pointer', height: '', fontSize: '', border:'none', outline:'none'}}
           >
@@ -174,7 +175,7 @@ const fontUrl = `https://fonts.googleapis.com/css?family=${defaultColors?.siteFo
           
             <RiArrowUpFill className="" style={{cursor: 'pointer', color: 'var(--theme-ui-colors-siteColorText)', fill:'var(--theme-ui-colors-siteColorText)', fontSize: '3rem'}} />
         </div>
-        </a>
+        </AnchorLink>
       </div>
 
 
@@ -182,10 +183,9 @@ const fontUrl = `https://fonts.googleapis.com/css?family=${defaultColors?.siteFo
 <div id="gobacker" style={{position:'fixed', top:'60px', right:'5px', zIndex:'5'}}><GoBack /></div>
 
 
-
+<header className="header" style={{display:'block', height:'',}}>
 {showNav ? (
 
-<header className="header" style={{display:'block', height:'51px',}}>
 
 <div id="menu" className="menu print panel1 header" style={{position:'fixed', width:'100vw', top:'0', zIndex:'30', maxHeight:'', overFlow:'', boxShadow:'0 0 0 rgba(0,0,0,.7)', padding:'0 2%', alignItems:'start', borderRadius:'0', display:'flex', justifyContent:'space-around', gap:'10px', color:'var(--theme-ui-colors-headerColorText)',  borderBottom:'0px solid #222',}}>
 
@@ -197,7 +197,7 @@ const fontUrl = `https://fonts.googleapis.com/css?family=${defaultColors?.siteFo
   <div style={{position:'absolute', left:'10px', top:'22px', cursor:'pointer'}}><BlueCheck /></div>
 
 
-<Link to="/" className="cornerlogo" name="homereturn" style={{position:'', display:'flex', marginLeft:'25px', alignItems:'center', justifyContent:'center', maxWidth:'', height:'60px', border:'0px solid transparent'}}  aria-label="Link to Top" title="Back to Top">
+<Link state={showModals ? { modal: true } : {}} to="/" className="cornerlogo" name="homereturn" style={{position:'', display:'flex', marginLeft:'25px', alignItems:'center', justifyContent:'center', maxWidth:'', height:'60px', border:'0px solid transparent'}}  aria-label="Link to Top" title="Back to Top">
 {iconimage ? (
 <img className="cornerlogo" style={{position:'relative', top:'', left:'4%', border:'0px solid white', padding:'0', maxHeight:'60px'}} src={iconimage} alt={companyname} width="111" height="60" />
 ) : (
@@ -256,12 +256,12 @@ const fontUrl = `https://fonts.googleapis.com/css?family=${defaultColors?.siteFo
 </div>
 
             </div>
-            </header>
+            
 
 ) : (
   ""
 )}
-
+</header>
 
 
 
@@ -388,15 +388,24 @@ const fontUrl = `https://fonts.googleapis.com/css?family=${defaultColors?.siteFo
 
 
 
-
+<main>
+<div id="top" name="pagetop"></div>
 {children}
-
+</main>
       
 {/* show footer */}
 {showfooter ? (
 <Footer />
 ) : (
-  ""
+  <footer className="" style={{display:'flex', flexDirection:'column', zIndex:'1', justifyContent:'end', padding:'0', marginTop:'0', width:'100vw',textAlign:'center'}}>
+  { showBranding ? (
+<div style={{textAlign: 'center', margin: '0 0 2rem 0', justifyContent: 'center', fontSize: '.75rem', position:'relative', right:'', top:'10px'}}>
+<a className="panel" href="https://pirateweb.org" rel="noreferrer">{dicPirate}</a>
+</div>
+  ) : (
+""
+)}
+</footer>
 )}
 {/* end show footer */}
 

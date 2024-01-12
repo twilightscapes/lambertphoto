@@ -12,14 +12,20 @@ showZoom: false
 showPageNav: true
 spotlight: true
 youtube:
-  youtubemute: true
-  youtubeautostart: true
-  youtubeloop: true
-  youtubecontrols: true
-  customcontrols: false
-  clicktoplay: false
-  youtuber: https://youtu.be/-mYw48uq010
-  showVidOnly: false
+ youtubeshoworiginal: false
+ youtubestart: "0"
+ youtubeend: ""
+ youtubemute: false
+ youtubecontrols: false
+ youtubeautostart: false
+ youtubeloop: false
+ clicktoplay: false
+ showVidOnly: false
+ customcontrols: false
+ audioend: ""
+ audiotitle: ""
+ audiostart: ""
+ youtuber: https://youtu.be/-mYw48uq010
 featuredImage: /assets/4b4a6896.jpeg
 mediawarnings:
   viewerwarning: MA

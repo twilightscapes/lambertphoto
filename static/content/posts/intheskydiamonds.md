@@ -11,18 +11,24 @@ shareable: false
 showZoom: false
 showPageNav: true
 spotlight: 
-youtube:
-  youtubemute: true
-  youtubeautostart: true
-  youtubeloop: true
-  youtubecontrols: false
-  customcontrols: false
-  clicktoplay: false
-  showVidOnly: false
-  youtuber: https://youtu.be/iHxmNzMfDj4
 featuredImage: /assets/Experiences-Header-5.jpg
 underlayImage: /assets/diamond-overlay.webp
 svgImage: /assets/campground.svg
 mediawarnings:
   viewerwarning: MA
+youtube:
+ youtuber: https://youtu.be/iHxmNzMfDj4
+ youtubeshoworiginal: false
+ youtubestart: ""
+ youtubeend: ""
+ youtubemute: true
+ youtubecontrols: false
+ youtubeautostart: true
+ youtubeloop: true
+ clicktoplay: false
+ showVidOnly: false
+ customcontrols: false
+ audioend: ""
+ audiotitle: ""
+ audiostart: ""
 ---

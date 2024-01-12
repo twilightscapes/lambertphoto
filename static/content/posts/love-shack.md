@@ -10,12 +10,19 @@ shareable: false
 showZoom: true
 showPageNav: true
 spotlight: true
-youtube:
-  youtubemute: false
-  youtubeautostart: false
-  youtubeloop: true
-  youtubecontrols: false
-  customcontrols: false
-  clicktoplay: false
 featuredImage: /assets/img_0024.jpeg
+youtube:
+ youtubeshoworiginal: false
+ youtubestart: ""
+ youtubeend: ""
+ youtubemute: false
+ youtubecontrols: false
+ youtubeautostart: false
+ youtubeloop: false
+ clicktoplay: false
+ showVidOnly: false
+ customcontrols: false
+ audioend: ""
+ audiotitle: ""
+ audiostart: ""
 ---

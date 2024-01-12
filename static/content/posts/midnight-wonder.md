@@ -11,12 +11,19 @@ showZoom: false
 showPageNav: true
 spotlight: 
 tags: []
-youtube:
-  youtubemute: false
-  youtubeautostart: false
-  youtubeloop: true
-  youtubecontrols: false
-  customcontrols: false
-  clicktoplay: false
 featuredImage: /assets/img_0007.jpeg
+youtube:
+ youtubeshoworiginal: false
+ youtubestart: ""
+ youtubeend: ""
+ youtubemute: false
+ youtubecontrols: false
+ youtubeautostart: false
+ youtubeloop: false
+ clicktoplay: false
+ showVidOnly: false
+ customcontrols: false
+ audioend: ""
+ audiotitle: ""
+ audiostart: ""
 ---
