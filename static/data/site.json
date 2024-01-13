@@ -18,7 +18,7 @@
     "homecount": 6,
     "magicOptions": {
       "showMagic": false,
-      "showMagicCat": false,
+      "showMagicCat": true,
       "showMagicTag": false,
       "showMagicSearch": false
     },
