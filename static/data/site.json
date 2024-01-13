@@ -17,9 +17,9 @@
     "postcount": 9,
     "homecount": 6,
     "magicOptions": {
-      "showMagic": false,
+      "showMagic": true,
       "showMagicCat": true,
-      "showMagicTag": false,
+      "showMagicTag": true,
       "showMagicSearch": false
     },
     "proOptions": {
@@ -71,7 +71,7 @@
     "navOptions": {
       "showNav": false,
       "showNav2": false,
-      "showFooterMenu": false
+      "showFooterMenu": true
     },
     "description": "Photography by Todd Lambert",
     "icon512": "/assets/tw-logo-large.png"

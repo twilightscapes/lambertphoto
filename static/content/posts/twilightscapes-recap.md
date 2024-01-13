@@ -15,13 +15,13 @@ youtube:
  youtubeshoworiginal: false
  youtubestart: "0"
  youtubeend: ""
- youtubemute: false
+ youtubemute: true
  youtubecontrols: false
- youtubeautostart: false
- youtubeloop: false
+ youtubeautostart: true
+ youtubeloop: true
  clicktoplay: false
  showVidOnly: false
- customcontrols: false
+ customcontrols: true
  audioend: ""
  audiotitle: ""
  audiostart: ""

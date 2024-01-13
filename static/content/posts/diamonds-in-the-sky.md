@@ -10,8 +10,6 @@ shareable: true
 showZoom: false
 showPageNav: true
 spotlight: true
-tags:
-  - video
 featuredImage: /assets/img_0743.jpeg
 mediawarnings:
   viewerwarning: MA
