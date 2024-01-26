@@ -26,6 +26,7 @@
       "showModals": true,
       "showContact": false,
       "xshowLegal": true,
+      "showDefault": true,
       "xshowConsent": false,
       "xshowContact": true,
       "showPopup": false,
@@ -34,7 +35,6 @@
       "ShowDisclaimer": false,
       "showBranding": true,
       "showLegal": false,
-      "showDefault": true,
       "showConsent": false
     },
     "titleTemplate": "%s",
@@ -76,7 +76,7 @@
     "image": "/assets/TSidebarHover.svg",
     "navOptions": {
       "showNav": false,
-      "showNav2": true,
+      "showNav2": false,
       "showFooterMenu": false
     },
     "description": "Photography by Todd Lambert",
