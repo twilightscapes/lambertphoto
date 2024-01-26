@@ -10,7 +10,7 @@
       "showTitles": false,
       "showfooter": false,
       "showSocial": false,
-      "showSwipe": false
+      "showSwipe": true
     },
     "twitterUsername": "toddlambert",
     "titleDefault": "Lambert Photography",
