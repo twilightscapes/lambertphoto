@@ -25,28 +25,13 @@
     "proOptions": {
       "showModals": true,
       "showContact": false,
-<<<<<<< Updated upstream
-      "xshowLegal": true,
-      "showDefault": true,
-      "xshowConsent": false,
-      "xshowContact": true,
-      "showPopup": false,
-      "xshowBranding": true,
-      "xshowPopup": true,
-      "ShowDisclaimer": false,
-=======
->>>>>>> Stashed changes
       "showBranding": true,
       "ShowDisclaimer": false,
       "showLegal": false,
-<<<<<<< Updated upstream
-      "showConsent": false
-=======
       "showConsent": false,
       "showDefault": false,
-      "startUrl": "youtube",
+      "startUrl": "",
       "showPopup": false
->>>>>>> Stashed changes
     },
     "titleTemplate": "%s",
     "title": "Unique Night Photography",
