@@ -34,6 +34,7 @@
       "ShowDisclaimer": false,
       "showBranding": true,
       "showLegal": false,
+      "showDefault": true,
       "showConsent": false
     },
     "titleTemplate": "%s",

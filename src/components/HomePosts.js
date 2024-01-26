@@ -11,17 +11,25 @@ import { ImPlay } from "react-icons/im";
 import { FaImage } from "react-icons/fa";
 import { AiOutlinePicLeft } from "react-icons/ai";
 // import { getSrc } from "gatsby-plugin-image";
-const BlogPosts = ({ isSliderVisible }) => {
+// const HomePosts = ({ isSliderVisible }) => {
 
-  const { postcount, language, magicOptions, featureOptions, proOptions, navOptions  } = useSiteMetadata();
+const HomePosts = ({ isSliderVisible }) => {
+// eslint-disable-next-line
+  const [sliderVisible, setSliderVisible] = useState(false); // Change the state variable name
 
+
+
+
+  const { postcount, homecount, language, magicOptions, featureOptions, proOptions, navOptions  } = useSiteMetadata();
+
+  
 
   const data = useStaticQuery(graphql`
-  query ($postcount: Int) {
+  query ($homecount: Int) {
     allMarkdownRemark(
       sort: [{ frontmatter: { spotlight: ASC } }, { frontmatter: { date: DESC } }]
       filter: { frontmatter: { template: { eq: "blog-post" }, draft: { ne: true } } }
-      limit: $postcount
+      limit: $homecount
     ) {
       edges {
         node {
@@ -54,11 +62,11 @@ const BlogPosts = ({ isSliderVisible }) => {
 `);
 
 
-    const scrollRef = useRef(null);
+
     
 
 
-    const { showMagic, showMagicCat, showMagicTag } = magicOptions;
+    const { showMagic, showMagicCat, showMagicTag, showMagicSearch } = magicOptions;
   
     const { showModals, showPopup } = proOptions
     const { showDates, showArchive, showTitles } = featureOptions
@@ -67,14 +75,30 @@ const BlogPosts = ({ isSliderVisible }) => {
     const { dicLoadMore, dicViewArchive, dicCategory, dicKeyword, dicSearch, dicClear, dicResults, dicPlayVideo, dicPlayMultimedia  } = language;
 
 
+
+    
+  
+
+
     useEffect(() => {
       // Check if window is defined to ensure it's running in a client-side environment
       if (typeof window !== 'undefined') {
-          // Save the current state to local storage when isSliderVisible changes
-          localStorage.setItem("isSliderVisible", JSON.stringify(isSliderVisible));
+        // Set the default visibility to true if localStorage value is not available
+        const storedSliderVisibility = localStorage.getItem("isSliderVisible");
+        const initialSliderVisible = storedSliderVisibility ? JSON.parse(storedSliderVisibility) : true;
+        // Set the initial visibility based on the prop or localStorage
+        setSliderVisible(isSliderVisible ?? initialSliderVisible);
       }
-  }, [isSliderVisible]); // Include isSliderVisible in the dependency array
   
+      // Cleanup function if needed
+      return () => {
+        // Cleanup logic here...
+      };
+    }, [isSliderVisible]); // Run this effect whenever isSliderVisible changes
+    
+    
+
+  const scrollRef = useRef(null);
 
   const handleScroll = (e) => {
     if (scrollRef.current) {
@@ -82,6 +106,26 @@ const BlogPosts = ({ isSliderVisible }) => {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Your scroll handling logic
+    };
+  
+    const currentScrollRef = scrollRef.current;
+  
+    if (currentScrollRef) {
+      currentScrollRef.addEventListener("scroll", handleScroll);
+    }
+  
+    return () => {
+      if (currentScrollRef) {
+        currentScrollRef.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [scrollRef]);
+
+
+  
 
 
   // const markdownRemark = data.allMarkdownRemark.edges[0]?.node;
@@ -94,7 +138,7 @@ const BlogPosts = ({ isSliderVisible }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
   // eslint-disable-next-line
-  const [visibleItems, setVisibleItems] = useState(postcount);
+  const [visibleItems, setVisibleItems] = useState(homecount);
 
   const allCategoriesSet = new Set(allPosts.flatMap(({ node }) => node.frontmatter.category));
   const allCategories = Array.from(allCategoriesSet);
@@ -151,13 +195,13 @@ const [playingIndex, setPlayingIndex] = useState(null);
 
 
   useEffect(() => {
-    setVisibleItems(postcount);
-  }, [filteredPosts, postcount]);
+    setVisibleItems(homecount);
+  }, [filteredPosts, homecount]);
 
   const handleSearch = (event) => {
     const query = event.target.value;
     setQuery(query);
-    setVisibleItems(postcount);
+    setVisibleItems(homecount);
   };
 
   const handleCategoryChange = (event) => {
@@ -169,7 +213,7 @@ const [playingIndex, setPlayingIndex] = useState(null);
       setSelectedCategory('');
     }
     setSelectedTag('');
-    setVisibleItems(postcount);
+    setVisibleItems(homecount);
   };
   
 
@@ -177,10 +221,10 @@ const [playingIndex, setPlayingIndex] = useState(null);
     const tag = event.target.value;
     setSelectedTag(tag);
     setSelectedCategory("");
-    setVisibleItems(postcount);
+    setVisibleItems(homecount);
   };
 
-  const [numVisibleItems, setNumVisibleItems] = useState(postcount);
+  const [numVisibleItems, setNumVisibleItems] = useState(homecount);
 
   const showMoreItems = () => {
     setNumVisibleItems((prevNumVisibleItems) => prevNumVisibleItems + postcount);
@@ -191,7 +235,7 @@ const [playingIndex, setPlayingIndex] = useState(null);
     setQuery('');
     setSelectedCategory('');
     setSelectedTag('');
-    setVisibleItems(postcount);
+    setVisibleItems(homecount);
   }
 
 
@@ -209,14 +253,16 @@ const [playingIndex, setPlayingIndex] = useState(null);
       return (
         <div
           className="slider"
+          onWheel={handleScroll}
+          ref={scrollRef}
           style={{
             display: "flex",
-            flexDirection: "row",
+            flexDirection: "row"
           }}
         >
 
-          
-                {/* <div className="horizontal-scroll1 contentpanel1" style={{ justifyContent: 'center', alignItems: 'center', paddingTop: showNav ? '8vw' : '8vw', }}>
+{/*           
+                <div className="horizontal-scroll1 contentpanel1" style={{ justifyContent: 'center', alignItems: 'center', paddingTop: showNav ? '8vw' : '8vw', }}>
         <div className="sliderSpacer" style={{ height: '', paddingTop: '', display: '' }}></div> */}
 
         {filteredPosts.slice(0, numVisibleItems).map(({ node }, index) => (
@@ -349,29 +395,31 @@ const [playingIndex, setPlayingIndex] = useState(null);
 
 
 {numVisibleItems < filteredPosts.length && (
-          <div className="loadmore" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', placeSelf: 'center', gap: '',  textAlign: 'center', zIndex:'1' }}>
-
-            <button className="button font" onClick={showMoreItems} style={{maxWidth:''}}>
+          <div className="loadmore" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '',  textAlign: 'center', zIndex:'1' }}>
+          <button className="button font" onClick={showMoreItems} style={{maxWidth:''}}>
               {dicLoadMore}
-            </button>
+          </button>
+          </div>
+        )}
 
-            {showArchive ? (
-              <Link state={showModals ? { modal: true } : {}} to="/archive" className="font" style={{ background: 'var(--theme-ui-colors-headerColor)', borderRadius: 'var(--theme-ui-colors-borderRadius)', color: 'var(--theme-ui-colors-headerColorText)', display: 'flex', padding: '8px', margin: '0 auto', justifyContent:'center' }}>{dicViewArchive} &nbsp;<MdArrowForwardIos style={{ marginTop: '' }} /></Link>
-            ) : (
-              ""
-            )}
-            
-            <br />
+
 {showPopup ? (
-  <SignUp />
+  <div className="loadmore" style={{ display: 'grid', flexDirection: 'column', placeContent: 'center', gap: '',  textAlign: 'center', zIndex:'1' }}>
+            <SignUp />
+  </div>
         ) : (
           ""
 )}
 
 
-        
-          </div>
-        )}
+{showArchive ? (
+              <div className="loadmore" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '', textAlign: 'center', zIndex:'1' }}>
+                <Link state={showModals ? { modal: true } : {}} to="/archive" className="font" style={{ background: 'var(--theme-ui-colors-headerColor)', borderRadius: 'var(--theme-ui-colors-borderRadius)', color: 'var(--theme-ui-colors-headerColorText)', display: 'flex', padding: '8px', margin: '0 auto', justifyContent:'center', maxWidth:'300px', alignItems:'center', }}>{dicViewArchive} &nbsp;<MdArrowForwardIos style={{ marginTop: '' }} /></Link>
+            </div>
+            ) : (
+              ""
+            )}
+
 
 
 
@@ -385,7 +433,7 @@ const [playingIndex, setPlayingIndex] = useState(null);
     } else {
       return (
         <div className="contentpanel1 grid-container" style={{ justifyContent: 'center', alignItems: 'center', paddingTop: showNav ? '8vw' : '8vw', width:'100vw' }}>
-        <div className="sliderSpacer" style={{ height: '', paddingTop: '', display: '' }}></div>
+
 
         {filteredPosts.slice(0, numVisibleItems).map(({ node }, index) => (
   
@@ -522,33 +570,30 @@ const [playingIndex, setPlayingIndex] = useState(null);
             <button className="button font" onClick={showMoreItems} style={{maxWidth:''}}>
               {dicLoadMore}
             </button>
+          </div>
+        )}
 
-            {showArchive ? (
-              <Link state={showModals ? { modal: true } : {}} to="/archive" className="font" style={{ background: 'var(--theme-ui-colors-headerColor)', borderRadius: 'var(--theme-ui-colors-borderRadius)', color: 'var(--theme-ui-colors-headerColorText)', display: 'flex', padding: '8px', margin: '0 auto', justifyContent:'center' }}>{dicViewArchive} &nbsp;<MdArrowForwardIos style={{ marginTop: '' }} /></Link>
-            ) : (
-              ""
-            )}
-            
-            <br />
 {showPopup ? (
+  <div className="loadmore" style={{minWidth:'300px'}}>
   <SignUp />
+  </div>
         ) : (
           ""
 )}
 
 
-        
-          </div>
-        )}
+{showArchive ? (
+              <div className="loadmore" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '', textAlign: 'center', zIndex:'1' }}>
+                <Link state={showModals ? { modal: true } : {}} to="/archive" className="font" style={{ background: 'var(--theme-ui-colors-headerColor)', borderRadius: 'var(--theme-ui-colors-borderRadius)', color: 'var(--theme-ui-colors-headerColorText)', display: 'flex', padding: '8px', margin: '0 auto', justifyContent:'center', maxWidth:'300px', alignItems:'center', }}>{dicViewArchive} &nbsp;<MdArrowForwardIos style={{ marginTop: '' }} /></Link>
+            </div>
+            ) : (
+              ""
+            )}
 
-
-
-
-
-
-        
       </div>
       );
+
+      
     }
   };
 
@@ -562,8 +607,7 @@ const [playingIndex, setPlayingIndex] = useState(null);
         ref={scrollRef}
         style={{
           overflowX: "auto",
-          overflowY: "hidden",
-
+          overflowY: "hidden"
         }}
       >
 
@@ -632,6 +676,8 @@ const [playingIndex, setPlayingIndex] = useState(null);
 
 
 
+              {showMagicSearch ? (
+                <>
                 
                     <input
                       id="clearme"
@@ -653,7 +699,8 @@ const [playingIndex, setPlayingIndex] = useState(null);
                       aria-label="Search"
                     />
                   
-
+                </>
+              ) : (
                 <input
                       id="clearme"
                       type="text"
@@ -674,7 +721,7 @@ const [playingIndex, setPlayingIndex] = useState(null);
                       }}
                       aria-label="Search"
                     />
-            
+              )}
 
               <button
                 type="reset"
@@ -717,4 +764,4 @@ const [playingIndex, setPlayingIndex] = useState(null);
   );
 };
 
-export default BlogPosts;
+export default HomePosts;

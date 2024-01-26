@@ -1,78 +1,145 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { BsFillGrid3X2GapFill } from "react-icons/bs";
 import { PiHandSwipeRightFill } from "react-icons/pi";
 import useSiteMetadata from "../hooks/SiteMetadata";
 
 function Header() {
-    const [archiveView, setArchiveView] = useState("");
-    const [showSwipe] = useState(true);
+  const { language } = useSiteMetadata();
+  const { dicSwipe, dicScroll } = language;
 
-    const { language } = useSiteMetadata();
-    const { dicSwipe, dicScroll } = language;
+  const [isSliderVisible, setIsSliderVisible] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const storedValue = localStorage.getItem("isSliderVisible");
+      try {
+        return JSON.parse(storedValue) ?? false;
+      } catch (error) {
+        return false;
+      }
+    }
+    return false;
+  });
 
-    const applyArchiveView = useCallback(() => {
-        const elements = document.querySelectorAll(".contentpanel");
-        elements.forEach((el) => {
-            if (archiveView === "grid") {
-                el.classList.remove("horizontal-scroll", "panels");
-                el.classList.add("grid-container");
-                document.body.classList.remove('scroll');
-            } else if (archiveView === "swipe") {
-                el.classList.remove("grid-container");
-                el.classList.add("horizontal-scroll", "panels");
-                document.querySelector(".contentpanel").style.transition = "all .5s ease-in-out";
-                window.scrollTo(0, 0);
-                document.body.classList.add('scroll');
-            }
-        });
-    }, [archiveView]);
+  useEffect(() => {
+    if (isSliderVisible) {
+      // Set initial scroll position to the top when in grid view
+      window.scrollTo(0, 0);
+    }
+  }, [isSliderVisible]);
 
-    useEffect(() => {
-        if (showSwipe) {
-            const storedArchiveView = localStorage.getItem("archiveView");
-            // Use the stored value or default to 'grid' or 'swipe'
-            setArchiveView(storedArchiveView || (showSwipe ? "grid" : "swipe"));
-        }
-    }, [showSwipe]);
+  useEffect(() => {
+    document.body.style.overflowX = isSliderVisible ? 'hidden' : 'auto';
+  }, [isSliderVisible]);
 
-    useEffect(() => {
-        applyArchiveView();
-        // Update local storage whenever archiveView changes
-        localStorage.setItem("archiveView", archiveView);
-    }, [archiveView, applyArchiveView]);
+  const toggleSlider = () => {
+    setIsSliderVisible((prev) => {
+      const newValue = !prev;
+      if (typeof window !== 'undefined') {
+        localStorage.setItem("isSliderVisible", JSON.stringify(newValue));
+        // Broadcast the change to other tabs/windows
+        window.dispatchEvent(new StorageEvent("storage", { key: "isSliderVisible" }));
+      }
+      return newValue;
+    });
+  };
 
-    const toggleArchiveView = () => {
-        const newArchiveView = archiveView === "grid" ? "swipe" : "grid";
-        setArchiveView(newArchiveView);
+  useEffect(() => {
+    const handleScroll = () => {
+      // Your scroll-related logic here
+      // For example, you can log the scroll position
+      console.log("Scroll position:", window.scrollY);
+    };
+  
+    if (isSliderVisible) {
+      window.addEventListener('scroll', handleScroll);
+    } else {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isSliderVisible]);
+  
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === "isSliderVisible" && typeof window !== 'undefined') {
+        const storedValue = localStorage.getItem("isSliderVisible");
+        setIsSliderVisible(JSON.parse(storedValue));
+      }
+    };
+  
+    if (typeof window !== 'undefined') {
+      window.addEventListener("storage", handleStorageChange);
+  
+      return () => {
+        window.removeEventListener("storage", handleStorageChange);
+      };
+    }
+  }, []);
+  
+
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === "isSliderVisible" && typeof window !== 'undefined') {
+        const storedValue = localStorage.getItem("isSliderVisible");
+        setIsSliderVisible(JSON.parse(storedValue));
+      }
     };
 
-    return (
-        <div>
-            <button
-                aria-label="Grid/Swipe View"
-                onClick={toggleArchiveView}
-                className="swipescroll"
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginTop: "0px",
-                    textAlign: "center",
-                    width: "100%"
-                }}
-            >
-                {archiveView === "grid" ? (
-                    <div className="themer"><PiHandSwipeRightFill style={{ width: '36px', height: '30px' }} /></div>
-                ) : (
-                    <div className="themer"><BsFillGrid3X2GapFill style={{ width: '36px', height: '30px' }} /></div>
-                )}
-                <span className="themetext" style={{ fontSize: '' }}>
-                    {archiveView === "grid" ? dicSwipe : dicScroll}
-                </span>
-            </button>
-        </div>
-    );
+    if (typeof window !== 'undefined') {
+      window.addEventListener("storage", handleStorageChange);
+
+      return () => {
+        window.removeEventListener("storage", handleStorageChange);
+      };
+    }
+  }, []);
+
+  useEffect(() => {
+    const saveToLocalStorage = () => {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem("isSliderVisible", JSON.stringify(isSliderVisible));
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener("beforeunload", saveToLocalStorage);
+
+      return () => {
+        window.removeEventListener("beforeunload", saveToLocalStorage);
+      };
+    }
+  }, [isSliderVisible]);
+
+  return (
+    <div>
+      <button
+        aria-label="Toggle View"
+        onClick={() => {
+          toggleSlider();
+        }}
+        className="swipescroll"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "0px",
+          textAlign: "center",
+          width: "100%"
+        }}
+      >
+        {isSliderVisible ? (
+          <div className="themer"><BsFillGrid3X2GapFill style={{ width: '36px', height: '30px' }} /></div>
+        ) : (
+          <div className="themer"><PiHandSwipeRightFill style={{ width: '36px', height: '30px' }} /></div>
+        )}
+        <span className="themetext" style={{ fontSize: '' }}>
+          {isSliderVisible ? dicScroll : dicSwipe}
+        </span>
+      </button>
+    </div>
+  );
 }
 
 export default Header;

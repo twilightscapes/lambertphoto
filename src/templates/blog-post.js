@@ -229,7 +229,7 @@ const ShowOriginal = frontmatter.youtube ? frontmatter.youtube.youtubeshoworigin
 const ShareThis = frontmatter.shareable
 // const Comments = frontmatter.comments
 
-const YouTubeStart = frontmatter.youtube.youtubestart
+const YouTubeStart = frontmatter.youtube.youtubestart ? frontmatter.youtube.youtubestart : null;
 const YouTubeEnd = frontmatter.youtube.youtubeend
 const YouTubeMute = frontmatter.youtube.youtubemute
 const YouTubeControls = frontmatter.youtube.youtubecontrols
@@ -994,7 +994,7 @@ const YouTube = frontmatter.youtube.youtuber
     {FrontImage ? (
       // Show zoom or regular Gatsby image based on showZoom flag
       frontmatter.showZoom ? (
-        <div className="imageonly" style={{ display: "flex", justifyContent: "center", maxHeight: "" }}>
+        <div className="imageonly" style={{ display: "flex", justifyContent: "center", minHeight: "45vh" }}>
           <InnerImageZoom
           // className="featured-image1"
             src={getSrc(FrontImage)}
