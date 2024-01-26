@@ -29,8 +29,8 @@
       "ShowDisclaimer": false,
       "showLegal": false,
       "showConsent": false,
-      "showDefault": false,
-      "startUrl": "youtube",
+      "showDefault": true,
+      "startUrl": "contact",
       "showPopup": false
     },
     "titleTemplate": "%s",
