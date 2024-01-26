@@ -17,16 +17,16 @@
     "postcount": 9,
     "homecount": 6,
     "magicOptions": {
-      "showMagic": true,
-      "showMagicCat": true,
-      "showMagicTag": true,
+      "showMagic": false,
+      "showMagicCat": false,
+      "showMagicTag": false,
       "showMagicSearch": false
     },
     "proOptions": {
       "showModals": true,
       "showContact": false,
       "xshowLegal": true,
-      "xshowConsent": true,
+      "xshowConsent": false,
       "xshowContact": true,
       "showPopup": false,
       "xshowBranding": true,
@@ -75,7 +75,7 @@
     "image": "/assets/TSidebarHover.svg",
     "navOptions": {
       "showNav": false,
-      "showNav2": false,
+      "showNav2": true,
       "showFooterMenu": false
     },
     "description": "Photography by Todd Lambert",
