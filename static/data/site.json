@@ -31,6 +31,8 @@
       "showConsent": false,
       "showDefault": true,
       "startUrl": "contact",
+      "showProfile": false,
+      "showFeature": false,
       "showPopup": false
     },
     "titleTemplate": "%s",
