@@ -25,15 +25,16 @@
     "proOptions": {
       "showModals": true,
       "showContact": false,
-      "showBranding": true,
-      "ShowDisclaimer": false,
-      "showLegal": false,
-      "showConsent": false,
       "showDefault": true,
-      "startUrl": "contact",
       "showProfile": false,
+      "startUrl": "youtube",
+      "showPopup": false,
+      "showHomePosts": true,
+      "ShowDisclaimer": false,
+      "showBranding": true,
       "showFeature": false,
-      "showPopup": false
+      "showLegal": false,
+      "showConsent": false
     },
     "titleTemplate": "%s",
     "title": "Unique Night Photography",
@@ -58,7 +59,7 @@
       "dicConfirmation": "Message Received",
       "dicDark": "Dark",
       "dicSubmit": "Send Message",
-      "dicPirate": "Powered by PIRATE",
+      "dicPirate": "PIRATE Plus",
       "dicResults": "Result",
       "dicLight": "Light",
       "dicDisclaimer": "Disclaimer",
@@ -69,7 +70,9 @@
       "dicCategory": "Category",
       "dicPlayMultimedia": "Play Multimedia",
       "dicEmail": "your@email.com",
-      "dicViewArchive": "View Archive"
+      "dicViewArchive": "View Archive",
+      "dicProfileAudioText": "I'm grooving to:",
+      "dicProfileAudioActionText": "Listen Now!"
     },
     "image": "/assets/TSidebarHover.svg",
     "navOptions": {

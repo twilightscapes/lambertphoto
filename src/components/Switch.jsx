@@ -22,7 +22,7 @@ function Header() {
   useEffect(() => {
     if (isSliderVisible) {
       // Set initial scroll position to the top when in grid view
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
     }
   }, [isSliderVisible]);
 
@@ -37,15 +37,25 @@ function Header() {
         localStorage.setItem("isSliderVisible", JSON.stringify(newValue));
         // Broadcast the change to other tabs/windows
         window.dispatchEvent(new StorageEvent("storage", { key: "isSliderVisible" }));
+  
+        // Scroll to the named anchor "posttop" when switching to grid view
+        if (newValue) {
+          const posttopElement = document.getElementById("posttop");
+          if (posttopElement) {
+            // Add 60px to the scrollTop
+            const offset = posttopElement.offsetTop - 60;
+            window.scrollTo({ top: offset, behavior: "smooth" });
+          }
+        }
       }
       return newValue;
     });
   };
+  
+  
 
   useEffect(() => {
     const handleScroll = () => {
-      // Your scroll-related logic here
-      // For example, you can log the scroll position
       console.log("Scroll position:", window.scrollY);
     };
   

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Seo from "../../components/seo";
 import Layout from "../../components/siteLayout";
-import BlogPosts from "../../components/BlogPosts";
+import SearchPosts from "../../components/SearchPosts";
 
 const Search = () => {
   // Check if localStorage is available
@@ -39,9 +39,9 @@ const Search = () => {
     <Layout className="search">
       <Seo title="Search" />
 
-      <div className="post-container">
+      <div className="post-container" id="posttop">
         {/* Pass isSliderVisible as a prop to BlogPosts */}
-        <BlogPosts isSliderVisible={isSliderVisible} />
+        <SearchPosts isSliderVisible={isSliderVisible} />
       </div>
     </Layout>
   );
