@@ -81,11 +81,24 @@ const Layout = ({ children }) => {
       <Seo />
 
       <ModalRoutingContext.Consumer>
-        {({ modal, closeTo }) => (
-          <>
-          </>
-        )}
-      </ModalRoutingContext.Consumer>
+  {({ modal, closeTo }) => {
+    // if (modal) {
+    //   document.body.style.position = 'fixed';
+    //   document.body.style.width = '100%';
+    //   return () => {
+    //     document.body.style.position = '';
+    //     document.body.style.width = '';
+    //   };
+    // }
+    return (
+      <>
+        <div>
+          {/* ... (modal-related code) */}
+        </div>
+      </>
+    );
+  }}
+</ModalRoutingContext.Consumer>
 
 
 
@@ -144,54 +157,9 @@ const Layout = ({ children }) => {
 
 
 
-      <main id="top" name="pagetop">
+      <main id="top" name="top">
         {children}
-
-        {showfooter ? (
-        <Footer />
-      ) : (
-        <footer className="" style={{display:'flex', flexDirection:'column', zIndex:'1', justifyContent:'end', padding:'0', marginTop:'0', width:'100vw',textAlign:'center'}}>
-          {showBranding ? (
-            <div style={{ textAlign: 'center', margin: '0 0 2rem 0', justifyContent: 'center', fontSize: '.75rem', position: 'relative', right: '', top: '10px' }}>
-              <a className="panel" href="https://pirateweb.org" rel="noreferrer">{dicPirate}</a>
-            </div>
-          ) : (
-            ""
-          )}
-        </footer>
-      )}
-      
-      </main>
-
-
-
-
-
-      
-
-
-
-<div id="gobacker"><GoBack /></div>
-
-
-
-
-
-
-      {image ? (
-        <img type="image/svg+xml" className="backimage" src={image} alt="Default Background" style={{ height: '100vh', width: '100vw', position: 'fixed', zIndex: '-2', top: '0', objectFit: 'cover' }} width="10" height="10" />
-      ) : (
-        ""
-      )}
-
-      {showConsent ? (
-        <Consent />
-      ) : (
-        ""
-      )}
-
-
-<div className={`upbar button ${showBackToTop ? 'visible' : ''}`}
+      <div className={`upbar button ${showBackToTop ? 'visible' : ''}`}
         style={{
           position: 'fixed',
           bottom: '20px',
@@ -218,6 +186,7 @@ const Layout = ({ children }) => {
           aria-label="Link to Top"
           onClick={scrollToTop}
           style={{ cursor: 'pointer', height: '', fontSize: '', border: 'none', outline: 'none' }}
+          state={showModals ? { modal: true } : {}}
         >
           <div className="uparrow" style={{ display: 'flex', flexDirection: 'column', gap: '0', padding: '', alignItems: 'center', textAlign: 'center' }}>
             <RiArrowUpFill
@@ -227,6 +196,49 @@ const Layout = ({ children }) => {
           </div>
         </AnchorLink>
       </div>
+      </main>
+
+      {showfooter ? (
+    <Footer />
+      ) : (
+        <footer className="" style={{display:'flex', flexDirection:'column', zIndex:'1', justifyContent:'end', padding:'0', marginTop:'0', width:'100vw',textAlign:'center'}}>
+          {showBranding ? (
+            <div style={{ textAlign: 'center', margin: '0 0 2rem 0', justifyContent: 'center', fontSize: '.75rem', position: 'relative', right: '', top: '10px' }}>
+              <a className="panel" href="https://pirateweb.org" rel="noreferrer">{dicPirate}</a>
+            </div>
+          ) : (
+            ""
+          )}
+        </footer>
+      )}
+
+
+
+      
+
+
+
+<div id="gobacker"><GoBack /></div>
+
+
+
+
+
+
+      {image ? (
+        <img type="image/svg+xml" className="backimage" src={image} alt="Default Background" style={{}} width="10" height="10" />
+      ) : (
+        ""
+      )}
+
+      {showConsent ? (
+        <Consent />
+      ) : (
+        ""
+      )}
+
+
+
 
 
 
@@ -253,7 +265,7 @@ const Layout = ({ children }) => {
             <ul className="sidebarMenuInner post-card panel" style={{ maxWidth: '260px', position: 'absolute', right: '0', display: '', justifyContent: '' }}>
 
               <li className="grad logo" style={{ position: 'relative', maxHeight: '100px', width: 'auto', display: 'flex', justifyContent: 'center' }}>
-                <AnchorLink className="sidelogo" to="/" name="homereturn" style={{ position: '', display: 'block', maxWidth: '150px', height: '60px', border: '0px solid' }} aria-label="Link to Top" title="Back to Top">
+                <AnchorLink className="sidelogo" to="/" state={showModals ? { modal: true } : {}} name="homereturn" style={{ position: '', display: 'block', maxWidth: '150px', height: '60px', border: '0px solid' }} aria-label="Link to Top" title="Back to Top">
                   {iconimage ? (
                     <img src={iconimage} alt={companyname} width="120" height="60" style={{ maxHeight: '60px', border: 'none' }} />
                   ) : (
