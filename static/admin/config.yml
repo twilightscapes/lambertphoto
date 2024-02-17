@@ -504,6 +504,25 @@ collections:
                 collapsed: true
                 fields:
                   - widget: boolean
+                    name: showVideoPlayer
+                    label: Show Pirate Video on home page
+                    required: false
+                  - widget: boolean
+                    name: showProfile
+                    label: Show Profile section on homepage
+                    required: false
+                    default: false
+                  - widget: boolean
+                    name: showPosts
+                    label: Show posts section on homepage
+                    required: false
+                    default: false
+                  - widget: boolean
+                    name: showDefault
+                    label: Show Swipe(horizontal scroll) by default
+                    required: false
+                    default: false
+                  - widget: boolean
                     name: showfooter
                     label: Show the Footer
                     required: false
@@ -542,15 +561,6 @@ collections:
                     label: Show Feature Image Video section on homepage
                     required: false
                   - widget: boolean
-                    name: xshowProfile
-                    label: Show Profile section on homepage
-                    required: false
-                  - widget: boolean
-                    name: showPosts
-                    label: Show posts section on homepage
-                    required: false
-                    default: true
-                  - widget: boolean
                     name: xshowModals
                     label: Show Posts in Modal Window
                     required: false
@@ -574,11 +584,6 @@ collections:
                     name: xshowConsent
                     label: Show Cookie Consent Banner
                     required: false
-                  - widget: boolean
-                    name: xshowDefault
-                    label: Show Swipe(horizontal scroll) by default
-                    required: false
-                    default: false
                   - widget: string
                     name: xstartUrl
                     label: the url of the page you want when your app is installed

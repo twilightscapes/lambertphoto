@@ -29,13 +29,13 @@
     "proOptions": {
       "showModals": true,
       "showContact": false,
-      "startUrl": "youtube",
+      "startUrl": "video",
       "showPopup": false,
       "ShowDisclaimer": false,
       "showBranding": true,
       "showFeature": false,
-      "showResume": true,
-      "showLocation": true,
+      "showResume": false,
+      "showLocation": false,
       "showLegal": false,
       "showConsent": false
     },

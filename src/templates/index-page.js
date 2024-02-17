@@ -23,12 +23,12 @@ import { ImPlay } from "react-icons/im"
 // import { IoShareOutline } from 'react-icons/io5';
 import { AiOutlineAudioMuted } from 'react-icons/ai';
 // import { StaticImage } from "gatsby-plugin-image"
-const HomePage = ({ data }) => {
+const HomePage = ({ data, location }) => {
 
   const { language, proOptions, featureOptions  } = useSiteMetadata();
 
-  const { showProfile, showFeature, showHomePosts } = proOptions
-  const { showDefault, showVideoPlayer } = featureOptions
+  const { showFeature } = proOptions
+  const { showDefault, showVideoPlayer, showNav, showProfile, showHomePosts } = featureOptions
 
   const { dicPlayVideo, dicProfileAudioText, dicProfileAudioActionText} = language;
 
@@ -122,15 +122,15 @@ const extractVideoId = (url) => {
 
 const playerRef = useRef(null);
     /* eslint-disable-next-line no-unused-vars */
-const [playingIndex, setPlayingIndex] = useState(null);
+// const [playingIndex, setPlayingIndex] = useState(null);
 
-  const handleVideoPlay = (index) => {
-    setPlayingIndex(index);
-  };
+  // const handleVideoPlay = (index) => {
+  //   setPlayingIndex(index);
+  // };
 
-  const handleVideoPause = () => {
-    setPlayingIndex(null);
-  };
+  // const handleVideoPause = () => {
+  //   setPlayingIndex(null);
+  // };
   
 
   
@@ -159,8 +159,8 @@ const [playingIndex, setPlayingIndex] = useState(null);
           overflow: '',
           border: '0px solid red',
           zIndex: '',
-          aspectRatio: '',
-          width: '100vw',
+          aspectRatio: '16/9',
+          width: '100dvw',
           background: 'transparent',
           objectFit: 'cover'
         }}
@@ -191,9 +191,9 @@ const [playingIndex, setPlayingIndex] = useState(null);
       }
     
       return (
-        <div className="wrap-element effects" style={{ aspectRatio: '16/9', minHeight: '300px', width: '100vw', maxHeight: '100vh', maxWidth:'100vw', overFlowY:'hidden' }}>
+        <div className="wrap-element effects" style={{ aspectRatio: '16/9', minHeight: '300px', width: '100dvw', maxHeight: '100dvh', maxWidth:'100dvw', overFlow:'hidden' }}>
           {YouTube ? (
-            <div>
+    
   
 
   <ReactPlayer
@@ -202,7 +202,7 @@ const [playingIndex, setPlayingIndex] = useState(null);
                 url={frontmatter.youtube.youtuber}
                   allow="web-share"
                   style={{ position: 'absolute', top:'0', margin: '0 auto 0 auto', zIndex: '1', aspectRatio:'16/9', }}
-                  width="100vw"
+                  width="100dvw"
                   height="100%"
                   className='inline'
                   playsinline
@@ -218,10 +218,10 @@ const [playingIndex, setPlayingIndex] = useState(null);
                         alt="Page Feature Image beegee"
                         className=""
                         placeholder="blurred" loading="eager"
-                        style={{ position: 'absolute', top: '0', height: 'auto', width: '100vw', maxHeight: '100vh', objectFit: 'cover', overflow: 'hidden', border: '0', outline:'0' }}
+                        style={{ position: 'absolute', top: '0', height: 'auto', width: '100dvw', maxHeight: '100dvh', objectFit: 'cover', overflow: 'hidden', border: '0', outline:'0' }}
                       />
                     ) : (
-                      <img src={`https://i.ytimg.com/vi/${extractVideoId(frontmatter.youtube.youtuber)}/hqdefault.jpg`} width="100%" height="auto" alt="" />
+                      <img src={`https://i.ytimg.com/vi/${extractVideoId(frontmatter.youtube.youtuber)}/hqdefault.jpg`} width="100dvw" height="auto" alt="Video Preview" />
                     )
                   }
                   
@@ -240,8 +240,8 @@ const [playingIndex, setPlayingIndex] = useState(null);
                     },
                   }}
                   playIcon={
-                    <div style={{display:'flex', flexDirection:'column', placeContent:'', justifyContent:'', position:'absolute', zindex:'3', top:'', fontWeight:'bold', padding:'3% 0 0 0', width:'100%', maxWidth:'25vw', height:'', border:'0px solid', borderRadius:'var(--theme-ui-colors-borderRadius)', margin:'0 auto 0 auto', opacity:'.99', textShadow:'2px 2px 2px black', color:'#fff' }}>
-                      <div className="spotlight font" style={{}}>
+                    <div style={{display:'flex', flexDirection:'column', placeContent:'', justifyContent:'', position:'absolute', zindex:'3', top:'', fontWeight:'bold', padding:'3% 0 0 0', width:'100%', maxWidth:'25vw', height:'300px', border:'0px solid', borderRadius:'var(--theme-ui-colors-borderRadius)', margin:'0 auto 0 auto', opacity:'.99', textShadow:'2px 2px 2px black', color:'#fff' }}>
+                      <div className="spotlight font">
                         <div className="posticons" style={{ flexDirection: 'column', margin: '0 auto' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-around', gap: '2vw', color: 'fff', }}>
                             <ImPlay className="posticon" style={{ margin: '0 auto', width: '60%', height: '30px', fontSize: '' }} />
@@ -250,10 +250,10 @@ const [playingIndex, setPlayingIndex] = useState(null);
                         </div>
                       </div>
                     </div>}
-                    onPlay={() => handleVideoPlay()}
-                    onPause={handleVideoPause}
+                    // onPlay={() => handleVideoPlay()}
+                    // onPause={handleVideoPause}
                 />
-    </div>
+  
     ) : (
       ""
     
@@ -262,14 +262,14 @@ const [playingIndex, setPlayingIndex] = useState(null);
   
     
     
-    <div className="" style={{maxHeight:'100vh', width:'100vw', height:'auto', overflow:'visible',position:'absolute', top:'0', zIndex:'',}}>
+    <div className="" style={{maxHeight:'100dvh', width:'100dvw', height:'auto', overflow:'visible',position:'absolute', top:'0', zIndex:'',}}>
 {UnderlayImage ? (
             <GatsbyImage
             image={UnderlayImage}
             alt={frontmatter.title + " - image"}
             className="print"
             placeholder="blurred" loading="eager"
-              style={{height:'auto', width:'100vw', maxHeight:'100vh',  objectFit:'cover', overflow:'visible', border:'0px solid red !important'}}
+              style={{height:'auto', width:'100dvw', maxHeight:'100dvh',  objectFit:'cover', overflow:'visible', border:'0px solid red !important'}}
           />
           ) : (
             ""
@@ -435,38 +435,43 @@ display:'flex', justifyContent:'center', maxHeight:'80px !important', height:'15
 
 
 
-<div className="post-container" style={{maxWidth:'100vw', overFlowY:'hidden'}}>
+<div className="post-container" style={{maxWidth:'100vw', overFlowY:'hidden', paddingTop: showNav ? '60px' : '',}}>
 
-
+{showVideoPlayer ? (
+<section id="VideoPlayer" name="VideoPlayer" className="print scroll-area" style={{  width:'100vw', height:'', margin:'0 auto 0 auto', position:'relative',alignContent:'center', maxWidth:'100vw', display:'flex', textAlign:'left', justifyContent:'start', verticalAlign:'center', fontSize:'clamp(1rem, 1.8vw, 3.2rem)',textShadow:'0 2px 7px #000',backgroundColor:'var(--theme-ui-colors-headerColor)'}}>
+<YouTubePlayer location={location} />
+</section>
+     ) : (
+       ""
+   )} 
 
 {/* show feature */}
 {showFeature ? (   
-<section id="feature" name="feature" className="print scroll-area" style={{  width:'100vw', minHeight:'100dvh', margin:'0 auto 0 auto', padding:'0 0 0 0', position:'relative',
- alignContent:'center', maxWidth:'100vw', overFlowY:'hidden', display:'flex', textAlign:'left', justifyContent:'start', verticalAlign:'center',
-  color:'',
-  fontSize:'clamp(1rem, 1.8vw, 3.2rem)',
-  textShadow:'0 2px 7px #000',
+<section id="feature" name="feature" className="print scroll-area" style={{  
   // backgroundColor:'var(--theme-ui-colors-headerColor)'
+  height:'100%'
 }}>
-  <article>
+  <article style={{}}>
 
-  <div className="" style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', color:'#999'}}  >
-
-
+  <div className="" style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', color:'#999', position:'relative'}}  >
 
 
-
-{UnderlayImage ? (
-                <GatsbyImage
-                  image={UnderlayImage}
-                  alt={frontmatter.title + " - image"}
-                  className="mcboaty1"
-                  style={{height:'auto', width:'100%', maxHeight:'100vh', overflow:'hidden', position:'absolute', left:'0', right:'0', bottom:'', top:'0', zIndex:'',
-                 objectFit:'cover', border:'0px solid red !important', background:'transparent',}}
-                />
-                
-              ) : (
-                
+  {YouTube ? (
+            <Iframer style={{height:'auto', width:'100dvw', maxHeight:'100dvh', position:'relative', zIndex:'1', top:'', left:'', right:'', border:'0px solid #888 !important', objectFit:'contain', margin:'0'}} />
+       
+          ) : (
+            <>
+            {UnderlayImage ? (
+              <GatsbyImage
+                image={UnderlayImage}
+                alt={frontmatter.title + " - image"}
+                className="mcboaty1"
+                style={{height:'auto', width:'100%', maxHeight:'100dvh', overflow:'hidden', margin:'0 auto', position:'relative', left:'0', right:'0', bottom:'', top:'0', zIndex:'',
+               objectFit:'cover', border:'0px solid red !important', background:'transparent',}}
+              />
+              
+            ) : (
+              
 <>
 {FrontImage ? (
 <GatsbyImage
@@ -475,23 +480,23 @@ alt={frontmatter.title + " - Featured image"}
 className="featuredimage"
 placeholder="blurred"
 loading="eager"
-style={{height:'auto', width:'100vw', maxHeight:'100vh', position:'absolute', zIndex:'1', top:'0', left:'0', right:'0', border:'0px solid #888 !important', objectFit:'contain', margin:'0'}}
+style={{height:'auto', width:'100dvw', maxHeight:'100dvh', position:'relative', zIndex:'1', top:'0', left:'0', right:'0', border:'0px solid #888 !important', objectFit:'contain', margin:'0'}}
 />
-          ) : (
+        ) : (
 ""
-          )}
+        )}
 </>
 
-              )}
+            )}
+</>
+          )}
+
+
+
 {/* 
             <StaticImage src="../../static/assets/default-og-image.webp" alt="Default Image" style={{height:'auto', maxHeight:'100vh', position:'relative', zIndex:'0', top:'0',border:'0px solid !important', objectFit:'contain', margin:'0 auto'}} /> */}
 
-{YouTube ? (
-            <Iframer />
-       
-          ) : (
-            ""
-          )}
+
 
 
 
@@ -507,9 +512,10 @@ style={{height:'auto', width:'100vw', maxHeight:'100vh', position:'absolute', zI
 {/* end show feature */}
 
 
+
 {/* show profile */}
 {showProfile ? (
-  <section className="scroll-area panel" id="profile" name="profile" style={{ display:'', height:'100%', minHeight:'100dvh', position:'relative', overflow:'hidden', margin:'0 auto 0 auto', padding:'0 0 60px 0', background:'var(--theme-ui-colors-background)', color:'var(--theme-ui-colors-text)', width:'100vw', borderRadius:'var(--theme-ui-colors-borderRadius)', }}>
+  <section className="scroll-area panel" id="profile" name="profile" style={{ display:'', height:'', minHeight:'', position:'relative', overflow:'hidden', margin:'0 auto 0 auto', padding:'0 0 60px 0', background:'var(--theme-ui-colors-background)', color:'var(--theme-ui-colors-text)', width:'100vw', borderRadius:'var(--theme-ui-colors-borderRadius)', }}>
   <article style={{ margin:'0 0 0 0'}}>
 
 
@@ -567,7 +573,7 @@ style={{height:'auto', width:'100vw', maxHeight:'100vh', position:'absolute', zI
   )}
 
   {/* <span style={{margin:'10px auto', fontSize:'160%'}}>{companyname}</span> */}
-    {/* <span style={{margin:'10px auto', fontSize:'160%'}}>Become a PIRATE!</span> */}
+    {/* <span style={{margin:'10px auto', fontSize:'160%'}}>Become a Pirate!</span> */}
   
   {frontmatter.addressText ? (
     frontmatter.addressText
@@ -592,7 +598,7 @@ style={{height:'auto', width:'100vw', maxHeight:'100vh', position:'absolute', zI
 
 
   {frontmatter.coverletter.showCover ? (
-    <Link to={frontmatter.coverletter.coverLink} state={{modal: true}} className="print" style={{color:'', fontSize:'', margin:'5px auto 10px auto', textAlign:'center', textDecoration:'underline', maxWidth:'600px', padding:'0 2rem'}}>{coverText}</Link>
+    <Link to={frontmatter.coverletter.coverLink} state={{modal: true}} className=" print" style={{color:'', fontSize:'', margin:'15px auto 10px auto', textAlign:'center', textDecoration:'underline', maxWidth:'600px', padding:'1vh 2rem'}}>{coverText}</Link>
   ) : (
     ""
   )}
@@ -631,19 +637,9 @@ style={{height:'auto', width:'100vw', maxHeight:'100vh', position:'absolute', zI
       ""
   )}
 
-{showVideoPlayer ? (
-  <section id="VideoPlayer" name="VideoPlayer" className="print scroll-area" style={{  width:'100vw', minHeight:'100dvh', margin:'0 auto 0 auto', padding:'0 0 0 0', position:'relative',
- alignContent:'center', maxWidth:'100vw', overFlowY:'hidden', display:'flex', textAlign:'left', justifyContent:'start', verticalAlign:'center',
-  color:'',
-  fontSize:'clamp(1rem, 1.8vw, 3.2rem)',
-  textShadow:'0 2px 7px #000',
-  // backgroundColor:'var(--theme-ui-colors-headerColor)'
-}}>
-<YouTubePlayer />
-</section>
-     ) : (
-       ""
-   )} 
+
+
+
 
 
 
