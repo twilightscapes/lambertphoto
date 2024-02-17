@@ -5,27 +5,27 @@
     "siteUrl": "https://lambertphotography.com",
     "featureOptions": {
       "showDefault": true,
-      "showArchive": true,
-      "showSearch": true,
-      "showDates": true,
-      "showSocial": true,
-      "showProfile": true,
+      "showArchive": false,
+      "showSearch": false,
+      "showDates": false,
+      "showSocial": false,
+      "showProfile": false,
       "showPosts": true,
       "showHomePosts": true,
-      "showTitles": true,
-      "showfooter": true,
-      "showSwipe": true,
-      "showVideoPlayer": true
+      "showTitles": false,
+      "showfooter": false,
+      "showSwipe": false,
+      "showVideoPlayer": false
     },
     "twitterUsername": "toddlambert",
     "titleDefault": "Lambert Photography",
     "postcount": 9,
     "homecount": 6,
     "magicOptions": {
-      "showMagic": true,
-      "showMagicCat": true,
-      "showMagicTag": true,
-      "showMagicSearch": true
+      "showMagic": false,
+      "showMagicCat": false,
+      "showMagicTag": false,
+      "showMagicSearch": false
     },
     "proOptions": {
       "xshowFeature": true,
@@ -88,9 +88,9 @@
     },
     "image": "/assets/TSidebarHover.svg",
     "navOptions": {
-      "showNav": true,
-      "showNav2": true,
-      "showFooterMenu": true
+      "showNav": false,
+      "showNav2": false,
+      "showFooterMenu": false
     },
     "description": "Photography by Todd Lambert",
     "icon512": "/assets/tw-logo-large.png"
