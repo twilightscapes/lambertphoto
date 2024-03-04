@@ -38,9 +38,11 @@ body.install #menu, body.install #gobacker, body.install .spacer  {display:none 
 body.contactpage #footercontact{display:none;}
 
 /* body.piratepage .missioncontrol{visibility:hidden !important;} */
-body.piratepage #gobacker, body.social #gobacker{visibility:hidden !important;}
+body.piratepage #gobacker{visibility:hidden !important;}
 /* body.piratepage :is(#gobacker) {display: none !important;} */
 body.piratepage footer {display: none !important;}
+
+body.social .searchIcon {visibility:hidden !important;}
 
 :root{--button-alternate-color:#e3272d;--button-color:#e5c3d3;--font-family:-apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,Ubuntu,roboto,noto,segoe ui,arial,sans-serif;--font-family-mono:Menlo,Consolas,Monaco,Liberation Mono,Lucida Console,monospace;--font-size-small:12px;--grid-gap:30px;--home-link-color:#d4d4d4;--home-link-hover-color:var(--primary-color);--input-focus-border:#83aaac;--label-text:#777;--nav-link-hover-bg:#111;--post-link-color:#0f070b;--text-color-meta:rgba(0,0,0,.5), height:100vh;}
 
@@ -413,7 +415,7 @@ bottom: 10px !important;
 .fire{box-shadow:0 4px 22px var(--theme-ui-colors-siteColor)}
 
 .round,.round img{border-radius:var(--theme-ui-colors-borderRadius)}
-.sharebutts svg{background-color:transparent;border:0 solid red;color:#fff;fill:#ddd}
+.sharebutts svg{background-color:transparent; color:inherit; fill:var(--theme-ui-colors-siteColorText);}
 .social-icons{display:flex;font-size:3rem;gap:16px;margin-top:10px}
 
 
@@ -635,7 +637,7 @@ body.homepage .pleaseshare{display:none}
 
 .sidebarMenuInner{
   background-color:var(--theme-ui-colors-headerColor);
-  filter:brightness(.7);
+  /* filter:brightness(.7); */
 }
 
 .sidebarMenuInner li{
@@ -936,6 +938,9 @@ button:disabled{
     margin:0 auto !important;
     /* height: 100% !important; */
   }
+
+
+  #bigbox {flex-wrap: wrap;}
 
   /* .player-wrapper .menusnapp{top:72% !important;} */
 
@@ -1315,6 +1320,75 @@ html:has body.youtube{position:fixed !important; overflow: hidden !important;}
   body.youtube .upbar 
   {display: none !important;}
 
+  #youtubelink-input::placeholder{color:var(--theme-ui-colors-siteColor) !important;}
+  body.homepage .public{display: flex !important;}
+
+  /* body.youtube #gobacker{top:14% !important; right:5px !important;} */
+
+  @media(max-width:48rem) {
+    body.youtube #PiratePlayer {top:60px !important;}
+  }
+
+#PiratePlayer .blocked-video::before{
+  content:"Pirate Video Pro";
+    position: fixed;
+    /* top: 60px; */
+    left: 0;
+    width: 100vw;
+    height: 99%;
+    z-index: 100000;
+    display:grid;
+    place-content: center;
+    border:20px solid yellow !important;
+    background:transparent;
+    background-size: cover;
+    font-size: clamp(2rem,3vw,3rem);
+}
+
+
+.youtubelinker.expanded {
+  width: 80%;
+  position: absolute;
+  left: 10%;
+}
+
+@media (max-width:48rem) {
+#seoTitle{
+  width: 100% !important;
+  background: rgba(0,0,0,1) !important;
+  position:relative !important;
+  top: inherit !important;
+  left: inherit !important;
+  border: inherit !important;
+}
+  }
+
+
+
+/* .blocked-video{border:2px solid red !important;} */
+
+
+
+
+  /* #piratevideo div.showBlocker[allow="web-share"] {border:10px solid green !important;} */
+  /* #piratevideo div.showBlocker[allow="web-share"] {border:1px solid green !important;} */
+  /* .video-blocker {
+    content:"❮❮scroll";
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100vw;
+    height: 99%;
+    z-index: 5;
+    border:2px solid yellow !important;
+    display: block;
+    background:transparent;
+    background-size: cover;  
+} */
+
+/* SAFARI INPUT ZOOM FIX */
+input {font-size: 16px !important;}
+/* SAFARI INPUT ZOOM FIX */
 
   /* html, body.youtube {
     touch-action: manipulation;
@@ -1331,8 +1405,8 @@ html:has body.youtube{position:fixed !important; overflow: hidden !important;}
 
 
 
-/* .pagemenu button.flag svg{color:#000 !important;} */
 
+/* .pagemenu button.flag svg{color:#000 !important;} */
 
 
 
@@ -1355,10 +1429,24 @@ body.youtube .player-wrapper {max-height: 100dvh;}
 
 
 
+/* #pwabanner {
+  opacity: 0;
+  overflow: hidden;
+  animation: showBanner 3s 1s forwards; 
+}
+
+@keyframes showBanner {
+  to {
+    opacity:100;
+  }
+} */
+
+
+
 
 /* Form container */
 .form-container {
-min-height: 80px;
+/* min-height: 80px; */
   /* justify-content: center;
   align-items: center; */
   padding: 0 ;
@@ -1366,7 +1454,7 @@ min-height: 80px;
   gap: 2vw;
   /* white-space: nowrap;  */
   /* display:flex; */
-
+width:100%;
 margin: 0 auto;
 }
 
@@ -1376,21 +1464,22 @@ margin: 0 auto;
   flex-wrap: nowrap; /* Prevent wrapping */
   align-items: center;
   margin: 0 auto;
+
   /* max-width:800px; */
   /* max-width: 380px; */
 }
 
-.frontdrop {
+/* .frontdrop {
   padding: 0;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap:3vw;
-}
+  gap:2vw;
+} */
 
 .youtubelinker {
-  background: var(--theme-ui-colors-headerColor);
-  padding: 1vh 0.5vw;
+  /* background: var(--theme-ui-colors-headerColor); */
+  /* padding: .2vh 0.5vw; */
   /* min-width: 200px; */
   outline: 1px solid #999;
   border-radius: var(--theme-ui-colors-borderRadius);

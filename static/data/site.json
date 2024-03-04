@@ -46,7 +46,8 @@
       "showFeature": false,
       "xshowModals": true,
       "showLegal": false,
-      "showConsent": false
+      "showConsent": false,
+      "showPWA": false
     },
     "titleTemplate": "%s",
     "title": "Unique Night Photography",

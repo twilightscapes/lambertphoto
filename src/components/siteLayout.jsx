@@ -5,6 +5,7 @@ import "../styles/reset.css"
 import "../styles/global.css"
 import { AnchorLink } from "gatsby-plugin-anchor-links"
 // import { navigate } from "gatsby"
+// import { RiCloseCircleFill } from "react-icons/ri";
 import { Helmet } from "react-helmet"
 import Theme from "./theme"
 import SearchIcon from "../../src/img/search"
@@ -13,16 +14,27 @@ import { RiArrowUpFill } from "react-icons/ri"
 import GoBack from "../components/goBack"
 import { ModalRoutingContext } from 'gatsby-plugin-modal-routing-4'
 import Menu from "../components/menu"
+import SocialMenu from "../components/menu-social"
 import { BiLeftArrow } from "react-icons/bi"
-import Consent from "../components/Consent"
+// import Consent from "../components/Consent"
 import defaultColors from "../../static/data/default-colors.json";
 import userStyles from "../../static/data/userStyles.json"
 import Switch from "../components/Switch"
 import BlueCheck from './bluecheck';
 import Footer from "../components/footer"
+import PwaInstaller from "../components/PwaInstaller"
 
 const Layout = ({ children }) => {
   const [showBackToTop, setShowBackToTop] = useState(false);
+
+
+  function isRunningStandalone() {
+    if (typeof window !== 'undefined') {
+        return window.matchMedia('(display-mode: standalone)').matches;
+    }
+    return false;
+}
+
 
   const handleScroll = () => {
     const currentScrollPos = document.documentElement.scrollTop || document.body.scrollTop;
@@ -53,13 +65,23 @@ const Layout = ({ children }) => {
   const { dicSearch, dicPirate, dicGoBack } = language;
   const { showNav, showNav2 } = navOptions
   const { showfooter, showSwipe, showSearch } = featureOptions
-  const { showModals, showBranding, showConsent } = proOptions
+  const { showModals, showBranding, showPWA } = proOptions
 
   const { companyname } = useSiteMetadata()
   const { iconimage } = useSiteMetadata()
   const { image } = useSiteMetadata()
 
   const fontUrl = `https://fonts.googleapis.com/css?family=${defaultColors?.siteFont}&display=swap`;
+
+
+
+  // Determine the current page location
+  const currentPage = typeof window !== 'undefined' ? window.location.pathname : '/';
+  // console.log('Current Page:', currentPage);
+  
+
+  // Define an array of page locations where you want to show the social menu
+  const socialMenuPages = ['/pirate', '/feeds', '/favorites'];
 
   
   return (
@@ -82,24 +104,17 @@ const Layout = ({ children }) => {
 
       <Seo />
 
+
+
       <ModalRoutingContext.Consumer>
       {({ modal, closeTo }) => (
 <>
   {modal ? (
-
-
-<div style={{display:'flex', justifyContent: 'center', color: '#ccc',  position:'fixed', top:'60px', right:'1vw', padding:'0px', fontSize:'', opacity:'1 !important', zIndex:'10',}}>
+<div style={{display:'flex', justifyContent: 'center', color: '#ccc',  position:'fixed', top:'60px', right:'1vw', padding:'0px', fontSize:'', opacity:'1 !important', zIndex:'12',}}>
 <Link state={{noScroll: true }} to={closeTo} style={{fontSize:'',  textDecoration:'none', lineHeight:'', display:'flex', flexDirection:'column', color:'#fff', cursor:'pointer'}}>
 <button className="button" style={{ display: 'flex', justifyContent: 'center', padding:'0 .5vw' }}><span className="icon -left" style={{ paddingRight: '' }}><BiLeftArrow /></span> {" "}{dicGoBack}</button>
 </Link>
 </div>
-
-
-
-
-
-
-
   ) : (
 ''
   )}
@@ -110,6 +125,7 @@ const Layout = ({ children }) => {
 
 
       <header className="header" style={{ display: 'block', height: showNav ? '60px' : '0' }}>
+
         {showNav ? (
 
           <div id="menu" className="menu print panel1 header" style={{ position: 'fixed', width: '100vw', top: '0', zIndex: '30', maxHeight: '', overFlow: '', boxShadow: '0 0 0 rgba(0,0,0,.7)', padding: '0 2%', alignItems: 'start', borderRadius: '0', display: 'flex', justifyContent: 'space-around', gap: '10px', color: 'var(--theme-ui-colors-headerColorText)', borderBottom: '0px solid #222', }}>
@@ -127,7 +143,13 @@ const Layout = ({ children }) => {
             </Link>
 
             <ul className="topmenu" style={{ fontSize: 'clamp(.6rem, 1.6vw, 1.8rem)', textAlign: 'center', maxHeight: '', display: 'flex', justifyContent: 'space-between', gap: '4vw', alignItems: 'center', margin: '0 auto 0 auto', padding: '1.5vh 2% 0 2%', border: '0px solid white' }}>
-              <Menu />
+
+
+
+            {socialMenuPages.some(page => currentPage.startsWith(page)) ? <SocialMenu /> : <Menu />}
+
+
+              {/* <li key="demo"><Link to="/pirate">View Demo</Link></li> */}
             </ul>
 
             <div id="missioncontrol" className="missioncontrol sitecontrols" style={{ display: 'flex', justifyContent: 'space-around', fontSize: 'clamp(.8rem, 2.3vw, 2.5rem)', gap: '3vw', textAlign: 'center', maxHeight: '', alignItems: 'center', paddingTop: '5px' }}>
@@ -164,12 +186,13 @@ const Layout = ({ children }) => {
 
 
 
-      <main id="top" name="top">
+      <main id="top" name="top" style={{height:'',}}>
         {children}
+
       <div className={`upbar button ${showBackToTop ? 'visible' : ''}`}
         style={{
           position: 'fixed',
-          bottom: '20px',
+          bottom: '80px',
           zIndex: '60',
           left: '',
           right: '1vw',
@@ -185,7 +208,7 @@ const Layout = ({ children }) => {
           textShadow: '0 1px 1px rgba(0, 0, 0, .7)',
           fontSize: '',
           verticalAlign: 'center',
-          transform: showBackToTop ? 'translateY(0)' : 'translateY(200%)',
+          transform: showBackToTop ? 'translateY(0)' : 'translateY(300%)',
         }}
       >
         <AnchorLink
@@ -197,14 +220,26 @@ const Layout = ({ children }) => {
         >
           <div className="uparrow" style={{ display: 'flex', flexDirection: 'column', gap: '0', padding: '', alignItems: 'center', textAlign: 'center' }}>
             <RiArrowUpFill
+            aria-label="Link to Top"
               className=""
               style={{ cursor: 'pointer', color: 'var(--theme-ui-colors-siteColorText)', fill: 'var(--theme-ui-colors-siteColorText)', fontSize: '3rem' }}
             />
           </div>
         </AnchorLink>
       </div>
+
+      {showPWA ? (
+<>
+{!isRunningStandalone() && (
+<PwaInstaller />
+)}
+</>
+  ) : (
+''
+)}
       </main>
 
+      
       {showfooter ? (
     <Footer />
       ) : (
@@ -238,11 +273,15 @@ const Layout = ({ children }) => {
         ""
       )}
 
-      {showConsent ? (
-        <Consent />
+
+
+      {/* {showConsent ? (
+        <div style={{display:'flex', placeContent:'', position:'absolute', width:'100vw', margin:'0 auto', height:'100%', top:'50%', left:'', right:'', zIndex:'2', border:'0px solid blue'}}>
+          <Consent />
+          </div>
       ) : (
         ""
-      )}
+      )} */}
 
 
 
@@ -281,7 +320,8 @@ const Layout = ({ children }) => {
                 </AnchorLink>
               </li>
 
-              <Menu id="sidechick" />
+              {/* <Menu id="sidechick" /> */}
+              {socialMenuPages.some(page => currentPage.startsWith(page)) ? <SocialMenu id="sidechick" /> : <Menu id="sidechick" />}
 
               <li>
                 <ul className="missioncontrol sitecontrols" style={{ display: 'flex', justifyContent: 'space-around', fontSize: 'clamp(.8rem, 2.3vw, 2.5rem)', gap: '', textAlign: 'center', maxHeight: '', alignItems: 'center', paddingTop: '5px' }}>
