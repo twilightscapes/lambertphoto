@@ -81,5 +81,4 @@ draft: true
 spotlight: false
 comments: false
 shareable: false
-showPWA: false
 ---
