@@ -81,4 +81,5 @@ draft: true
 spotlight: false
 comments: false
 shareable: false
+externalLink: https://piratesocial.org
 ---
