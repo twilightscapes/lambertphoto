@@ -6,26 +6,26 @@
     "featureOptions": {
       "showDefault": true,
       "showArchive": false,
-      "showSearch": false,
-      "showDates": false,
-      "showSocial": false,
-      "showProfile": false,
+      "showSearch": true,
+      "showDates": true,
+      "showSocial": true,
+      "showProfile": true,
       "showPosts": true,
       "showHomePosts": true,
-      "showTitles": false,
-      "showfooter": false,
-      "showSwipe": false,
-      "showVideoPlayer": false
+      "showTitles": true,
+      "showfooter": true,
+      "showSwipe": true,
+      "showVideoPlayer": true
     },
     "twitterUsername": "toddlambert",
     "titleDefault": "Lambert Photography",
     "postcount": 9,
     "homecount": 6,
     "magicOptions": {
-      "showMagic": false,
+      "showMagic": true,
       "showMagicCat": false,
       "showMagicTag": false,
-      "showMagicSearch": false
+      "showMagicSearch": true
     },
     "proOptions": {
       "xshowFeature": true,
@@ -89,7 +89,7 @@
     },
     "image": "/assets/TSidebarHover.svg",
     "navOptions": {
-      "showNav": false,
+      "showNav": true,
       "showNav2": false,
       "showFooterMenu": false
     },
