@@ -89,7 +89,7 @@
     },
     "image": "/assets/TSidebarHover.svg",
     "navOptions": {
-      "showNav": true,
+      "showNav": false,
       "showNav2": false,
       "showFooterMenu": false
     },
