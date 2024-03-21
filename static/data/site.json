@@ -85,7 +85,8 @@
       "dicCategory": "Category",
       "dicPlayMultimedia": "Play Multimedia",
       "dicEmail": "your@email.com",
-      "dicViewArchive": "View Archive"
+      "dicViewArchive": "View Archive",
+      "dicGallery": "Choose Collection"
     },
     "image": "/assets/TSidebarHover.svg",
     "navOptions": {
