@@ -3,6 +3,7 @@
     "iconimage": "/assets/tw-logo-large.png",
     "companyname": "Lambert Photography",
     "siteUrl": "https://lambertphotography.com",
+    "defaultCollection": "Favorites",
     "featureOptions": {
       "showDefault": true,
       "showArchive": false,
@@ -15,8 +16,7 @@
       "showTitles": false,
       "showfooter": false,
       "showSwipe": true,
-      "showVideoPlayer": false,
-      "defaultCollection": "Favorites"
+      "showVideoPlayer": false
     },
     "twitterUsername": "toddlambert",
     "titleDefault": "Lambert Photography",

@@ -16,6 +16,7 @@ const useSiteMetadata = () => {
           companyname
           postcount
           homecount
+          defaultCollection
 
           featureOptions{
             showfooter
@@ -89,6 +90,7 @@ const useSiteMetadata = () => {
             dicConfirmation
             dicProfileAudioText
             dicProfileAudioActionText
+            dicGallery
           }
         }
       }
