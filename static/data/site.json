@@ -15,7 +15,8 @@
       "showTitles": false,
       "showfooter": false,
       "showSwipe": true,
-      "showVideoPlayer": false
+      "showVideoPlayer": false,
+      "defaultCollection": "Favorites"
     },
     "twitterUsername": "toddlambert",
     "titleDefault": "Lambert Photography",
