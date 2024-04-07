@@ -96,6 +96,7 @@
       "showFooterMenu": false
     },
     "description": "Photography by Todd Lambert",
+    "showCollectionTitles": false,
     "icon512": "/assets/tw-logo-large.png"
   }
 }
