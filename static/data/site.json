@@ -3,7 +3,7 @@
     "iconimage": "/assets/tw-logo-large.png",
     "companyname": "Lambert Photography",
     "siteUrl": "https://lambertphotography.com",
-    "defaultCollection": "Favorites",
+    "defaultCollection": "favorites",
     "featureOptions": {
       "showDefault": true,
       "showArchive": false,
