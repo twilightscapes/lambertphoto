@@ -301,7 +301,8 @@ body {
 	  /* old */
 	  
 	  header.header {height:0;}
-	  #missioncontrol{line-height: 1;}
+	  #missioncontrol{line-height: 1; position:fixed; top:10px; right:0; z-index: 600; color:#fff; fill:#fff; }
+	  
 	  
 	  .flexbutt{display:flex; }
 	  .flexcheek{
