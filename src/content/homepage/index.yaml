@@ -1,11 +1,11 @@
 featureImage:
   src: /images/homepage/featureImage/src.webp
   alt: Become a Pirate!
-showFeature: true
+showFeature: false
 showBioOnHome: true
-showHomeGallery: false
-showPosts: true
-showFaqOnHome: true
+showHomeGallery: true
+showPosts: false
+showFaqOnHome: false
 showTestOnHome: false
 pitch: test
 postsectiontitle: 'I like big posts '

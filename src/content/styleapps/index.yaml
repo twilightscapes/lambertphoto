@@ -1,6 +1,7 @@
+backgroundImage: /images/styleapps/backgroundImage.svg
 siteFont: Orbitron
 borderRadius: 10px
-lightBg: rgba(192, 185, 185, 0.57)
+lightBg: rgba(168, 159, 159, 0.57)
 lightAccent: rgba(0, 0, 0, 0.6)
 lightAccent2: rgba(192, 43, 233, 1)
 darkBg: rgba(34, 34, 34, 1)
