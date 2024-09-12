@@ -327,9 +327,9 @@ body {
 		top:0;
 		object-fit:cover;
 	  }
-
+/* user css */
 	  .backimage{max-height: 50vh; margin:0 auto; background-size: center; background-position: center; object-fit: contain;  opacity:.2; margin-top: 20vh; padding:0 2%;}
-
+/* user css */
 
 	  
 	  .sliderSpacer{display:none;}
