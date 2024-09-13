@@ -2,7 +2,7 @@ featureImage:
   src: /images/homepage/featureImage/src.webp
   alt: Become a Pirate!
 showFeature: false
-showBioOnHome: true
+showBioOnHome: false
 showHomeGallery: true
 showPosts: false
 showFaqOnHome: false
