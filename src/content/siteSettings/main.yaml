@@ -6,6 +6,6 @@ showSwitch: true
 showSearch: false
 showFooter: false
 defaultView: swipe
-showTitles: false
+showTitles: true
 showDates: false
 MAX_POSTS: 3

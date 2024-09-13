@@ -1,10 +1,10 @@
 galleryMode: directory
-showCaptions: false
+showCaptions: true
 showBioOnPhotos: true
 showFaqsOnPhotos: false
 showTestimonialsOnPhotos: false
 defaultDirectory: Favorites
-showGallerySelector: false
+showGallerySelector: true
 galleryImages:
   - image: /images/galleryImages/0/image.webp
     caption: What a dick
