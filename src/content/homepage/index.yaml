@@ -1,18 +1,26 @@
+showFeature: false
 featureImage:
   src: /images/homepage/featureImage/src.webp
-  alt: Become a Pirate!
-showFeature: false
+  alt: Become A PIRATE!
+youtube:
+  discriminant: false
 showBioOnHome: false
+showApp: false
 showHomeGallery: true
 showPosts: false
+showMore: false
 showFaqOnHome: false
 showTestOnHome: false
-pitch: test
-postsectiontitle: 'I like big posts '
-youtube:
-  controls: false
-  useCustomPlayer: true
-  mute: true
-  loop: false
-  start: .nan
-  end: .nan
+featureOrder: 1
+bioOrder: 2
+appOrder: .nan
+galleryOrder: .nan
+postsOrder: 7
+faqOrder: 6
+testimonialsOrder: 9
+infoblockOrder: 3
+infoblock2Order: 4
+infoblock3Order: 5
+faqsectiontitle: FAQs
+testimonialtitle: What the dogs are sayin'
+postsectiontitle: Our Latest News
