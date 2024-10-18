@@ -1,37 +1,11 @@
 import React from 'react';
 import { config, fields, collection, singleton } from '@keystatic/core';
-import fs from 'fs';
-import path from 'path';
 import { colorPicker } from './src/components/ColorPicker.tsx';
-
-
-
-
-const getDirectories = () => {
-  const photosPath = path.join(process.cwd(), 'public/images/photos');
-  return fs.readdirSync(photosPath, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => ({ label: dirent.name, value: dirent.name }));
-};
-
-
-
-const isProduction: boolean = process.env.NODE_ENV === 'production'
-
 export default config({
-  storage: isProduction
-    ? {
-        kind: 'cloud',
-      }
-    : {
-        kind: 'local',
-      },
-  cloud: isProduction
-    ? {
-        project: 'tool/toolpirate',
-      }
+  storage: import.meta.env.PROD ? { kind: 'cloud' } : { kind: 'local' },
+  cloud: import.meta.env.PROD
+    ? { project: import.meta.env.VITE_KEYSTATIC_PROJECT || 'pirate/pirate' }
     : undefined,
-  
   collections: {
     posts: collection({
       label: 'Posts',
@@ -40,14 +14,22 @@ export default config({
       path: 'src/content/post/*/',
       format: { contentField: 'content' },
       schema: {
+        publishDate: fields.datetime({ label: 'Publish Date' }),
         title: fields.slug({ name: { label: 'Title' } }),
         description: fields.text({ label: 'Description', validation: { length: { min: 50, max: 160 } } }),
         draft: fields.checkbox({ label: 'Draft', defaultValue: false }),
+        order: fields.conditional(
+          fields.checkbox({ label: 'Make Sticky On Homepage?' }),
+          {
+            true: fields.number({ label: 'Sort Order' }),
+            false: fields.empty()
+          }
+        ),
         content: fields.markdoc({ label: 'Content' }),
         
-        publishDate: fields.datetime({ label: 'Publish Date' }),
-        updatedDate: fields.datetime({ label: 'Updated Date' }),
-        divider: fields.empty(),
+
+        // updatedDate: fields.datetime({ label: 'Updated Date' }),
+
         coverImage: fields.object({
           src: fields.image({
             label: 'Image file',
@@ -58,7 +40,10 @@ export default config({
             label: 'Alt Text',
           }),
         }),
-        divider2: fields.empty(),
+
+        externalUrl: fields.text({ label: 'External Url', description: 'A url of an external site will be loaded into an iframe', }),
+
+
         youtube: fields.conditional(
           fields.checkbox({ label: 'Include YouTube Video' }),
           {
@@ -93,10 +78,10 @@ export default config({
             false: fields.empty(),
           }
         ),
-        divider1: fields.empty(),        tags: fields.array(fields.text({ label: 'Tag' }), {
+        divider1: fields.empty(),        
+        tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
-          itemLabel: (props) => props.value,
-        }),
+          itemLabel: (props: any) => props.value,        }),
       },
     }),    pages: collection({      label: 'Other Pages',
       path: 'src/content/pages/*',
@@ -115,27 +100,46 @@ export default config({
       },
     }),
 
+    CTAs: collection({
+      label: 'Call-To-Actions',
+      path: 'src/content/ctas/*',
+      schema: {
+        title: fields.text({ label: 'CTA Title', description: 'The text on the CTA Button' }),
+        ctaUrl: fields.text({ label: 'CTA Url', description: 'The location of your CTA', defaultValue: '/', validation: { length: { min: 1 } } }),
+        description: fields.text({ label: 'Description', description: 'The description for the CTA', multiline: true }),
+        showFancy: fields.checkbox({ label: 'Show Fancy Button', description: 'Use the Fancy style with animated button', defaultValue: true }),
+      },
+      slugField: 'description'
+    }),
+
     pitches: collection({
-      label: 'Info Block',
+      label: 'Content Blocks',
       path: 'src/content/pitches/*',
       schema: {
         title: fields.text({ label: 'Title' }),
-        tagline: fields.text({ label: 'Tagline' }),
-        description: fields.text({ label: 'Description', multiline: true }),
-        phone: fields.text({ label: 'Phone' }),
-        subheading: fields.text({ label: 'Subheading' }),
-        subcontent: fields.text({ label: 'Subcontent' }),
-        subcta: fields.text({ label: 'CTA Text' }),
+        showTitle: fields.checkbox({ label: 'Show Title', description: 'Hide/Show the section title', defaultValue: true }),
         image: fields.image({
           label: 'Image',
           directory: 'public/images/pitches',
           publicPath: '/images/pitches',
         }),
+        imageAlt: fields.text({ label: 'Image Alt Text' }),
+        description: fields.text({ label: 'Image description/caption' }),
+
+        divider: fields.empty(),
+        divider2: fields.empty(),
+
+        tagline: fields.text({ label: 'Tagline' }),
+        subheading1: fields.text({ label: 'Subheading1' }),
+        text1: fields.text({ label: 'Text 1', multiline: true }),
+        subheading2: fields.text({ label: 'Subheading2' }),
+        text2: fields.text({ label: 'Text 2', multiline: true }),
+        subheading3: fields.text({ label: 'Subheading3' }),
+        text3: fields.text({ label: 'Text 3', multiline: true }),
+        
       },
       slugField: 'title'
-    }),
-
-    
+    }),    
 
     faqs: collection({
       label: 'FAQs',
@@ -153,6 +157,26 @@ export default config({
         order: fields.number({ label: 'Order' }),
       },
     }),
+
+
+    resume: collection({
+      label: 'Resume Blocks',
+      path: 'src/content/resume/*',
+      slugField: 'section',
+      format: { contentField: 'content' },
+      schema: {
+        section: fields.slug({ name: { label: 'Title' } }),
+        showTitle: fields.checkbox({ label: 'Show Title', description: 'Hide/Show the section title', defaultValue: true }),
+        content: fields.document({
+          label: 'Content',
+          formatting: true,
+          dividers: true,
+          links: true,
+        }),
+      },
+    }),
+
+
     testimonials: collection({
       label: 'Testimonials',
       path: 'src/content/testimonials/*',
@@ -168,7 +192,9 @@ export default config({
         }),
         order: fields.number({ label: 'Order' }),
       },
+  
     }),
+    
     menuItems: collection({
       label: 'Menu Items',
       path: 'src/content/menu/*',
@@ -179,7 +205,43 @@ export default config({
         order: fields.number({ label: 'Order' }),
       },
     }),
+
+    piratePosts: collection({
+      label: 'Pirate Posts',
+      path: 'src/content/piratePosts/*',
+      format: { contentField: 'content' },
+      slugField: 'title',
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        content: fields.markdoc({ label: 'Content' }),
+        createdAt: fields.datetime({ label: 'Created At' }),
+      },
+    }),
+
+    pirateFeeds: collection({
+      label: 'Pirate Feeds',
+      path: 'src/content/pirateFeeds/*',
+      slugField: 'title',
+      schema: {
+        title: fields.text({ label: 'Title' }),
+        feedUrl: fields.text({ label: 'Feed Url', description: 'The address to the Pirate users feed that you want to follow' }),
+        order: fields.number({ label: 'Order' }),
+      },
+    }),
+
+
+    
   },
+
+
+
+
+
+
+
+
+
+
   singletons: {
     siteSettings: singleton({
       label: 'Site Settings',
@@ -194,6 +256,8 @@ export default config({
         divider: fields.empty(),
         showHeader: fields.checkbox({ label: 'Show Header', description: 'Hide/Show the main site header', defaultValue: true }),
         showLogo: fields.checkbox({ label: 'Show Logo', description: 'Hide/Show the logo in the header', defaultValue: true }),
+        showCheck: fields.checkbox({ label: 'Show Blue Check', description: 'Hide/Show the Blue Check - Blue Checks only available with use of a custom domain name', defaultValue: true }),
+        showHome: fields.checkbox({ label: 'Show Home Link', description: 'Hide/Show the Home Link', defaultValue: true }),
         showTheme: fields.checkbox({ label: 'Show Theme', description: 'Hide/Show the theme selector', defaultValue: true }),
         showSwitch: fields.checkbox({ label: 'Show Switch', description: 'Hide/Show the layout selector', defaultValue: true }),
         showSearch: fields.checkbox({ label: 'Show Search', description: 'Hide/Show the search in the header', defaultValue: true }),
@@ -215,24 +279,61 @@ export default config({
         }),
         showTitles: fields.checkbox({ label: 'Show Post Titles', description: 'Hide/Show the post titles', defaultValue: false }),
         showDates: fields.checkbox({ label: 'Show Dates', description: 'Hide/Show the post dates', defaultValue: true }),
+        enableImageBlur: fields.checkbox({ 
+          label: 'Enable Image Blur Effect', 
+          defaultValue: true 
+        }),
+        showTags: fields.checkbox({ label: 'Show Post Tags', description: 'Hide/Show the post tags', defaultValue: false }),
         MAX_POSTS: fields.number({ label: 'Number of posts to display on home page', defaultValue: 3 }),
+        MAX_POSTS_PER_PAGE: fields.number({ label: 'Number of posts to display on other pages', defaultValue: 3 }),
+
+        
         divider4: fields.empty(),
+        showShare: fields.checkbox({ label: 'Show Share section on posts', description: 'Hide/Show the share this copy button on posts', defaultValue: false }),
 
 
         
       },
     }),
     pwaSettings: singleton({
-      label: 'PWA Settings',
+      label: 'PWA/SEO Settings',
       path: 'src/content/pwaSettings/',
       schema: {
+        showRobots: fields.checkbox({
+          label: 'SEO VISIBILITY',
+          description: 'Set the robots meta tag to index site and follow links - checking this box will make your site appear in search engines',
+          defaultValue: false,
+        }),
         siteUrl: fields.text({ label: 'Site Url', description: 'The address to your website' }),
         name: fields.text({ label: 'App Name' }),
         shortName: fields.text({ label: 'Short Name' }),
-        description: fields.text({ label: 'Description' }),
-        themeColor: fields.text({ label: 'Theme Color' }),
-        backgroundColor: fields.text({ label: 'Background Color' }),
-        startUrl: fields.text({ label: 'Start URL' }),
+
+        divider: fields.empty(),
+
+        screenshot: fields.image({
+          label: 'Screenshot',
+          description: 'This image is used on Android in the PWA install dialogue window (Image should be in JPG or PNG format and sized at 320x640)',
+          directory: 'public/images/pwa',
+          publicPath: '/images/pwa',
+        }),
+        description: fields.text({ label: 'SEO/App Description', description: 'The description is used as the title of the homepage for SEO, and on Android in the PWA install dialogue window', }),
+
+        divider2: fields.empty(),
+
+        themeColor: colorPicker({ 
+          label: 'Theme Color', 
+          showOpacity: false
+        }),
+        backgroundColor: colorPicker({ 
+          label: 'Background Color', 
+          showOpacity: false
+        }),
+        startUrl: fields.text({
+          label: 'PWA Start URL',
+          description: 'This sets the start page when your app is installed',
+          defaultValue: '/',
+          validation: { length: { min: 1 } },
+        }),
         display: fields.select({
           label: 'Display Mode',
           options: [
@@ -241,6 +342,7 @@ export default config({
             { label: 'Minimal UI', value: 'minimal-ui' },
             { label: 'Browser', value: 'browser' }
           ],
+          description: 'This sets the browser chrome to be used. - Standalone is default and removes all browser controls and chrome',
           defaultValue: 'standalone'
         }),
         icon192: fields.image({
@@ -259,7 +361,7 @@ export default config({
       label: 'Home Page',
       path: 'src/content/homepage/',
       schema: {
-
+        showFeature: fields.checkbox({ label: 'Show Feature', description: 'Hide/Show the Feature section on home page', defaultValue: false }),
         featureImage: fields.object({
           src: fields.image({
             label: 'Feature Image',
@@ -270,19 +372,79 @@ export default config({
             label: 'Featured Image Alt Text',
           }),
         }),
+        youtube: fields.conditional(
+          fields.checkbox({ label: 'Include YouTube Video' }),
+          {
+            true: fields.object({
+              url: fields.text({ 
+                label: 'YouTube Video URL',
+                description: 'Enter the full YouTube video URL'
+              }),
+              title: fields.text({ 
+                label: 'Video Title',
+                description: 'Enter a title for the video (optional, leave blank for no title)',
+                validation: { isRequired: false }
+              }),
+              controls: fields.checkbox({ label: 'Use YouTube Player Controls' }),
+              useCustomPlayer: fields.checkbox({ 
+                label: 'Use Custom Player Controls', 
+                defaultValue: true 
+              }),
+              mute: fields.checkbox({ label: 'Mute Video' }),
+              loop: fields.checkbox({ label: 'Loop Video' }),
+              start: fields.number({ 
+                label: 'Start Time (seconds)', 
+                defaultValue: 0,
+                validation: { min: 0 }
+              }),
+              end: fields.number({ 
+                label: 'End Time (seconds)', 
+                validation: { min: 0, isRequired: false }
+              }),
+              videoOnly: fields.checkbox({ label: 'Video Only', defaultValue: false }),
+            }),
+            false: fields.empty(),
+          }
+        ),
 
-        showFeature: fields.checkbox({ label: 'Show Feature', description: 'Hide/Show the Feature section on home page', defaultValue: false }),
 
+        cta: fields.relationship({
+          label: 'HOME BOTTOM CTA',
+          description: 'CTA at the bottom of the homepage',
+          collection: 'CTAs',
+        }),
+        divider9: fields.empty(),
+        // homeCTA: fields.relationship({
+        //   label: 'BOTTOM CTA',
+        //   description: 'CTA at the bottom of the homepage',
+        //   collection: 'CTAs',
+        // }),
+        divider7: fields.empty(),
         showBioOnHome: fields.checkbox({
-          label: 'Show Bio Module',
-          description: 'Hide/Show the Bio/Info section on the home page',
+          label: 'Show Profile Module',
+          description: 'Hide/Show the Profile section on the home page',
+          defaultValue: false,
+        }),
+
+        showApp: fields.checkbox({
+          label: 'Show App Module',
+          description: 'Hide/Show custom App section on the home page',
           defaultValue: false,
         }),
 
         showHomeGallery: fields.checkbox({ label: 'Show Home Photo Gallery', description: 'Hide/Show the Photo section on home page', defaultValue: false }),
 
+        showResume: fields.checkbox({
+          label: 'Show Resume',
+          description: 'Hide/Show Resume section on the home page',
+          defaultValue: false,
+        }),
+
+
+
         showPosts: fields.checkbox({ label: 'Show Posts', description: 'Hide/Show the Posts section on the home page', defaultValue: false }),
 
+        showMore: fields.checkbox({ label: 'Show More Button', description: 'Hide/Show the Show More Button (for the posts section above)', defaultValue: false }),
 
         showFaqOnHome: fields.checkbox({
           label: 'Show FAQ Module',
@@ -295,50 +457,56 @@ export default config({
           description: 'Hide/Show the Testomonials section on the home page',
           defaultValue: false,
         }),
-      
-        
 
         divider: fields.empty(),
 
         pitch: fields.relationship({
-          label: 'Select Pitch',
+          label: 'Content Block 1',
           collection: 'pitches',
         }),
 
-        divider1: fields.empty(),
+        pitch2: fields.relationship({
+          label: 'Content Module 2',
+          collection: 'pitches',
+        }),
+
+        pitch3: fields.relationship({
+          label: 'Content Module 3',
+          collection: 'pitches',
+        }),
+
         
-        testimonialtitle: fields.text({ label: 'Testimonials or Faq Title Header' }),
-        postsectiontitle: fields.text({ label: 'Posts Section Title Header'  }),
+
+        divider1: fields.empty(),
+        divider6: fields.empty(),
+        
+        featureOrder: fields.number({ label: 'Feature Section Order', defaultValue: 1 }),
+        bioOrder: fields.number({ label: 'Profile Section Order', defaultValue: 2 }),
+        appOrder: fields.number({ label: 'App Section Order', defaultValue: 3 }),
+        galleryOrder: fields.number({ label: 'Gallery Section Order', defaultValue: 4 }),
+        postsOrder: fields.number({ label: 'Posts Section Order', defaultValue: 5 }),
+        resumeOrder: fields.number({ label: 'Resume Section Order', defaultValue: 11 }),
+        faqOrder: fields.number({ label: 'FAQ Section Order', defaultValue: 6 }),
+        testimonialsOrder: fields.number({ label: 'Testimonials Section Order', defaultValue: 7 }),
+        infoblockOrder: fields.number({ label: 'Content Block 1 Order', defaultValue: 8 }),
+        infoblock2Order: fields.number({ label: 'Content Block 2 Order', defaultValue: 9 }),
+        infoblock3Order: fields.number({ label: 'Content Block 3 Order', defaultValue: 10 }),
+
+        
+        divider5: fields.empty(),        
+        
+        
+        photosectiontitle: fields.text({ label: 'Photo Section Title Header'  }),
+        faqsectiontitle: fields.text({ label: 'FAQ Title Header'  }),
+        testimonialtitle: fields.text({ label: 'Testimonials Title Header' }),
+        postsectiontitle: fields.text({ label: 'Posts Title Header'  }),
 
         divider2: fields.empty(),
 
-
-        youtube: fields.object({
-          url: fields.text({ 
-            label: 'YouTube Video URL',
-            description: 'Enter the full YouTube video URL'
-          }),
-
-          title: fields.text({ 
-            label: 'Video Title',
-            description: 'Enter a title for the video (optional, leave blank for no title)',
-            validation: { isRequired: false }
-          }),
-          // controls: fields.checkbox({ label: 'Show Controls', defaultValue: true }),
-          controls: fields.checkbox({ label: 'Use YouTube Player Controls' }),
-              useCustomPlayer: fields.checkbox({ 
-                label: 'Use Custom Player Controls', 
-                defaultValue: true 
-              }),
-          mute: fields.checkbox({ label: 'Mute Video', defaultValue: false }),
-          loop: fields.checkbox({ label: 'Loop Video', defaultValue: false }),
-          start: fields.number({ label: 'Start Time (seconds)', defaultValue: 0 }),
-          end: fields.number({ label: 'End Time (seconds)' }),
-          divider: fields.empty(),
-        }),
-      
+        
       },
-    }),    photoSettings: singleton({
+    }),    
+    photoSettings: singleton({
       label: 'Photo Gallery Settings',
       path: 'src/content/photoSettings/',
       schema: {
@@ -359,7 +527,7 @@ export default config({
         divider: fields.empty(),
 
         showBioOnPhotos: fields.checkbox({
-          label: 'Show Bio Module',
+          label: 'Show Profile Module',
           defaultValue: false,
         }),
 
@@ -373,6 +541,10 @@ export default config({
           defaultValue: false,
         }),
 
+        pitch: fields.relationship({
+          label: 'Content Block 1',
+          collection: 'pitches',
+        }),
         
 
         divider5: fields.empty(),
@@ -410,8 +582,7 @@ export default config({
           }),
           {
             label: 'CMS-managed Gallery Images',
-            itemLabel: (props) => props.fields.caption.value || 'Image',
-          }
+            itemLabel: (props: { fields: { caption: { value: string } } }) => props.fields.caption.value || 'Image',          }
         ),        divider4: fields.empty(),
 
       },
@@ -482,7 +653,7 @@ export default config({
           description: '(dark) Link Color - can use any color value',
         }),
 
-        customCSS: fields.text({ label: 'Custom CSS', multiline: true }),
+        customCSS: fields.text({ label: 'Custom CSS', description:'Additional CSS can be written here, overwriting the sites default styles.', multiline: true }),
 
         
       },
@@ -502,25 +673,121 @@ export default config({
       },
     }),  
 
+    language: singleton({
+      label: 'Language',
+      path: 'src/content/language/',
+      schema: {
+        homelink: fields.text({ label: 'Home' }),
+        copyright: fields.text({ label: 'Copyright' }),
+        goback: fields.text({ label: 'Back' }),
+        viewmore: fields.text({ label: 'View More' }),
+        allimages: fields.text({ label: 'All Images' }),
+        close: fields.text({ label: 'Close' }),
+        search: fields.text({ label: 'Search' }),
+        mute: fields.text({ label: 'Mute' }),
+        volume: fields.text({ label: 'Volume' }),
+        progress: fields.text({ label: 'Progress' }),
+        tags: fields.text({ label: 'Tags' }),
+        viewall: fields.text({ label: 'View All' }),
+        shareText: fields.text({ label: 'Share This' }),
+        copyButton: fields.text({ label: 'Copy' }),
+        
+        // temp: fields.text({ label: 'temp', multiline: true }),
+      },
+    }),
+  
+
     bio: singleton({
-      label: 'Bio',
+      label: 'Profile',
       path: 'src/content/bio/',
       schema: {
         title: fields.text({ label: 'Title' }),
         tagline: fields.text({ label: 'Tagline' }),
         description: fields.text({ label: 'Description', multiline: true }),
+        image: fields.image({
+          label: 'Image',
+          directory: 'public/images/bio',
+          publicPath: '/images/bio',
+        }),
         phone: fields.text({ label: 'Phone' }),
         subheading: fields.text({ label: 'Sub Heading' }),
         subcontent: fields.text({ label: 'Sub Content', multiline: true }),
-        subcta: fields.text({ label: 'CTA Text' }),
+        cta: fields.relationship({
+          label: 'CTA',
+          collection: 'CTAs',
+        }),
+        showSocial: fields.checkbox({ label: 'Show Social Links' }),
+      },
+    }),    
+
+
+    pirateSocial: singleton({
+      label: 'Settings',
+      path: 'src/content/pirate/',
+      schema: {
+        profile: fields.text({ label: 'Profile Name' }),
+        description: fields.text({ label: 'Profile Description' }),
+
+        // autoDeletePiratePosts: fields.checkbox({
+        //   label: 'Auto-delete Pirate Posts',
+        //   description: 'Enable this to automatically delete Pirate Posts',
+        //   defaultValue: false,
+        // }),
+        // autoDeleteTime: fields.number({
+        //   label: 'Auto-delete Time (in minutes)',
+        //   description: 'Set the time after which Pirate Posts will be deleted',
+        //   defaultValue: 1440, // 24 hours in minutes
+        // }),
       },
     }),
+
+
+
+    resumeSettings: singleton({
+      label: 'Resume Settings',
+      path: 'src/content/resumeSettings/',
+      schema: {
+        title: fields.text({ label: 'Resume Title' }),
+        showTitle: fields.checkbox({ label: 'Show Title', defaultValue: true }),
+        name: fields.text({ label: 'Your Name' }),
+        contact: fields.text({ label: 'Your Contact Details', description:'Enter your email address or phone number - (injected into print style sheet to prevent bots)' }),
+        
+        leftColumnItems: fields.array(
+          fields.relationship({
+            label: 'Left Column Item',
+            collection: 'resume',
+          }),
+          {
+            label: 'Left Column Items',
+            itemLabel: (props) => props.value || 'Resume Item',
+          }
+        ),
+        rightColumnItems: fields.array(
+          fields.relationship({
+            label: 'Right Column Item',
+            collection: 'resume',
+          }),
+          {
+            label: 'Right Column Items',
+            itemLabel: (props) => props.value || 'Resume Item',
+          }
+        ),
+      },
+    }),
+
+
   },
+
+
+
+
+
+
 
 ui: {
   brand: {
     name: ' ',
-    mark: ({ colorScheme }) => {
+    mark: ({ colorScheme }: { colorScheme: string }) => {
       let path = colorScheme === 'dark'
         ? '/images/logo/logoImage.svg'
         : '/images/logo/logoImage.svg';
@@ -528,7 +795,7 @@ ui: {
     },
   },
   navigation: {
-    'Pages and Posts': [
+    'Site Pages and Posts': [
       'home',
       'pages',
       'posts',
@@ -538,7 +805,8 @@ ui: {
       'faqs',
       'testimonials',
       'pitches',
-      
+      'CTAs',
+      'resume',
     ],
     'Settings': [
       'siteSettings',
@@ -547,6 +815,15 @@ ui: {
       'socialCard',
       'photoSettings',
       'styleAppearance',
+      'language',
+      'resumeSettings',
+    ],
+    'Pirate Social': [
+      'pirateSocial',
+      'piratePosts',
+      'pirateFeeds',
     ],
   },
 },});
+
+
