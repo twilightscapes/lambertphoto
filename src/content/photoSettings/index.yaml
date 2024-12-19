@@ -3,8 +3,9 @@ showCaptions: false
 showBioOnPhotos: false
 showFaqsOnPhotos: false
 showTestimonialsOnPhotos: false
-defaultDirectory: favorites
-showGallerySelector: false
+defaultDirectory: Favorites
+showGallerySelector: true
+showSwitch: true
 galleryImages:
   - image: /images/galleryImages/0/image.webp
     caption: What a dick

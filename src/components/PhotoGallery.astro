@@ -4,11 +4,15 @@ import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 import GalleryLightbox from './GalleryLightbox.jsx';
 import { getEntry } from 'astro:content';
+
+import Switch from "@/components/Switch.jsx";
+
 const language = await getEntry('language', 'index');
 const reader = createReader(process.cwd(), keystaticConfig);
 const photoSettings = await reader.singletons.photoSettings.read();
 const defaultDirectory = photoSettings?.defaultDirectory || 'all';
 const galleryMode = photoSettings?.galleryMode || 'directory';
+
 
 const imageFiles = import.meta.glob('/public/images/photos/**/*.{jpg,jpeg,png,gif,webp,avif}', { eager: true });
 let allImages;
@@ -30,9 +34,25 @@ if (galleryMode === 'keystatic') {
   }));
 }
 
-const directories = ['all', ...new Set(allImages.map(img => img.directory))].sort();
+const directories = [
+  'all',
+  defaultDirectory,
+  ...new Set(
+    allImages
+      .map(img => img.directory)
+      .filter(dir => dir !== defaultDirectory)
+  )
+].filter(Boolean).sort((a, b) => {
+  if (a === 'all') return -1;
+  if (b === 'all') return 1;
+  if (a === defaultDirectory) return -1;
+  if (b === defaultDirectory) return 1;
+  return a.localeCompare(b);
+});
+
 const showCaptions = photoSettings?.showCaptions ?? true;
 const showGallerySelector = photoSettings?.showGallerySelector && galleryMode === 'directory';
+const showSwitch = photoSettings?.showSwitch;
 
 const siteSettings = await getEntry('siteSettings', 'main');
 const { defaultView } = siteSettings.data;
@@ -41,16 +61,20 @@ const { defaultView } = siteSettings.data;
 
 
 {showGallerySelector && (
-  <div class="cattags" style={{ maxWidth: '', margin: '0px auto 0 auto', display: 'flex', placeSelf: 'center', gap: '0', color: '' }}>
-    <select id="directorySelect" style={{ background: '', border: '1px solid #000', borderRadius: 'var(--border-radius)', padding: '8px', boxShadow: '0px 0px 0px 1px #000', opacity:'.9', color:'#fff' }}>
+  <div class="cattags" style={{ width: '100%', margin: '0px auto 0 auto', display: 'flex', justifyContent:'center', gap: '0', color: '' }}>
+    <select aria-label="View Available Galleries" id="directorySelect" name="directorySelect" style={{ background: '', border: '1px solid #000', borderRadius: 'var(--border-radius)', padding: '8px', boxShadow: '0px 0px 0px 1px #000', opacity:'.9', color:'#fff' }}>
       {directories.map((dir) => (
         <option value={dir} selected={dir === defaultDirectory}>
           {dir === 'all' ? language.data.allimages : dir}
         </option>
       ))}
     </select>
+    {showSwitch && (
+    <div class="switcher" style={{marginTop:'10px'}}><Switch client:load defaultView={defaultView} /></div>
+    )}
   </div>
 )}
+
 
 
 
@@ -85,7 +109,7 @@ const { defaultView } = siteSettings.data;
 
 
 <style>
-
+.switcher{position:relative !important; margin:5px -360px 0 0;}
 
 .post-card1 {
   display: flex;
@@ -114,8 +138,8 @@ img{border-radius: var(--border-radius) !important;}
   body:has(.header) #directorySelect{left:0 !important; right:0 !important; }
 }
 </style>
-<script>
-  function filterImages(selectedDir: string) {
+<script define:vars={{ defaultDirectory }}>
+  function filterImages(selectedDir) {
     const galleryContainer = document.querySelector('.contentpanel');
     if (!galleryContainer) return;
     
@@ -132,12 +156,14 @@ img{border-radius: var(--border-radius) !important;}
       }
     });
   }
+
   function initializeGallery() {
-    const defaultDir = (document.getElementById('directorySelect') as HTMLSelectElement)?.value || 'all';
-    filterImages(defaultDir);
+    // Use defaultDirectory instead of reading from select
+    filterImages(defaultDirectory);
   }
 
-  document.addEventListener('DOMContentLoaded', initializeGallery);
+  // Wait for both DOM and images to load
+  window.addEventListener('load', initializeGallery);
 
   const directorySelect = document.getElementById('directorySelect');
   directorySelect?.addEventListener('change', (event) => {
@@ -161,4 +187,5 @@ img{border-radius: var(--border-radius) !important;}
       document.documentElement.scrollTop = 0;
     }, 100);
   }
+  
 </script>

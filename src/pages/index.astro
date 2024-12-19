@@ -17,8 +17,15 @@ import Resume from '@/components/Resume.astro';
 import PhotoSection from "@/components/PhotoGallery.astro"
 const siteSettings = await getEntry('siteSettings', 'main');
 const pwaSettings = await getEntry('pwaSettings', 'index');
-const { defaultView, MAX_POSTS } = siteSettings.data;
 const homeContent = await getEntry('homepage', 'index');
+const language = await getEntry('language', 'index');
+
+
+if (!siteSettings || !pwaSettings || !homeContent || !language) {
+  throw new Error('Required content settings not found');
+}
+
+const { defaultView, MAX_POSTS } = siteSettings.data;
 import App from '@/components/App.astro';
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -179,8 +186,6 @@ const showHomeGallery = homepage?.showHomeGallery ?? false;
 
 const allPosts = await getAllPosts();
 const allPostsSorted = sortMDByDate(allPosts, true).slice(0, MAX_POSTS);
-
-const language = await getEntry('language', 'index');
 type Section = {
   name: string;
   show: boolean;
@@ -237,7 +242,7 @@ const sortedSections = sections  .filter(section => section.show)
 <style>
 	.scroll-snap-container {
 flex-direction: column;
-  height: 100vh;
+  height: 100%;
   max-width:100vw;
   /* overflow-x: hidden; */
   /* overflow-y: scroll; */
@@ -249,7 +254,7 @@ flex-direction: column;
 
 </style>
 <PageLayout title={homeContent.data.title} description={pwaSettings.data.description}>
-	<div class="scroll-snap-container flex flex-col home">
+	<div class="scroll-snap-container flex flex-col home panel">
 		{sortedSections.map(section => (
 			<section class={section.name === 'resume' ? 'resume' : ''}>
 				{(() => {
@@ -294,7 +299,7 @@ flex-direction: column;
 							return (
 								<>
 									<h2 class="glow text-[clamp(1.4rem,3.9vw,4rem)] shadow-text text-center theme-accent" style="margin-bottom:2vh;">{homeContent.data.postsectiontitle}</h2>
-									<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider' : 'grid-container'}`}>
+									<div class={`contentpanel ${defaultView === 'swipe' ? 'slider panels horizontal-slider panel' : 'grid-container'}`}>
 									
 
                     {allPostsSorted.map((p) => <PostPreview post={p} withDesc />)}
